@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html class="full-height" lang="es-MX">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Galardones IPN</title>
+    <meta name="description" content="Proyecto final para la materia de Tecnologías para la Web.">
+
+    <!-- Font Awesome JS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
+
+    <!-- Materialize Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and Materialize minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+
+</head>
+
+<body>
+    <div id="bgimg" class="bgimg-1" style="height: 100%">
+    </div>
+    <div class="row">
+        <div id="login-container" class="col s6 white">
+            <ul id="tabs-login" class="tabs">
+                <li class="tab col s6"><a href="#swipe-login">Login</a></li>
+                <li class="tab col s6"><a href="#swipe-recover">Recuperar password</a></li>
+            </ul>
+            <!-- Start Login Tab -->
+            <div id="swipe-login" class="col s12">
+                <h1 class="left-align">Ingresar</h1>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input id="usuario" type="text" class="validate" name="usuario">
+                        <label for="usuario">Usuario</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input id="password" type="password" class="validate" name="password">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                        <a class="btn waves-effect waves-light red darken-2" href="#">Entrar</a>
+                        <a class="waves-effect waves-light btn red darken-2" href="index.html">Salir <i class="material-icons options-text">exit_to_app</i></a>
+                </div>
+            </div>
+            <!-- Finish Login Tab -->
+            <div id="swipe-recover" class="col s12">
+                <h1 class="left-align">Recuperar</h1>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input id="email" type="email" class="validate" name="email">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <a class="btn waves-effect waves-light red darken-2" type="submit" name="enviar" value="Enviar">Enviar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+<!-- Our Custom JS -->
+<script src="scripts/login.js"></script>
+
+</html>
