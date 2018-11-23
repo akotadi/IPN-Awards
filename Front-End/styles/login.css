@@ -1,0 +1,11 @@
+/* Bloque blanco del login */
+
+#login-container {
+    position: absolute;
+    top: 25%;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
