@@ -31,6 +31,7 @@
 </head>
 
 <body class="pink darken-3">
+    <!-- Navigation section -->
     <!-- Navbar -->
     <nav class="pink darken-4">
         <div class="nav-wrapper">
@@ -69,6 +70,7 @@
         <li><a href="perfil.html" class="waves-effect">Perfil</a></li>
     </ul>
     <!-- /Sidenav -->
+    <!-- /Navigation section -->
 
     <!-- Main -->
     <div class="row">
@@ -96,32 +98,100 @@
                             </div>
                         </div>
                         <div class="row">
-                            <a class="btn waves-effect waves-light pink darken-4" href="home.html">Actualizar</a>
+                            <a href="#!" class="btn waves-effect waves-light pink darken-4">Actualizar</a>
                         </div>
                     </div>
                 </li>
                 <li>
-                    <div class="collapsible-header"><i class="fas fa-key"></i>Cambiar Password</div>
+                    <div class="collapsible-header"><i class="fas fa-key"></i>Cambiar password</div>
                     <div class="collapsible-body">
-
+                        <div class="row">
+                            <div class="input-field col s8">
+                                <input id="old-password" type="password" class="validate" name="old-password">
+                                <label for="old-password">Password actual</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s8">
+                                <input id="new-password" type="password" class="validate" name="new-password">
+                                <label for="new-password">Nuevo password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s8">
+                                <input id="new-password-confirm" type="password" class="validate" name="new-password-confirm">
+                                <label for="new-password-confirm">Confirma nuevo password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <a href="#!" class="btn waves-effect waves-light pink darken-4">Actualizar</a>
+                        </div>
                     </div>
                 </li>
                 <li>
                     <div class="collapsible-header"><i class="fas fa-user-times"></i>Eliminar cuenta</div>
                     <div class="collapsible-body">
-
+                        <div class="row">
+                            <p>
+                                Al eliminar tu cuenta se perderán todos tus datos.
+                                Esta acción no se puede deshacer.
+                            </p>
+                        </div>
+                        <div class="row">
+                            <a href="#!" class="btn modal-trigger waves-effect waves-light pink darken-4" data-target="delete-modal">Elimnar
+                                cuenta</a>
+                        </div>
                     </div>
                 </li>
                 <li>
                     <div class="collapsible-header"><i class="fas fa-sign-out-alt"></i>Desconectar</div>
                     <div class="collapsible-body">
-
+                        <div class="row">
+                            <a href="index.html" class="btn waves-effect waves-light pink darken-4" data-target="delete-modal">Cerrar
+                                sesión</a>
+                        </div>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
     <!-- /Main -->
+
+    <!-- Extras -->
+    <!-- Modal -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col s12">
+                    <h4>Eliminar cuenta?</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <p>
+                        Al eliminar tu cuenta se perderán todos tus datos.
+                        Esta acción no se puede deshacer.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="delete-password" type="password" class="validate" name="delete-password">
+                    <label for="delete-password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4">
+                    <a href="#!" class="waves-effect waves-purple btn-flat">Eliminar cuenta</a>
+                </div>
+                <div class="col s4">
+                    <a href="#!" class="btn-flat modal-close waves-effect waves-light darken-4">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal -->
+    <!-- /Extras -->
 
 </body>
 
