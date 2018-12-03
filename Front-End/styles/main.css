@@ -15,49 +15,26 @@ body, html {
   filter: blur(1px) grayscale(60%);
 }
 
-/* Alinear icono con texto en botones */
-
-.options-text {
-  vertical-align: bottom;
-}
-
 /* label color */
-
 .input-field label {
-  color: #000;
+  color: #000 !important;
 }
-
 /* label focus color */
-
-.input-field input[type=text]:focus+label {
-  color: #000;
+.input-field input[type=text]:focus + label {
+  color: black !important;
 }
-
 /* label underline focus color */
-
 .input-field input[type=text]:focus {
-  border-bottom: 1px solid #000;
-  box-shadow: 0 1px 0 0 #000;
+  border-bottom: 1px solid #000 !important;
+  box-shadow: 0 1px 0 0 #000 !important;
 }
-
-/* valid color */
-
-.input-field input[type=text].valid {
-  border-bottom: 1px solid #000;
-  box-shadow: 0 1px 0 0 #000;
-}
-
-/* invalid color */
-
-.input-field input[type=text].invalid {
-  border-bottom: 1px solid #000;
-  box-shadow: 0 1px 0 0 #000;
-}
-
 /* icon prefix focus color */
-
 .input-field .prefix.active {
-  color: #000;
+  color: #000 !important;
+}
+
+input{
+  color: black;
 }
 
 .caption {
@@ -75,5 +52,4 @@ body, html {
   font-size: 30px;
   padding: 10px;
   letter-spacing: 5px;
-
 }

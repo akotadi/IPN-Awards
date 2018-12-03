@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html class="full-height" lang="es-MX">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Home</title>
     <meta name="description" content="Proyecto final para la materia de Tecnologías para la Web.">
 
     <!-- Font Awesome JS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+          crossorigin="anonymous">
 
     <!-- Materialize Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -31,52 +32,59 @@
 </head>
 
 <body>
-    <!-- Background -->
-    <div id="bgimg" class="bgimg-1"></div>
-    <div class="caption">
-        <span class="border">CEREMONIA</span><br><br><br>
-        <span class="border">GALARDONES</span><br><br><br>
-        <span class="border">IPN</span>
+<!-- Navigation Section -->
+<!-- Navbar -->
+<nav class="pink darken-4">
+    <div class="nav-wrapper">
+        <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <a href="home.html" class="brand-logo">IPN</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="asistencia.html" class="waves-effect waves-light">Asistencias</a></li>
+            <li><a href="#" class="waves-effect waves-light">Invitados</a></li>
+            <li><a href="#" class="waves-effect waves-light">Usuarios</a></li>
+            <li><a href="#" class="waves-effect waves-light">Estadisticas</a></li>
+            <li><a href="perfil.html" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
+        </ul>
     </div>
+</nav>
+<!-- /Navbar -->
 
-    <!-- Navbar -->
-    <nav class="pink darken-4">
-        <div class="nav-wrapper">
-            <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <a href="index.html" class="brand-logo">IPN</a>
-            <ul class="right hide-on-med-and-down">
-                <li><a class="waves-effect waves-light" href="#">Asistencias</a></li>
-                <li><a class="waves-effect waves-light" href="#">Invitados</a></li>
-                <li><a class="waves-effect waves-light" href="#">Usuarios</a></li>
-                <li><a class="waves-effect waves-light" href="#">Estadisticas</a></li>
-                <li><a class="waves-effect waves-light" href="perfil.html"><i class="material-icons">person</i></a></li>
-            </ul>
-        </div>
-    </nav>
-    <!-- /Navbar -->
-
-    <!-- Sidenav -->
-    <ul id="slide-out" class="sidenav">
-        <li>
-            <div class="user-view">
-                <div class="background">
-                    <img src="img/sidenav-bg.png" class="responsive-img">
-                </div>
-                <a href="#user"><img class="circle" src="img/ipn-logo.png"></a>
-                <a href="#name"><span class="white-text name">Usuario generico</span></a>
-                <a href="#email"><span class="white-text email">user@mail.com</span></a>
+<!-- Sidenav -->
+<ul id="slide-out" class="sidenav">
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="img/sidenav-bg.png" class="responsive-img">
             </div>
-        </li>
-        <li><a href="#" class="waves-effect">Asistencias</a></li>
-        <li><a href="#" class="waves-effect">Invitados</a></li>
-        <li><a href="#" class="waves-effect">Usuarios</a></li>
-        <li><a href="#" class="waves-effect">Estadisticas</a></li>
-        <li>
-            <div class="divider"></div>
-        </li>
-        <li><a class="waves-effect" href="perfil.html">Perfil</a></li>
-    </ul>
-    <!-- /Sidenav -->
+            <a href="#user"><img class="circle" src="img/ipn-logo.png"></a>
+            <a href="#name"><span class="white-text name">Usuario generico</span></a>
+            <a href="#email"><span class="white-text email">user@mail.com</span></a>
+        </div>
+    </li>
+    <li><a href="asistencia.html" class="waves-effect">Asistencias</a></li>
+    <li><a href="invitados.html" class="waves-effect">Invitados</a></li>
+    <li><a href="usuarios.html" class="waves-effect">Usuarios</a></li>
+    <li><a href="estadisticas.html" class="waves-effect">Estadisticas</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a href="perfil.html" class="waves-effect">Perfil</a></li>
+</ul>
+<!-- /Sidenav -->
+<!-- /Navigation Section -->
+
+<!-- Background -->
+<div id="bgimg" class="bgimg-1"></div>
+<!-- /Background -->
+
+<!-- Main -->
+<div class="caption">
+    <span class="border">CEREMONIA</span><br><br><br>
+    <span class="border">GALARDONES</span><br><br><br>
+    <span class="border">IPN</span>
+</div>
+<!-- /Main -->
+
 </body>
 
 <!-- Our Custom JS -->

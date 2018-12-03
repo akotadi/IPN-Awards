@@ -1,11 +1,9 @@
 /* Bloque blanco del login */
 
-#login-container {
+.login-container {
     position: absolute;
     top: 20%;
     bottom: auto;
     left: 0;
     right: 0;
-    margin: auto;
-    text-align: center;
 }

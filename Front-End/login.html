@@ -9,8 +9,9 @@
     <meta name="description" content="Proyecto final para la materia de Tecnologías para la Web.">
 
     <!-- Font Awesome JS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+          crossorigin="anonymous">
 
     <!-- Materialize Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -31,55 +32,69 @@
 </head>
 
 <body>
-    <!-- Background -->
-    <div id="bgimg" class="bgimg-1" style="height: 97%"></div>
-    <!-- /Background -->
-    <div class="row">
-        <div id="login-container" class="col s6 white">
-            <!-- Tab Menu -->
-            <ul id="tabs-login" class="tabs">
-                <li class="tab col s6"><a href="#swipe-login">Login</a></li>
-                <li class="tab col s6"><a href="#swipe-recover">Recuperar password</a></li>
-            </ul>
-            <!-- /Tab Menu -->
-            <!-- Login Tab -->
-            <div id="swipe-login" class="col s12">
-                <h1 class="left-align">Ingresar</h1>
-                <div class="row">
-                    <div class="input-field col s8">
-                        <input id="usuario" type="text" class="validate" name="usuario">
-                        <label for="usuario">Usuario</label>
+
+<!-- Background -->
+<div class="bgimg-1" style="height: 97%"></div>
+<!-- /Background -->
+<!-- Main -->
+<div class="row login-container">
+    <div class="col s12 m6 offset-m3">
+        <div class="row white">
+            <div class="col s12">
+                <!-- Tab Menu -->
+                <ul id="tabs-login" class="tabs">
+                    <li class="tab col s6"><a href="#swipe-login">Login</a></li>
+                    <li class="tab col s6"><a href="#swipe-recover">Recuperar password</a></li>
+                </ul>
+                <!-- /Tab Menu -->
+                <!-- Login Tab -->
+                <div id="swipe-login" class="col s12">
+                    <h1 class="left-align">Ingresar</h1>
+                    <div class="row">
+                        <div class="input-field col s8">
+                            <input id="usuario" type="text" class="validate" name="usuario">
+                            <label for="usuario">Usuario</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s8">
+                            <input id="password" type="password" class="validate" name="password">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m3">
+                            <a class="btn waves-effect waves-light pink darken-4" href="home.html">Entrar</a>
+                        </div>
+                        <div class="input-field col s12 m3">
+                            <a class="waves-effect waves-light btn pink darken-4" href="#">Salir <i
+                                    class="material-icons options-text">exit_to_app</i></a>
+                        </div>
+                    </div>
+                    <p>asdsads</p>
+                </div>
+                <!-- /Login Tab -->
+                <!-- Recover Tab -->
+                <div id="swipe-recover" class="col s12">
+                    <h1 class="left-align">Recuperar</h1>
+                    <div class="row">
+                        <div class="input-field col s8">
+                            <input id="email" type="email" class="validate" name="email">
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <a class="btn waves-effect waves-light pink darken-4" href="#">Enviar</a>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s8">
-                        <input id="password" type="password" class="validate" name="password">
-                        <label for="password">Password</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <a class="btn waves-effect waves-light pink darken-4" href="home.html">Entrar</a>
-                    <a class="waves-effect waves-light btn pink darken-4" href="#">Salir <i class="material-icons options-text">exit_to_app</i></a>
-                </div>
+                <!-- /Recover Tab -->
             </div>
-            <!-- /Login Tab -->
-            <!-- Recover Tab -->
-            <div id="swipe-recover" class="col s12">
-                <h1 class="left-align">Recuperar</h1>
-                <div class="row">
-                    <div class="input-field col s8">
-                        <input id="email" type="email" class="validate" name="email">
-                        <label for="email">Email</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <a class="btn waves-effect waves-light pink darken-4" href="#">Enviar</a>
-                </div>
-            </div>
-            <!-- /Recover Tab -->
         </div>
     </div>
-    </div>
+    <!-- /Main -->
+
 </body>
 
 <!-- Our Custom JS -->
