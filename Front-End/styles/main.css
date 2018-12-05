@@ -15,6 +15,12 @@ body, html {
   filter: blur(1px) grayscale(60%);
 }
 
+/* Alinear icono con texto en botones */
+
+.options-text {
+  vertical-align: bottom;
+}
+
 /* label color */
 .input-field label {
   color: #000 !important;
