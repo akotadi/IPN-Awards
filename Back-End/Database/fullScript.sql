@@ -17,7 +17,7 @@ DROP SCHEMA IF EXISTS `IPN-Awards` ;
 -- -----------------------------------------------------
 -- Schema IPN-Awards
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `IPN-Awards` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE SCHEMA IF NOT EXISTS `IPN-Awards` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 SHOW WARNINGS;
 USE `IPN-Awards` ;
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Area` (
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idArea`),
   UNIQUE KEY `name_UNIQUE` (`name` ASC)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 SHOW WARNINGS;
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Award` (
   UNIQUE KEY `name_UNIQUE` (`name` ASC),
   KEY `fk_Diploma_Diploma1_idx` (`Award_idAward` ASC),
   CONSTRAINT `fk_Diploma_Diploma1` FOREIGN KEY (`Award_idAward`) REFERENCES `IPN-Awards`.`Award` (`idAward`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 SHOW WARNINGS;
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Awarded` (
   KEY `fk_Awarded_Procedency1_idx` (`idProcedency` ASC),
   CONSTRAINT `fk_Awarded_Award1` FOREIGN KEY (`idAward`) REFERENCES `IPN-Awards`.`Award` (`idAward`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Awarded_Procedency1` FOREIGN KEY (`idProcedency`) REFERENCES `IPN-Awards`.`Procedency` (`idProcedency`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 SHOW WARNINGS;
@@ -147,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Awarded_has_Observation` (
   KEY `fk_Awarded_has_Observation_Awarded1_idx` (`rfc` ASC),
   CONSTRAINT `fk_Awarded_has_Observation_Awarded1` FOREIGN KEY (`rfc`) REFERENCES `IPN-Awards`.`Awarded` (`rfc`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Awarded_has_Observation_Observation1` FOREIGN KEY (`Observation_idObservation`) REFERENCES `IPN-Awards`.`Observation` (`idObservation`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 SHOW WARNINGS;
@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Observation` (
   `commentary` varchar(200) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idObservation`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 SHOW WARNINGS;
@@ -211,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Procedency` (
   UNIQUE KEY `name_UNIQUE` (`name` ASC),
   KEY `fk_Procedency_Area1_idx` (`idArea` ASC),
   CONSTRAINT `fk_Procedency_Area1` FOREIGN KEY (`idArea`) REFERENCES `IPN-Awards`.`Area` (`idArea`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 SHOW WARNINGS;
@@ -244,7 +244,7 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`type` (
   PRIMARY KEY (`idtype`),
   UNIQUE KEY `idtype_UNIQUE` (`idtype` ASC),
   UNIQUE KEY `name_UNIQUE` (`name` ASC)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 SHOW WARNINGS;
@@ -271,10 +271,10 @@ SHOW WARNINGS;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE IF NOT EXISTS `IPN-Awards`.`user` (
   `idUser` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `activation_code` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `activation_code` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `verified` tinyint(3) unsigned zerofill NOT NULL,
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `idtype` int(11) NOT NULL,
@@ -283,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`user` (
   UNIQUE KEY `email_UNIQUE` (`email` ASC),
   KEY `fk_user_type1_idx` (`idtype` ASC),
   CONSTRAINT `fk_user_type1` FOREIGN KEY (`idtype`) REFERENCES `IPN-Awards`.`type` (`idtype`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 SHOW WARNINGS;

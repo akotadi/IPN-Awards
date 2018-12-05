@@ -15,7 +15,7 @@ DROP SCHEMA IF EXISTS `IPN-Awards` ;
 -- -----------------------------------------------------
 -- Schema IPN-Awards
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `IPN-Awards` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE SCHEMA IF NOT EXISTS `IPN-Awards` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 SHOW WARNINGS;
 USE `IPN-Awards` ;
 
