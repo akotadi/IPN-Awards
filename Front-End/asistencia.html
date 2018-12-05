@@ -25,6 +25,11 @@
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+    <!-- Validetta -->
+    <link rel="stylesheet" type="text/css" href="js/validetta/validetta.min.css">
+    <script type="text/javascript" src="js/validetta/validetta.min.js"></script>
+    <script type="text/javascript" src="js/validetta/localization/validettaLang-es-ES.js"></script>
+
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="styles/main.css">
 
@@ -92,7 +97,7 @@
                     <h1 class="left-align">A&ntildeadir invitado</h1>
                     <div class="row">
                         <div class="input-field col s8">
-                            <input id="rfc" type="text" class="validate" name="rfc">
+                            <input id="rfc" type="text" class="validate" name="rfc" data-validetta="required,minLength[10],maxLength[10]">
                             <label for="rfc">RFC</label>
                         </div>
                         <div class="input-field col s3">
@@ -101,7 +106,7 @@
                     </div>
                     <div class="row">
                         <div class="input-field col s3">
-                            <a class="waves-effect waves-light btn pink darken-4" href="#">A&ntildeadir</a>
+                            <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnCAssistant">A&ntildeadir</button>
                         </div>
                     </div>
                 </form>
@@ -172,37 +177,39 @@
 <!-- Modal Comentarios -->
 <div id="asist-modal" class="modal">
     <div class="modal-content">
-        <div class="row">
-            <div class="col s12">
-                <h1>A&ntildeadir Comentarios</h1>
+        <form id="FormCommentaries">
+            <div class="row">
+                <div class="col s12">
+                    <h1>A&ntildeadir Comentarios</h1>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <select multiple id="asist-select">
-                    <option value="" disabled selected>Elige opcion</option>
-                    <option value="capacidad_diferente">Capacidad diferente</option>
-                    <option value="silla_de_ruedas">Silla de ruedas</option>
-                    <option value="se_retira_temprano">Se retira temprano</option>
-                    <option value="acompaniante">Acompa&ntildeante (ayudante)</option>
-                    <option value="otro">Otro</option>
-                </select>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select multiple id="asist-select" data-validetta="required,minSelected[1]">
+                        <option value="" disabled selected>Elige opcion</option>
+                        <option value="capacidad_diferente">Capacidad diferente</option>
+                        <option value="silla_de_ruedas">Silla de ruedas</option>
+                        <option value="se_retira_temprano">Se retira temprano</option>
+                        <option value="acompaniante">Acompa&ntildeante (ayudante)</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <input id="otherInput" type="text" class="validate" name="otherInput">
-                <label id="otherLabel" for="otherInput">Agrega comentario</label>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="otherInput" type="text" class="validate" name="otherInput">
+                    <label id="otherLabel" for="otherInput">Agrega comentario</label>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col s4">
-                <a href="#!" class="waves-effect waves-purple btn-flat modal-close">Aceptar</a>
+            <div class="row">
+                <div class="col s4">
+                    <button class="waves-effect waves-purple btn-flat modal-close" type="submit" id="btnUAssistant">Aceptar</button>
+                </div>
+                <div class="col s4">
+                    <a href="#!" class="waves-effect waves-light btn-flat modal-close">Cancelar</a>
+                </div>
             </div>
-            <div class="col s4">
-                <a href="#!" class="waves-effect waves-light btn-flat modal-close">Cancelar</a>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 <!-- /Modal Comentarios -->

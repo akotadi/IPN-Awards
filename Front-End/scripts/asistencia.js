@@ -49,4 +49,57 @@ $('#asist-select').change(function() {
 $(document).ready(function () {
     $('#otherInput').prop("hidden", true);
     $('#otherLabel').prop("hidden", true);
+
+    $('#FormAssistance').validetta({
+        bubblePosition: "bottom",
+        bubbleGapTop: 10,
+        bubbleGapLeft: -5,
+        onError:function(e){
+            e.preventDefault();
+            // alert("ERROR");
+        },
+        onValid:function(e){
+            e.preventDefault(); // Deja de actuar como formulario
+            $.ajax({
+                method:"post",
+                url:"../Back-End/PHP/cAssistant_AX.php",
+                data:$("#FormAssistance").serialize(),
+                cache:false,
+                success:function(resp){
+                    if (resp == 200) {
+                        $(location).attr("href", "asistencia.html");
+                    }else{
+                        alert("Hubo un problema, inténtelo de nuevo.");
+                    }
+                    alert(resp);
+                }
+            });
+        }
+    });
+
+    $('#FormCommentaries').validetta({
+        bubblePosition: "bottom",
+        bubbleGapTop: 10,
+        bubbleGapLeft: -5,
+        onError:function(e){
+            e.preventDefault();
+            // alert("ERROR");
+        },
+        onValid:function(e){
+            e.preventDefault(); // Deja de actuar como formulario
+            $.ajax({
+                method:"post",
+                url:"../Back-End/PHP/uAssistant_AX.php",
+                data:$("#FormCommentaries").serialize(),
+                cache:false,
+                success:function(resp){
+                    if (resp == 200) {
+                        // $(location).attr("href", "home.html");
+                    }else{
+                        alert("Hubo un problema, inténtelo de nuevo.");
+                    }
+                }
+            });
+        }
+    });
 });

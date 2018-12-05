@@ -9,13 +9,14 @@ use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 if (isset($_POST) & !empty($_POST)) {
-	$connection = connect();
 
 	$email = $_POST['email'];
 
 	if (empty($email)) {
 		echo $RESTResponse::FAIL;
 	} else {
+		$connection = connect();
+
 		$email = mysqli_real_escape_string($connection, $email);
 
 		$query = "SELECT * FROM user WHERE email = '$email'";
@@ -45,7 +46,7 @@ if (isset($_POST) & !empty($_POST)) {
 				try {
 					//Server settings
 					$mail->CharSet   = 'UTF-8';
-					$mail->SMTPDebug = 1; // Enable verbose debug output
+					$mail->SMTPDebug = 0; // Enable verbose debug output
 					$mail->isSMTP(); // Set mailer to use SMTP
 					$mail->Host       = 'smtp.gmail.com'; // Specify main and backup SMTP servers
 					$mail->SMTPAuth   = true; // Enable SMTP authentication
@@ -68,6 +69,7 @@ if (isset($_POST) & !empty($_POST)) {
 					$mail->send();
 					echo $RESTResponse::OK;
 				} catch (Exception $e) {
+					error_log($e, 3, "C:\wamp\logs\php_error.log");
 					echo $RESTResponse::FAIL;
 				}
 			} else {
@@ -76,10 +78,10 @@ if (isset($_POST) & !empty($_POST)) {
 		} else {
 			echo $RESTResponse::FAIL;
 		}
+		mysqli_free_result($resultUser);
+		close($connection);
 	}
 } else {
 	echo $RESTResponse::FAIL;
 }
-mysqli_free_result($resultUser);
-close($connection);
 ?>

@@ -40,10 +40,10 @@ if (isset($_POST) & !empty($_POST)) {
 			session_destroy();
 			echo $RESTResponse::FAIL;
 		}
+		mysqli_free_result($resultUser);
+		close($connection);
 	}
 } else {
 	echo $RESTResponse::FAIL;
 }
-mysqli_free_result($resultUser);
-close($connection);
 ?>
