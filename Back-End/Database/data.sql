@@ -1,10 +1,10 @@
 /**
  * Insert # user #
  */
-INSERT INTO user (username, email, password, verified, idtype) VALUES ('test1', 'test1IPN@einrot.com', '', 1, (SELECT idType FROM type WHERE name LIKE 'Organizator'));
-INSERT INTO user (username, email, password, verified, idtype) VALUES ('test2', 'test2IPN@einrot.com', '', 1, (SELECT idType FROM type WHERE name LIKE 'Staff Front'));
-INSERT INTO user (username, email, password, verified, idtype) VALUES ('test3', 'test3IPN@einrot.com', '', 1, (SELECT idType FROM type WHERE name LIKE 'Staff Back'));
-INSERT INTO user (username, email, password, verified, idtype) VALUES ('test4', 'test4IPN@einrot.com', '', 1, (SELECT idType FROM type WHERE name LIKE 'Presentator'));
+INSERT INTO user (username, email, password, verified, idtype) VALUES ('test1', 'test1IPN@einrot.com', '$2y$10$nKP1Y.XhgsBbFjk6ETaVm.LEIlZc8yoh.GAFm5HWcenx2sEKKqV4y', 1, (SELECT idType FROM type WHERE name LIKE 'Organizator'));
+INSERT INTO user (username, email, password, verified, idtype) VALUES ('test2', 'test2IPN@einrot.com', '$2y$10$0Bo1eSIKbfQkhgnqTe8Pw.555GbQ1CWKeCbuYQuxACdetVsJ4A6O.', 1, (SELECT idType FROM type WHERE name LIKE 'Staff Front'));
+INSERT INTO user (username, email, password, verified, idtype) VALUES ('test3', 'test3IPN@einrot.com', '$2y$10$S7kiDUVsZodabBBhGaFE6OQ5iUhLVVMCfwYuAwqmSj3mPinOHwk.O', 1, (SELECT idType FROM type WHERE name LIKE 'Staff Back'));
+INSERT INTO user (username, email, password, verified, idtype) VALUES ('test4', 'test4IPN@einrot.com', '$2y$10$PW9CgSzU3iP9CPHXO8gP2O5HIWdTxqRgq9vx1gmKMrrFncdPb7rmu', 1, (SELECT idType FROM type WHERE name LIKE 'Presentator'));
 
 /**
  * Insert # Awarded #

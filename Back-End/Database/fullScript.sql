@@ -294,7 +294,7 @@ SHOW WARNINGS;
 
 LOCK TABLES `IPN-Awards`.`user` WRITE;
 /*!40000 ALTER TABLE `IPN-Awards`.`user` DISABLE KEYS */;
-INSERT INTO `IPN-Awards`.`user` VALUES (1,'admin1','admin1IPN@einrot.com','',NULL,001,'2018-12-01 18:44:04',1),(2,'test1','test1IPN@einrot.com','',NULL,001,'2018-12-01 18:44:04',2),(3,'test2','test2IPN@einrot.com','',NULL,001,'2018-12-01 18:44:04',4),(4,'test3','test3IPN@einrot.com','',NULL,001,'2018-12-01 18:44:04',3),(5,'test4','test4IPN@einrot.com','',NULL,001,'2018-12-01 18:44:04',5);
+INSERT INTO `IPN-Awards`.`user` VALUES (1,'admin1','admin1IPN@einrot.com','$2y$10$fvRJXraoANmPHarPJ1KgzO6a1vpi1inEjHXsgMMBmDcjVAxokGE5u',NULL,001,'2018-12-01 18:44:04',1),(2,'test1','test1IPN@einrot.com','$2y$10$nKP1Y.XhgsBbFjk6ETaVm.LEIlZc8yoh.GAFm5HWcenx2sEKKqV4y',NULL,001,'2018-12-01 18:44:04',2),(3,'test2','test2IPN@einrot.com','$2y$10$0Bo1eSIKbfQkhgnqTe8Pw.555GbQ1CWKeCbuYQuxACdetVsJ4A6O.',NULL,001,'2018-12-01 18:44:04',4),(4,'test3','test3IPN@einrot.com','$2y$10$S7kiDUVsZodabBBhGaFE6OQ5iUhLVVMCfwYuAwqmSj3mPinOHwk.O',NULL,001,'2018-12-01 18:44:04',3),(5,'test4','test4IPN@einrot.com','$2y$10$PW9CgSzU3iP9CPHXO8gP2O5HIWdTxqRgq9vx1gmKMrrFncdPb7rmu',NULL,001,'2018-12-01 18:44:04',5);
 /*!40000 ALTER TABLE `IPN-Awards`.`user` ENABLE KEYS */;
 UNLOCK TABLES;
 

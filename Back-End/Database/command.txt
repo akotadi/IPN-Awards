@@ -14,3 +14,5 @@ drop database `ipn-awards`;
 source IPN-Awards\Back-End\Database\Fullscript.sql 
 
 mysqldump ipn-awards > dump.sql;
+
+admin1 XZAT9WJH

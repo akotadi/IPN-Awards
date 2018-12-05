@@ -18,7 +18,7 @@ function sendInvitation($listAwarded) {
 		$pdfdoc = createInvitation($awarded);
 		if (sendEmail($awarded, $pdfdoc)) {
 			echo $RESTResponse->OK;
-		}else{
+		} else {
 			echo $RESTResponse->FAIL;
 		}
 	}
@@ -38,7 +38,7 @@ function sendEmail($rfc, $pdfdoc) {
 			$extract          = $result->fetch_array();
 			$code             = $extract['code'];
 			$email            = $extract['email'];
-			$name            = $extract['name'].' '$extract['first_surname'].' '$extract['second_surname'].' ';
+			$name             = $extract['name'] . ' ' . $extract['first_surname'] . ' ' . $extract['second_surname'] . ' ';
 			$confirmationLink = 'http://localhost:6789/ipn-awards/Back-End/PHP/confirmAssistance.php?rfc=' . $rfc . '&code=' . $code;
 		} else {
 			return false;
@@ -60,7 +60,7 @@ function sendEmail($rfc, $pdfdoc) {
 
 		//Recipients
 		$mail->setFrom('galardones.ipn@gmail.com', 'Galardones IPN');
-		$mail->addAddress($email, $name); 
+		$mail->addAddress($email, $name);
 
 		//Attachments
 		$mail->addStringAttachment($pdfdoc, 'Invitacion.pdf'); // Add attachments
@@ -68,8 +68,8 @@ function sendEmail($rfc, $pdfdoc) {
 		//Content
 		$mail->isHTML(true); // Set email format to HTML
 		$mail->Subject = 'Invitación para la ceremonia del IPN';
-		$mail->Body    = 'Buenas tardes, el Instituto Politécnico Nacional lo invita a la ceremonia, <a href="'.$confirmationLink.'">por favor clickea aquí para confirmar tu asistencia</a>. Felicidades y esperamos que nos honre con su amable presencia.';
-		$mail->AltBody = 'Es necesario confirmar la asistencia, por favor visita '.$confirmationLink.' o revisa tu invitación para hacerlo.';
+		$mail->Body    = 'Buenas tardes, el Instituto Politécnico Nacional lo invita a la ceremonia, <a href="' . $confirmationLink . '">por favor clickea aquí para confirmar tu asistencia</a>. Felicidades y esperamos que nos honre con su amable presencia.';
+		$mail->AltBody = 'Es necesario confirmar la asistencia, por favor visita ' . $confirmationLink . ' o revisa tu invitación para hacerlo.';
 
 		$mail->send();
 		return true;

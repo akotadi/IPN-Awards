@@ -25,6 +25,11 @@
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+    <!-- Validetta -->
+    <link rel="stylesheet" type="text/css" href="js/validetta/validetta.min.css">
+    <script type="text/javascript" src="js/validetta/validetta.min.js"></script>
+    <script type="text/javascript" src="js/validetta/localization/validettaLang-es-ES.js"></script>
+
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/login.css">
@@ -49,45 +54,50 @@
                 <!-- /Tab Menu -->
                 <!-- Login Tab -->
                 <div id="swipe-login" class="col s12">
-                    <h1 class="left-align">Ingresar</h1>
-                    <div class="row">
-                        <div class="input-field col s8">
-                            <input id="usuario" type="text" class="validate" name="usuario">
-                            <label for="usuario">Usuario</label>
+                    <form id="FormLogin">
+                        <h1 class="left-align">Ingresar</h1>
+                        <div class="row">
+                            <div class="input-field col s8">
+                                <input id="user" type="text" class="validate" name="user" data-validetta="required">
+                                <label for="user">Usuario</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s8">
-                            <input id="password" type="password" class="validate" name="password">
-                            <label for="password">Password</label>
+                        <div class="row">
+                            <div class="input-field col s8">
+                                <input id="password" type="password" class="validate" name="password" data-validetta="required,minLength[4],maxLength[16]">
+                                <label for="password">Contraseña</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 m3">
-                            <a class="btn waves-effect waves-light pink darken-4" href="home.html">Entrar</a>
+                        <div class="row">
+                            <div class="input-field col s12 m3">
+                                <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnLogin">Entrar</button>
+                            </div>
+                            <div class="input-field col s12 m3">
+                                <a class="waves-effect waves-light btn pink darken-4" href="index.html">Salir<i class="material-icons options-text">exit_to_app</i></a>
+                            </div>
                         </div>
-                        <div class="input-field col s12 m3">
-                            <a class="waves-effect waves-light btn pink darken-4" href="#">Salir <i
-                                    class="material-icons options-text">exit_to_app</i></a>
-                        </div>
-                    </div>
-                    <p>asdsads</p>
+                    </form>
                 </div>
                 <!-- /Login Tab -->
                 <!-- Recover Tab -->
                 <div id="swipe-recover" class="col s12">
-                    <h1 class="left-align">Recuperar</h1>
-                    <div class="row">
-                        <div class="input-field col s8">
-                            <input id="email" type="email" class="validate" name="email">
-                            <label for="email">Email</label>
+                    <form id="FormRecover">
+                        <h1 class="left-align">Recuperar</h1>
+                        <div class="row">
+                            <div class="input-field col s8">
+                                <input id="email" type="email" class="validate" name="email" data-validetta="required,email">
+                                <label for="email">Email</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s6">
-                            <a class="btn waves-effect waves-light pink darken-4" href="#">Enviar</a>
+                        <div class="row">
+                            <div class="input-field col s12 m3">
+                                <button class="btn waves-effect waves-light btn pink darken-4" type="submit" id="btnRecover">Enviar</button>
+                            </div>
+                            <div class="input-field col s12 m3">
+                                <a class="waves-effect waves-light btn pink darken-4" href="index.html">Salir<i class="material-icons options-text">exit_to_app</i></a>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <!-- /Recover Tab -->
             </div>
