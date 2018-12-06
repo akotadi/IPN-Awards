@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Awarded` (
   `second_surname` VARCHAR(50) NULL,
   `email` VARCHAR(255) NOT NULL,
   `seat_number` INT NULL,
-  `activation_code` VARCHAR(32) NULL,
+  `activation_code` VARCHAR(16) NULL,
   `confirmed` TINYINT ZEROFILL NOT NULL,
   `is_present` TINYINT ZEROFILL NOT NULL,
   `idAward` INT NOT NULL,

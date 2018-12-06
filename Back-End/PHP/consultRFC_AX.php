@@ -6,19 +6,21 @@ $response = array('valid' => false, 'message' => '');
 
 if (isset($_POST) && !empty($_POST)) {
 
-	$assistant = $_POST["rfc"];
+	$rfc = $_POST["dataRFC"];
 
-	if (!empty($assistant)) {
+	if (!empty($rfc)) {
 		$connection = connect();
 
-		$assistant = mysqli_real_escape_string($connection, $assistant);
+		$rfc = mysqli_real_escape_string($connection, $rfc);
 
-		$uQuery = "UPDATE awarded SET is_present = 1 WHERE rfc = '$assistant'";
+		$query = "SELECT * FROM awarded WHERE rfc = '$rfc'";
 
-		if ($connection->query($uQuery)) {
+		$resultAwarded = $connection->query($query);
+		if ($resultAwarded->num_rows > 0) {
+
 			$response = array('valid' => true);
 		} else {
-			$response = array('valid' => false, 'message' => 'Hubo un problema, por favor intente de nuevo.');
+			$response = array('valid' => false, 'message' => 'RFC no registrado.');
 		}
 		close($connection);
 	} else {

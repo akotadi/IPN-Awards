@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Awarded` (
   `second_surname` varchar(50) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `seat_number` int(11) DEFAULT NULL,
-  `activation_code` varchar(32) DEFAULT NULL,
+  `activation_code` varchar(16) DEFAULT NULL,
   `confirmed` tinyint(3) unsigned zerofill NOT NULL,
   `is_present` tinyint(3) unsigned zerofill NOT NULL,
   `idAward` int(11) NOT NULL,

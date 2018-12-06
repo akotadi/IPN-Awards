@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 $response = array('valid' => false, 'message' => '');
 
-if (isset($_POST) && !empty($_POST) && isset($_SESSION)) {
+if (isset($_POST) && !empty($_POST)) {
 
 	$email   = $_POST["old-email"];
 	$new     = $_POST["new-email"];

@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 $response = array('valid' => false, 'message' => '');
 
-if (isset($_POST) && !empty($_POST) && isset($_SESSION) && !empty($_SESSION)) {
+if (isset($_POST) && !empty($_POST)) {
 
 	$password = $_POST["old-password"];
 	$new      = $_POST["new-password"];
