@@ -27,7 +27,7 @@ $(document).ready(function () {
 			.done( function( data ){
 				console.log(data);
 				if (data.valid) {
-					$(location).attr("href", "home.html");
+					$(location).attr("href", "./home.php");
 				} else {
 					alert(data.message);
 				}
