@@ -30,19 +30,19 @@ function searchAsist() {
 }
 
 // Listener para el select del modal
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, {});
 });
 
 // Bloque para ocultar Input y Label de Otro
-$('#asist-select').change(function() {
-    if( $(this).val().includes("otro")) {
-        $('#otherInput').prop( "hidden", false );
-        $('#otherLabel').prop( "hidden", false );
+$('#asist-select').change(function () {
+    if ($(this).val().includes("otro")) {
+        $('#otherInput').prop("hidden", false);
+        $('#otherLabel').prop("hidden", false);
     } else {
-        $('#otherInput').prop( "hidden", true );
-        $('#otherLabel').prop( "hidden", true );
+        $('#otherInput').prop("hidden", true);
+        $('#otherLabel').prop("hidden", true);
     }
 });
 
@@ -54,7 +54,7 @@ $(document).ready(function () {
         bubblePosition: "bottom",
         bubbleGapTop: 10,
         bubbleGapLeft: -5,
-        onError:function(e){
+        onError: function (e) {
             e.preventDefault();
             // alert("ERROR");
         },
@@ -64,25 +64,26 @@ $(document).ready(function () {
                 method: "post",
                 url: "../Back-End/PHP/cAssistant_AX.php",
                 data: $(this.form).serialize(),
-                dataType : 'json',
+                dataType: 'json',
                 cache: false,
-                beforeSend : function(){
+                beforeSend: function () {
                     console.log('Started request !');
                 }
             })
-            .done( function( data ){
-                console.log(data);
-                if (data.valid) {
-                    $(location).attr("href", "asistencia.html");
-                } else {
-                    alert(data.message);
-                }
-            })
-            .fail( function( jqXHR, textStatus, error ){
-                console.log(textStatus+':'+jqXHR.status+' : '+jqXHR.statusText);
-            })
-            .always( function( result ){ console.log('Request done !!');
-            });
+                .done(function (data) {
+                    console.log(data);
+                    if (data.valid) {
+                        $(location).attr("href", "asistencia.html");
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .fail(function (jqXHR, textStatus, error) {
+                    console.log(textStatus + ':' + jqXHR.status + ' : ' + jqXHR.statusText);
+                })
+                .always(function (result) {
+                    console.log('Request done !!');
+                });
         }
     });
 
@@ -90,7 +91,7 @@ $(document).ready(function () {
         bubblePosition: "bottom",
         bubbleGapTop: 10,
         bubbleGapLeft: -5,
-        onError:function(e){
+        onError: function (e) {
             e.preventDefault();
             // alert("ERROR");
         },
@@ -100,25 +101,26 @@ $(document).ready(function () {
                 method: "post",
                 url: "../Back-End/PHP/uAssistant_AX.php",
                 data: $(this.form).serialize(),
-                dataType : 'json',
+                dataType: 'json',
                 cache: false,
-                beforeSend : function(){
+                beforeSend: function () {
                     console.log('Started request !');
                 }
             })
-            .done( function( data ){
-                console.log(data);
-                if (data.valid) {
-                    $(location).attr("href", "asistencia.html");
-                } else {
-                    alert(data.message);
-                }
-            })
-            .fail( function( jqXHR, textStatus, error ){
-                console.log(textStatus+':'+jqXHR.status+' : '+jqXHR.statusText);
-            })
-            .always( function( result ){ console.log('Request done !!');
-            });
+                .done(function (data) {
+                    console.log(data);
+                    if (data.valid) {
+                        $(location).attr("href", "asistencia.html");
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .fail(function (jqXHR, textStatus, error) {
+                    console.log(textStatus + ':' + jqXHR.status + ' : ' + jqXHR.statusText);
+                })
+                .always(function (result) {
+                    console.log('Request done !!');
+                });
         }
     });
 });
@@ -127,4 +129,3 @@ $(document).ready(function () {
 document.addEventListener('DOMContentLoaded', function () {
     var instances = M.Modal.init(document.getElementById("qr-modal"), {});
 });
-
