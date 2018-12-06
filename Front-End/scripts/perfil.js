@@ -38,7 +38,7 @@ $(document).ready(function () {
             .done( function( data ){
                 console.log(data);
                 if (data.valid) {
-                    $(location).attr("href", "perfil.html");
+                    $(location).attr("href", "perfil.php");
                 } else {
                     alert(data.message);
                 }
@@ -74,7 +74,7 @@ $(document).ready(function () {
             .done( function( data ){
                 console.log(data);
                 if (data.valid) {
-                    $(location).attr("href", "perfil.html");
+                    $(location).attr("href", "perfil.php");
                 } else {
                     alert(data.message);
                 }
