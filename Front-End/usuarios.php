@@ -10,7 +10,7 @@ if (isset($_SESSION["user"])) {
 
 		$now = time();
 		if ($now > $_SESSION['expire_time']) {
-			error_log("Expired time", 3, "C:\wamp\logs\php_error.log");
+			error_log("Expired time", 3, "../logs/php_error.log");
 			session_destroy();
 			header("Location: ./index.html");
 		} else {
@@ -78,13 +78,13 @@ if (isset($_SESSION["user"])) {
     <nav class="pink darken-4">
         <div class="nav-wrapper">
             <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <a href="home.html" class="brand-logo">IPN</a>
+            <a href="home.php" class="brand-logo">IPN</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="asistencia.php" class="waves-effect waves-light">Asistencias</a></li>
-                <li><a href="invitados.html" class="waves-effect waves-light">Invitados</a></li>
-                <li><a href="usuarios.html" class="waves-effect waves-light">Usuarios</a></li>
-                <li><a href="estadisticas.html" class="waves-effect waves-light">Estadisticas</a></li>
-                <li><a href="#" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
+                <li><a href="invitados.php" class="waves-effect waves-light">Invitados</a></li>
+                <li><a href="usuarios.php" class="waves-effect waves-light">Usuarios</a></li>
+                <li><a href="estadisticas.php" class="waves-effect waves-light">Estadisticas</a></li>
+                <li><a href="perfil.php" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
             </ul>
         </div>
     </nav>
@@ -105,11 +105,11 @@ if (isset($_SESSION["user"])) {
         <li><a href="asistencia.php" class="waves-effect">Asistencias</a></li>
         <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
         <li><a href="usuarios.php" class="waves-effect">Usuarios</a></li>
-        <li><a href="estadisticas.html" class="waves-effect">Estadisticas</a></li>
+        <li><a href="estadisticas.php" class="waves-effect">Estadisticas</a></li>
         <li>
             <div class="divider"></div>
         </li>
-        <li><a href="#" class="waves-effect">Perfil</a></li>
+        <li><a href="perfil.php" class="waves-effect">Perfil</a></li>
     </ul>
     <!-- /Sidenav -->
     <!-- /Navigation section -->
@@ -169,12 +169,12 @@ echo $filasUsuarios;
 <?php
 }
 	} else {
-		error_log("Not loggedin", 3, "C:\wamp\logs\php_error.log");
+		error_log("Not loggedin", 3, "../logs/php_error.log");
 		session_destroy();
 		header("location:./index.html");
 	}
 } else {
-	error_log("Not session", 3, "C:\wamp\logs\php_error.log");
+	error_log("Not session", 3, "../logs/php_error.log");
 	session_destroy();
 	header("Location: ./index.html");
 }

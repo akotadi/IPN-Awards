@@ -10,7 +10,7 @@ if (isset($_SESSION["user"])) {
 
 		$now = time();
 		if ($now > $_SESSION['expire_time']) {
-			error_log("Expired time", 3, "C:\wamp\logs\php_error.log");
+			error_log("Expired time", 3, "../logs/php_error.log");
 			session_destroy();
 			header("Location: ./index.html");
 		} else {
@@ -170,8 +170,8 @@ if (isset($_SESSION["user"])) {
                             </thead>
                             <tbody>
                             <?php
-                                echo $filasInvitados;
-			                ?>
+echo $filasInvitados;
+			?>
                             </tbody>
                         </table>
                     </div>
@@ -263,12 +263,12 @@ if (isset($_SESSION["user"])) {
 <?php
 }
 	} else {
-		error_log("Not loggedin", 3, "C:\wamp\logs\php_error.log");
+		error_log("Not loggedin", 3, "../logs/php_error.log");
 		session_destroy();
 		header("location:./index.html");
 	}
 } else {
-	error_log("Not session", 3, "C:\wamp\logs\php_error.log");
+	error_log("Not session", 3, "../logs/php_error.log");
 	session_destroy();
 	header("Location: ./index.html");
 }

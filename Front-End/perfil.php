@@ -1,3 +1,17 @@
+<?php
+session_start();
+if (isset($_SESSION["user"])) {
+	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+
+		$now = time();
+		if ($now > $_SESSION['expire_time']) {
+			error_log("Expired time", 3, "../logs/php_error.log");
+			session_destroy();
+			header("Location: ./index.html");
+		} else {
+			$_SESSION['expire_time'] = $now + (30 * 60);
+		}
+		?>
 <!DOCTYPE html>
 <html>
 
@@ -219,3 +233,15 @@
 <script src="scripts/perfil.js"></script>
 
 </html>
+<?php
+} else {
+		error_log("Not loggedin", 3, "../logs/php_error.log");
+		session_destroy();
+		header("location:./index.html");
+	}
+} else {
+	error_log("Not session", 3, "../logs/php_error.log");
+	session_destroy();
+	header("Location: ./index.html");
+}
+?>
