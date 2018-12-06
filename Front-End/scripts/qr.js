@@ -63,6 +63,6 @@ function closeQRReader(){
 }
 
 function create(){
-	var data = document.getElementById("data").value;
+	var data = document.getElementById("dataRFC").value;
 	document.getElementById("qrimage").innerHTML="<img src='https://chart.googleapis.com/chart?chs=250x250&cht=qr&choe=ISO-8859-1&chl="+encodeURIComponent(data)+"'/>";
 }

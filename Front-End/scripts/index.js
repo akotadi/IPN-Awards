@@ -28,17 +28,15 @@ $(document).ready(function () {
 				cache: false,
 				beforeSend : function(){
 					console.log('Started request !');
-					console.log($(this.form));
-					console.log($(this.form).serialize());
 				}
 			})
 			.done( function( data ){
-				console.log(data);
-				// if (data.valid) {
-				// 	create();
-				// } else {
-				// 	alert(data.message);
-				// }
+				// console.log(data);
+				if (data.valid) {
+					create();
+				} else {
+					alert(data.message);
+				}
             })
             .fail( function( jqXHR, textStatus, error ){
                 console.log(textStatus+':'+jqXHR.status+' : '+jqXHR.statusText);
