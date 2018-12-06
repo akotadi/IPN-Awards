@@ -24,7 +24,7 @@ if (isset($_POST) && !empty($_POST)) {
 			$extractUser = $resultUser->fetch_assoc();
 			$stored      = $extractUser['password'];
 			if (password_verify(base64_encode(hash('sha256', $_POST['password'], true)), $stored)) {
-				$_SESSION['logged_in']   = true;
+				$_SESSION['loggedin']    = true;
 				$_SESSION['start_time']  = time();
 				$_SESSION['expire_time'] = $_SESSION['start_time'] + (30 * 60);
 				$_SESSION['user']        = $user;
