@@ -2,7 +2,9 @@
 require './connection_DB.php';
 require './RESTResponse.php';
 
-if (isset($_POST) & !empty($_POST)) {
+$response = array('valid' => false, 'message' => '');
+
+if (isset($_POST) && !empty($_POST) && isset($_SESSION) && !empty($_SESSION)) {
 
 	$assistant = $_POST["rfc"];
 
@@ -14,15 +16,18 @@ if (isset($_POST) & !empty($_POST)) {
 		$uQuery = "UPDATE awarded SET is_present = 1 WHERE rfc = '$assistant'";
 
 		if ($connection->query($uQuery)) {
-			echo $RESTResponse::OK;
+			$response = array('valid' => true);
 		} else {
-			echo $RESTResponse::FAIL;
+			$response = array('valid' => false, 'message' => 'Hubo un problema, por favor intente de nuevo.');
 		}
 		close($connection);
 	} else {
-		echo $RESTResponse::FAIL;
+		$response = array('valid' => false, 'message' => 'Debe enviar todos los parámetros.');
 	}
 } else {
-	echo $RESTResponse::FAIL;
+	$response = array('valid' => false, 'message' => 'Hubo un problema, por favor intente de nuevo.');
 }
+
+echo json_encode($response);
+
 ?>

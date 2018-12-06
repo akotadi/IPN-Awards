@@ -8,13 +8,13 @@ require './PHPMailer/SMTP.php';
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
-if (isset($_POST) & !empty($_POST)) {
+$response = array('valid' => false, 'message' => '');
+
+if (isset($_POST) && !empty($_POST) && isset($_SESSION) && !empty($_SESSION)) {
 
 	$email = $_POST['email'];
 
-	if (empty($email)) {
-		echo $RESTResponse::FAIL;
-	} else {
+	if (!empty($email)) {
 		$connection = connect();
 
 		$email = mysqli_real_escape_string($connection, $email);
@@ -67,21 +67,25 @@ if (isset($_POST) & !empty($_POST)) {
 					$mail->AltBody = 'Hola, como lo has solicitado, tu contraseña se ha recuperado, ingresa con ' . $password . ' para continuar en el sitio.';
 
 					$mail->send();
-					echo $RESTResponse::OK;
+					$response = array('valid' => true);
 				} catch (Exception $e) {
 					error_log($e, 3, "C:\wamp\logs\php_error.log");
-					echo $RESTResponse::FAIL;
+					$response = array('valid' => false, 'message' => 'No se pudo enviar el correo pero se ha actualizado la contraseña.');
 				}
 			} else {
-				echo $RESTResponse::FAIL;
+				$response = array('valid' => false, 'message' => 'Hubo un problema, por favor intente de nuevo.');
 			}
 		} else {
-			echo $RESTResponse::FAIL;
+			$response = array('valid' => false, 'message' => 'Correo no registrado.');
 		}
 		mysqli_free_result($resultUser);
 		close($connection);
+	} else {
+		$response = array('valid' => false, 'message' => 'Debe enviar todos los parámetros.');
 	}
 } else {
-	echo $RESTResponse::FAIL;
+	$response = array('valid' => false, 'message' => 'Hubo un problema, por favor intente de nuevo.');
 }
+
+echo json_encode($response);
 ?>

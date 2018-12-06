@@ -24,6 +24,11 @@
     <!-- JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+    <!-- Validetta -->
+    <link rel="stylesheet" type="text/css" href="js/validetta/validetta.min.css">
+    <script type="text/javascript" src="js/validetta/validetta.min.js"></script>
+    <script type="text/javascript" src="js/validetta/localization/validettaLang-es-ES.js"></script>
+
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/perfil.css">
@@ -77,67 +82,72 @@
         <div id="login-container" class="col s6 white">
             <ul id="menu-collapsible" class="collapsible">
                 <li>
-                    <!-- Email -->
                     <div class="collapsible-header"><i class="fas fa-envelope"></i>Cambiar Email</div>
                     <div class="collapsible-body">
-                        <form id="FormEmail">
+                        <form id="FormChangeEmail">
                             <div class="row">
                                 <div class="input-field col s8">
-                                    <input id="old-email" type="email" class="validate" name="old-email">
+                                    <input id="old-email" type="email" class="validate" name="old-email" data-validetta="required,email">
                                     <label for="old-email">Email actual</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s8">
-                                    <input id="new-email" type="email" class="validate" name="new-email">
+                                    <input id="new-email" type="email" class="validate" name="new-email" data-validetta="required,email,different[old-email]">
                                     <label for="new-email">Nuevo email</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s8">
-                                    <input id="new-email-confirm" type="email" class="validate" name="new-email-confirm">
+                                    <input id="new-email-confirm" type="email" class="validate" name="new-email-confirm"
+                                        data-validetta="required,email,equalTo[new-email]">
                                     <label for="new-email-confirm">Confirma nuevo email</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <button href="#!" class="waves-effect waves-light btn pink darken-4" type="submit" id="btnEmail">Actualizar</button>
+                                <div class="input-field col s12 m3">
+                                    <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnChangeEmail">Actualizar
+                                        Correo</button>
+                                </div>
                             </div>
                         </form>
                     </div>
-                    <!-- Email -->
                 </li>
                 <li>
-                    <!-- Password -->
-                    <div class="collapsible-header"><i class="fas fa-key"></i>Cambiar password</div>
+                    <div class="collapsible-header"><i class="fas fa-key"></i>Cambiar contrase&ntilde;a</div>
                     <div class="collapsible-body">
-                        <form id="FormPassword">
+                        <form id="#FormChangePassword">
                             <div class="row">
                                 <div class="input-field col s8">
-                                    <input id="old-password" type="password" class="validate" name="old-password">
-                                    <label for="old-password">Password actual</label>
+                                    <input id="old-password" type="password" class="validate" name="old-password"
+                                        data-validetta="required,minLength[4],maxLength[16]">
+                                    <label for="old-password">Contrase&ntilde;a actual</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s8">
-                                    <input id="new-password" type="password" class="validate" name="new-password">
-                                    <label for="new-password">Nuevo password</label>
+                                    <input id="new-password" type="password" class="validate" name="new-password"
+                                        data-validetta="required,minLength[4],maxLength[16],different[old-password]">
+                                    <label for="new-password">Nueva contrase&ntilde;a</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s8">
-                                    <input id="new-password-confirm" type="password" class="validate" name="new-password-confirm">
-                                    <label for="new-password-confirm">Confirma nuevo password</label>
+                                    <input id="new-password-confirm" type="password" class="validate" name="new-password-confirm"
+                                        data-validetta="required,minLength[4],maxLength[16],equalTo[new-password]">
+                                    <label for="new-password-confirm">Confirmar nueva contrase&ntilde;a</label>
                                 </div>
                             </div>
                             <div class="row">
-                                <button href="#!" class="btn waves-effect waves-light pink darken-4" type="submit" id="btnPassword">Actualizar</button>
+                                <div class="input-field col s12 m3">
+                                    <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnChangePassword">Actualizar
+                                        Contrase&ntilde;a</button>
+                                </div>
                             </div>
                         </form>
                     </div>
-                    <!-- Password -->
                 </li>
                 <li>
-                    <!-- Delete -->
                     <div class="collapsible-header"><i class="fas fa-user-times"></i>Eliminar cuenta</div>
                     <div class="collapsible-body">
                         <div class="row">
@@ -151,64 +161,58 @@
                                 cuenta</a>
                         </div>
                     </div>
-                    <!-- Delete -->
                 </li>
                 <li>
-                    <!-- Logout -->
                     <div class="collapsible-header"><i class="fas fa-sign-out-alt"></i>Desconectar</div>
                     <div class="collapsible-body">
-                        <form id="FormLogout">
-                            <div class="row">
-                                <button href="index.html" class="btn waves-effect waves-light pink darken-4" type="submit"
-                                    id="btnLogout">Cerrar sesión</button>
-                            </div>
-                        </form>
+                        <div class="row">
+                            <a href="index.html" class="btn waves-effect waves-light pink darken-4" data-target="delete-modal">Cerrar
+                                sesión</a>
+                        </div>
                     </div>
-                    <!-- /Logout -->
                 </li>
             </ul>
         </div>
-    </div>
-    <!-- /Main -->
+        <!-- /Main -->
 
-    <!-- Extras -->
-    <!-- Modal -->
-    <div id="delete-modal" class="modal">
-        <div class="modal-content">
-            <div class="row">
-                <div class="col s12">
-                    <h4>Eliminar cuenta?</h4>
-                </div>
+        <!-- Extras -->
+        <!-- Modal -->
+        <div id="delete-modal" class="modal">
+            <div class="modal-content">
+                <form>
+                    <div class="row">
+                        <div class="col s12">
+                            <h4>Eliminar cuenta?</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12">
+                            <p>
+                                Al eliminar tu cuenta se perderán todos tus datos.
+                                Esta acción no se puede deshacer.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="delete-password" type="password" class="validate" name="delete-password">
+                            <label for="delete-password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4">
+                            <button class="waves-effect waves-purple btn-flat" type="submit" id="btnDelete">Eliminar
+                                cuenta</button>
+                        </div>
+                        <div class="col s4">
+                            <a href="#!" class="btn-flat modal-close waves-effect waves-light darken-4">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="row">
-                <div class="col s12">
-                    <p>
-                        Al eliminar tu cuenta se perderán todos tus datos.
-                        Esta acción no se puede deshacer.
-                    </p>
-                </div>
-            </div>
-            <form id="FormDelete">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input id="delete-password" type="password" class="validate" name="delete-password">
-                        <label for="delete-password">Password</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s4">
-                        <button href="#!" class="waves-effect waves-purple btn-flat" type="submit" id="btnDelete">Eliminar
-                            cuenta</button>
-                    </div>
-                    <div class="col s4">
-                        <a href="#!" class="btn-flat modal-close waves-effect waves-light darken-4">Cancelar</a>
-                    </div>
-            </form>
         </div>
-    </div>
-    </div>
-    <!-- /Modal -->
-    <!-- /Extras -->
+        <!-- /Modal -->
+        <!-- /Extras -->
 
 </body>
 
