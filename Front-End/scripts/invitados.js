@@ -1,7 +1,11 @@
 // Tabla de busqueda en invitados
 $(document).ready(function () {
     $('#tabla-invitados tbody').on('click', 'tr', function () {
-        $(this).toggleClass('selected');
+        if ($(this).attr('class') == 'selected') {
+            $(this).attr('class', 'not-selected');
+        } else {
+            $(this).attr('class', 'selected');
+        }
     });
 });
 
@@ -28,11 +32,12 @@ function searchAsist() {
     }
 }
 
-function selectAll(){
-    if($('tbody').has('tr.selected')){
-        $('tbody').children('tr.selected').removeClass('selected');
+function selectAll() {
+    if ($('tbody').has('tr.not-selected')) {
+        $('tbody').children('tr.not-selected').removeClass('not-selected');
         $('tbody').children('tr').addClass('selected');
     } else {
-        $('tbody').children('tr').addClass('selected');
+        $('tbody').children('tr.selected').removeClass('selected');
+        $('tbody').children('tr').addClass('not-selected');
     }
 }
