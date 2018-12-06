@@ -103,3 +103,9 @@ $(document).ready(function () {
         }
     });
 });
+
+// Listener para modal de "Asistencia por QR"
+document.addEventListener('DOMContentLoaded', function () {
+    var instances = M.Modal.init(document.getElementById("qr-modal"), {});
+});
+

@@ -9,9 +9,8 @@
     <meta name="description" content="Proyecto final para la materia de Tecnologías para la Web.">
 
     <!-- Font Awesome JS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+        crossorigin="anonymous">
 
     <!-- Materialize Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -30,51 +29,100 @@
 
 <body>
 
-<!-- Navigation Section -->
-<!-- Navbar -->
-<nav class="pink darken-4">
-    <div class="nav-wrapper">
-        <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <a href="#" class="brand-logo">Ceremonia Galardones IPN</a>
-        <ul class="right hide-on-med-and-down">
-            <li><a class="waves-effect waves-light" href="login.html">Login</a></li>
-            <li><a class="waves-effect waves-light" href="consultar-qr.html">Consultar QR <i
-                    class="fas fa-qrcode options-text"></i></a></li>
-        </ul>
-    </div>
-</nav>
-<!-- /Navbar -->
-
-<!-- Sidenav -->
-<ul id="slide-out" class="sidenav">
-    <li>
-        <div class="user-view">
-            <div class="background">
-                <img src="img/sidenav-bg.png" class="responsive-img">
-            </div>
-            <a href="#user"><img class="circle" src="img/ipn-logo.png"></a>
-            <a href="#name"><span class="white-text name">Usuario generico</span></a>
-            <a href="#email"><span class="white-text email">user@mail.com</span></a>
+    <!-- Navigation Section -->
+    <!-- Navbar -->
+    <nav class="pink darken-4">
+        <div class="nav-wrapper">
+            <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <a href="#" class="brand-logo">Ceremonia Galardones IPN</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a class="waves-effect waves-light" href="login.html">Login</a></li>
+                <li><a class="waves-effect waves-light modal-trigger" href="#!" data-target="qr-modal">Consultar QR <i
+                            class="fas fa-qrcode options-text"></i></a></li>
+            </ul>
         </div>
-    </li>
-    <li><a class="waves-effect waves-light" href="login.html">Login</a></li>
-    <li><a class="waves-effect waves-light" href="consultar-qr.html">Consultar QR <i
-            class="fas fa-qrcode options-text"></i></a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a class="waves-effect" href="perfil.html">Perfil</a></li>
-</ul>
-<!-- /Sidenav -->
-<!-- /Navigation Section -->
+    </nav>
+    <!-- /Navbar -->
 
-<!-- Background -->
-<div id="bgimg" class="bgimg-1"></div>
-<!-- /Background -->
+    <!-- Sidenav -->
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="img/sidenav-bg.png" class="responsive-img">
+                </div>
+                <a href="#user"><img class="circle" src="img/ipn-logo.png"></a>
+                <a href="#name"><span class="white-text name">Usuario generico</span></a>
+                <a href="#email"><span class="white-text email">user@mail.com</span></a>
+            </div>
+        </li>
+        <li><a class="waves-effect waves-light" href="login.html">Login</a></li>
+        <li><a class="waves-effect waves-light modal-trigger" href="#!" data-target="qr-modal">Consultar QR <i class="fas fa-qrcode options-text"></i></a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="waves-effect" href="perfil.html">Perfil</a></li>
+    </ul>
+    <!-- /Sidenav -->
+    <!-- /Navigation Section -->
+
+    <!-- Background -->
+    <div id="bgimg" class="bgimg-1"></div>
+    <!-- /Background -->
+
+
+    <!-- Extras -->
+    <!-- Modal -->
+    <div id="qr-modal" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col s12">
+                    <h4>Consultar QR</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div id="qrEncoder">
+                        <div class="row">
+                            <form id="FormQR">
+                                <div class="input-field col s12 m9">
+                                    <input type="text" id="data" class="form-control validate">
+                                    <label for="data">RFC:</label>
+                                </div>
+                                <div class="input-field col s12 m3">
+                                    <button class="btn waves-effect waves-light pink darken-4" onclick="create()">Crear</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <div id="qrimage"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4">
+                            <a href="#!" class="btn-flat modal-close waves-effect waves-light darken-4">Cerrar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- /Modal -->
+    <!-- /Extras -->
+
 
 </body>
 
 <!-- Our Custom JS -->
 <script src="scripts/index.js"></script>
+<script src="scripts/qr.js"></script>
+
+<!-- QR Code Reader -->
+<!-- <script src="js/qr_packed.js"></script> -->
+<script type="text/javascript" src="js/instascan.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/3.3.3/adapter.min.js"></script>
 
 </html>

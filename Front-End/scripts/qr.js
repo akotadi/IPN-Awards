@@ -7,6 +7,7 @@ function startQRReader(){
 	self.scanner.addListener('scan', function (content) {
 		var input = document.getElementById('qrcode-text');
 		input.value = content;
+		$(input).focus();
 		document.getElementById("btnCloseModal").click();
 	});
 	Instascan.Camera.getCameras().then(function (cameras) {
