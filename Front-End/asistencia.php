@@ -27,7 +27,7 @@ if (isset($_SESSION["user"])) {
                     <tr>
                         <td>" . $extractUser['name'] . " " . $extractUser['first_surname'] . " " . $extractUser['second_surname'] . "</td>
                         <td>
-                            <a id='" . $extractUser['rfc'] . "' href=' class='waves-effect waves-light modal-trigger' data-target='asist-modal'><i
+                            <a id='" . $extractUser['rfc'] . "' href='' class='waves-effect waves-light modal-trigger' data-target='asist-modal'><i
                                 class='material-icons left'>add</i></a>
                             <a class='waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
                         </td>
