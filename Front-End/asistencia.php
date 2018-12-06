@@ -233,7 +233,9 @@ echo $filasInvitados;
             <div class="row">
                 <div class="col s12">
                     <div class="preview-container">
-                        <video id="preview" autoplay="autoplay" class="active"></video>
+                        <video id="preview" autoplay="autoplay" class="active responsive-video"></video>
+                    </div>
+                    <div id="listCameras" class="collection">
                     </div>
                     <div>
                         <button id="btnCloseModal" type="button" class="btn-flat modal-close waves-effect waves-light darken-4"
