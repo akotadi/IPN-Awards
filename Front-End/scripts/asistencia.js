@@ -58,21 +58,30 @@ $(document).ready(function () {
             e.preventDefault();
             // alert("ERROR");
         },
-        onValid:function(e){
+        onValid: function (e) {
             e.preventDefault(); // Deja de actuar como formulario
             $.ajax({
-                method:"post",
-                url:"../Back-End/PHP/cAssistant_AX.php",
-                data:$("#FormAssistance").serialize(),
-                cache:false,
-                success:function(resp){
-                    if (resp == 200) {
-                        $(location).attr("href", "asistencia.html");
-                    }else{
-                        alert("Hubo un problema, inténtelo de nuevo.");
-                    }
-                    alert(resp);
+                method: "post",
+                url: "../Back-End/PHP/cAssistant_AX.php",
+                data: $(this.form).serialize(),
+                dataType : 'json',
+                cache: false,
+                beforeSend : function(){
+                    console.log('Started request !');
                 }
+            })
+            .done( function( data ){
+                console.log(data);
+                if (data.valid) {
+                    $(location).attr("href", "asistencia.html");
+                } else {
+                    alert(data.message);
+                }
+            })
+            .fail( function( jqXHR, textStatus, error ){
+                console.log(textStatus+':'+jqXHR.status+' : '+jqXHR.statusText);
+            })
+            .always( function( result ){ console.log('Request done !!');
             });
         }
     });
@@ -85,20 +94,30 @@ $(document).ready(function () {
             e.preventDefault();
             // alert("ERROR");
         },
-        onValid:function(e){
+        onValid: function (e) {
             e.preventDefault(); // Deja de actuar como formulario
             $.ajax({
-                method:"post",
-                url:"../Back-End/PHP/uAssistant_AX.php",
-                data:$("#FormCommentaries").serialize(),
-                cache:false,
-                success:function(resp){
-                    if (resp == 200) {
-                        // $(location).attr("href", "home.html");
-                    }else{
-                        alert("Hubo un problema, inténtelo de nuevo.");
-                    }
+                method: "post",
+                url: "../Back-End/PHP/uAssistant_AX.php",
+                data: $(this.form).serialize(),
+                dataType : 'json',
+                cache: false,
+                beforeSend : function(){
+                    console.log('Started request !');
                 }
+            })
+            .done( function( data ){
+                console.log(data);
+                if (data.valid) {
+                    $(location).attr("href", "asistencia.html");
+                } else {
+                    alert(data.message);
+                }
+            })
+            .fail( function( jqXHR, textStatus, error ){
+                console.log(textStatus+':'+jqXHR.status+' : '+jqXHR.statusText);
+            })
+            .always( function( result ){ console.log('Request done !!');
             });
         }
     });

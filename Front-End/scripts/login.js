@@ -17,17 +17,27 @@ $(document).ready(function () {
 			$.ajax({
 				method: "post",
 				url: "../Back-End/PHP/index_AX.php",
-				data: $("#FormLogin").serialize(),
+				data: $(this.form).serialize(),
+				dataType : 'json',
 				cache: false,
-				success: function (resp) {
-					if (resp == 200) {
-						$(location).attr("href", "home.html");
-					} else {
-						alert("Usuario y/o contraseña inválido");
-					}
+				beforeSend : function(){
+					console.log('Started request !');
 				}
+			})
+			.done( function( data ){
+				console.log(data);
+				if (data.valid) {
+					$(location).attr("href", "home.html");
+				} else {
+					alert(data.message);
+				}
+            })
+            .fail( function( jqXHR, textStatus, error ){
+                console.log(textStatus+':'+jqXHR.status+' : '+jqXHR.statusText);
+            })
+            .always( function( result ){ console.log('Request done !!');
 			});
-		}
+        }
 	});
 
 	$('#FormRecover').validetta({
@@ -43,16 +53,26 @@ $(document).ready(function () {
 			$.ajax({
 				method: "post",
 				url: "../Back-End/PHP/recoveryPassword_AX.php",
-				data: $("#FormRecover").serialize(),
+				data: $(this.form).serialize(),
+				dataType : 'json',
 				cache: false,
-				success: function (resp) {
-					if (resp == 200) {
-						$(location).attr("href", "login.html");
-					} else {
-						alert("Error con la recuperación, por favor vuelve a intentarlo");
-					}
+				beforeSend : function(){
+					console.log('Started request !');
 				}
+			})
+			.done( function( data ){
+				console.log(data);
+				if (data.valid) {
+					$(location).attr("href", "index.html");
+				} else {
+					alert(data.message);
+				}
+            })
+            .fail( function( jqXHR, textStatus, error ){
+                console.log(textStatus+':'+jqXHR.status+' : '+jqXHR.statusText);
+            })
+            .always( function( result ){ console.log('Request done !!');
 			});
-		}
+        }
 	});
 });

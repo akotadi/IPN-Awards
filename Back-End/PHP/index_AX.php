@@ -2,17 +2,16 @@
 require './connection_DB.php';
 require './RESTResponse.php';
 
-if (isset($_POST) & !empty($_POST)) {
+$response = array('valid' => false, 'message' => '');
+
+if (isset($_POST) && !empty($_POST)) {
 	session_start();
 	sleep(2);
 
 	$user     = $_POST["user"];
 	$password = $_POST["password"];
 
-	if (empty($user) || empty($password)) {
-		session_destroy();
-		echo $RESTResponse::FAIL;
-	} else {
+	if (!empty($user) || !empty($password)) {
 		$connection = connect();
 
 		$user     = mysqli_real_escape_string($connection, $user);
@@ -30,20 +29,26 @@ if (isset($_POST) & !empty($_POST)) {
 				$_SESSION['expire_time'] = $_SESSION['start_time'] + (30 * 60);
 				$_SESSION['user']        = $user;
 				$_SESSION['type']        = $extractUser['idtype'];
-				echo $RESTResponse::OK;
+				$response                = array('valid' => true);
 			} else {
 				session_destroy();
-				echo $RESTResponse::FAIL;
+				$response = array('valid' => false, 'message' => 'Contraseña incorrecta.');
 				exit;
 			}
 		} else {
 			session_destroy();
-			echo $RESTResponse::FAIL;
+			$response = array('valid' => false, 'message' => 'Usuario inexistente.');
 		}
 		mysqli_free_result($resultUser);
 		close($connection);
+	} else {
+		session_destroy();
+		$response = array('valid' => false, 'message' => 'Debe enviar todos los parámetros.');
 	}
 } else {
-	echo $RESTResponse::FAIL;
+	$response = array('valid' => false, 'message' => 'Hubo un problema, por favor intente de nuevo.');
 }
+
+echo json_encode($response);
+
 ?>

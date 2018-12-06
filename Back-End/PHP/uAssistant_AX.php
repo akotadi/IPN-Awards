@@ -2,7 +2,7 @@
 require './connection_DB.php';
 require './RESTResponse.php';
 
-if (isset($_POST) & !empty($_POST)) {
+if (isset($_POST) && !empty($_POST) && isset($_SESSION) && !empty($_SESSION)) {
 
 	$assistant = $_POST["rfc"];
 

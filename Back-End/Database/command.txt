@@ -11,8 +11,7 @@ source IPN-Awards\Back-End\Database\data.sql
 
 mysql -u root -p --default-character-set=utf8
 drop database `ipn-awards`; 
-source IPN-Awards\Back-End\Database\Fullscript.sql 
-
+source C:\wamp\www\IPN-Awards\Back-End\Database\fullScript.sql 
 mysqldump ipn-awards > dump.sql;
 
 admin1 XZAT9WJH
