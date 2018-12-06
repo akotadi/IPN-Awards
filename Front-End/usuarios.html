@@ -2,14 +2,13 @@
     session_start();
     include("../Back-End/PHP/connection_DB.php");
     if(isset($_SESSION["usuario"])){
-        $sqlGetInvitados = "SELECT * FROM Awarded";
+        $sqlGetInvitados = "SELECT * FROM user";
         $resGetInvitados = mysqli_query($conexion,$sqlGetInvitados);
-        $filasInvitados = "";
+        $filasUsuarios = "";
         while($filas = mysqli_fetch_array($resGetInvitados,MYSQLI_BOTH)){
-            $filasInvitados .= '
-                    <tr class="not-selected">
-                        <td>$filas[1] $filas[2] $filas[3]</td>
-                        <td>$filas[7]</td>
+            $filasUsuarios .= '
+                    <tr>
+                        <td>$filas[1]</td>
                         <td id="$filas[0]">
                             <a href="#!" class="edit waves-effect waves-light modal-trigger" data-target="asist-modal"><i
                                 class="material-icons left">add</i></a>
@@ -27,7 +26,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Invitados</title>
+    <title>Usuarios</title>
     <meta name="description" content="Proyecto final para la materia de Tecnologías para la Web.">
 
     <!-- Font Awesome JS -->
@@ -52,7 +51,7 @@
 
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/invitados.css">
+    <link rel="stylesheet" href="styles/usuarios.css">
 
 </head>
 
@@ -102,14 +101,14 @@
     <form id="FormAssistance">
         <div class="row">
             <div class="col s12">
-                <h1 class="left-align">Invitados</h1>
+                <h1 class="left-align">Usuarios</h1>
             </div>
         </div>
         <div class="row">
             <div class="col s12 m10 offset-m1 white">
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnCAssistant">A&ntildeadir invitados</a>
+                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnCAssistant">A&ntildeadir usuario</a>
                     </div>
                 </div>
                 <div class="row">
@@ -128,26 +127,16 @@
                     <table id="tabla-invitados" class="responsive-table">
                         <thead>
                             <tr>
-                                <th>Invitado</th>
-                                <th>Confirmado</th>
+                                <th>Usuario</th>
                                 <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                                $filasInvitados;
+                                $filasUsuarios;
                             ?>
                         </tbody>
                     </table>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12 m4">
-                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnInvitacion">Enviar
-                            Invitacion</a>
-                    </div>
-                    <div class="input-field col s12 m4">
-                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnAviso">Enviar Aviso</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -163,6 +152,11 @@
 </body>
 
 <!-- Our Custom JS -->
-<script src="scripts/invitados.js"></script>
+<script src="scripts/usuarios.js"></script>
 
 </html>
+<?php
+}else{
+    header("location:../Front-End/index.html");
+}
+?>

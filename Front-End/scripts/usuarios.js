@@ -1,24 +1,3 @@
-// Tabla: selects
-$(document).ready(function () {
-    $('#tabla-invitados tbody').on('click', 'tr', function () {
-        if ($(this).attr('class') == 'selected') {
-            $(this).attr('class', 'not-selected');
-        } else {
-            $(this).attr('class', 'selected');
-        }
-    });
-});
-
-function selectAll() {
-    if ($('tbody').has('tr.not-selected')[0] != undefined) {
-        $('tbody').children('tr.not-selected').removeClass('not-selected');
-        $('tbody').children('tr').addClass('selected');
-    } else {
-        $('tbody').children('tr.selected').removeClass('selected');
-        $('tbody').children('tr').addClass('not-selected');
-    }
-}
-
 // Table browser
 function searchAsist() {
     // Declare variables
