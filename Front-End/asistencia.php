@@ -81,8 +81,8 @@ if (isset($_SESSION["user"])) {
             <a href="index.html" class="brand-logo">IPN</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="#" class="waves-effect waves-light">Asistencias</a></li>
-                <li><a href="#" class="waves-effect waves-light">Invitados</a></li>
-                <li><a href="#" class="waves-effect waves-light">Usuarios</a></li>
+                <li><a href="invitados.php" class="waves-effect waves-light">Invitados</a></li>
+                <li><a href="usuarios.php" class="waves-effect waves-light">Usuarios</a></li>
                 <li><a href="#" class="waves-effect waves-light">Estadisticas</a></li>
                 <li><a href="perfil.html" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
             </ul>
@@ -103,7 +103,7 @@ if (isset($_SESSION["user"])) {
             </div>
         </li>
         <li><a href="#" class="waves-effect">Asistencias</a></li>
-        <li><a href="invitados.html" class="waves-effect">Invitados</a></li>
+        <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
         <li><a href="usuarios.html" class="waves-effect">Usuarios</a></li>
         <li><a href="estadisticas.html" class="waves-effect">Estadisticas</a></li>
         <li>
@@ -170,8 +170,8 @@ if (isset($_SESSION["user"])) {
                             </thead>
                             <tbody>
                             <?php
-echo $filasInvitados;
-			?>
+                                echo $filasInvitados;
+			                ?>
                             </tbody>
                         </table>
                     </div>
