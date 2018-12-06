@@ -1,5 +1,5 @@
 <?php
-require '..\Back-End\PHP\connection_DB.php ';
+require '../Back-End/PHP/connection_DB.php ';
 
 session_start();
 
@@ -10,7 +10,7 @@ if (isset($_SESSION["user"])) {
 
 		$now = time();
 		if ($now > $_SESSION['expire_time']) {
-			error_log("Expired time", 3, "C:\wamp\logs\php_error.log");
+			error_log("Expired time", 3, "../logs/php_error.log");
 			session_destroy();
 			header("Location: ./index.html");
 		} else {
@@ -28,7 +28,7 @@ if (isset($_SESSION["user"])) {
                         <td>".$extractUser['name'].$extractUser['first_surname'].$extractUser['first_surname']."</td>
                         <td>".$extractUser['confirmed']."</td>
                         <td id='".$extractUser['rfc']."'>
-                            <a href='#!' class='edit waves-effect waves-light modal-trigger' data-target='asist-modal'><i
+                            <a href='#!' class='edit waves-effect waves-light modal-trigger' data-target='gest-modal'><i
                                 class='material-icons left'>add</i></a>
                             <a class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
                             <a class='delete waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
@@ -48,7 +48,7 @@ if (isset($_SESSION["user"])) {
     <meta name="description" content="Proyecto final para la materia de Tecnologías para la Web.">
 
     <!-- Font Awesome JS -->
-    <link rel="stylesheet" href="css\fontawesome-free-5.3.1-web\css\all.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.3.1-web/css/all.min.css">
 
     <!-- Materialize Icons -->
     <link href="css/icon.css" rel="stylesheet">
@@ -145,9 +145,9 @@ if (isset($_SESSION["user"])) {
                     <table id="tabla-invitados" class="responsive-table">
                         <thead>
                             <tr>
-                                <th>Invitado</th>
-                                <th>Confirmado</th>
-                                <th>Accion</th>
+                                <th style="width:50%;">Invitado</th>
+                                <th style="width:20%;">Confirmado</th>
+                                <th style="width:30%;">Accion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -186,12 +186,12 @@ if (isset($_SESSION["user"])) {
 <?php
 }
 	} else {
-		error_log("Not loggedin", 3, "C:\wamp\logs\php_error.log");
+		error_log("Not loggedin", 3, "../logs/php_error.log");
 		session_destroy();
 		header("location:./index.html");
 	}
 } else {
-	error_log("Not session", 3, "C:\wamp\logs\php_error.log");
+	error_log("Not session", 3, "../logs/php_error.log");
 	session_destroy();
 	header("Location: ./index.html");
 }
