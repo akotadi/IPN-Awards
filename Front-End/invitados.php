@@ -166,3 +166,8 @@
 <script src="scripts/invitados.js"></script>
 
 </html>
+<?php
+}else{
+    header("location:../Front-End/index.html");
+}
+?>
