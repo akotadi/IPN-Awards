@@ -2,8 +2,16 @@
 require './connection_DB.php';
 require './RESTResponse.php';
 
-$response = array('valid' => false, 'message' => '');
+function debug_to_console( $data ) {
+    $output = $data;
+    if ( is_array( $output ) )
+        $output = implode( ',', $output);
 
+    echo "<script>console.log( 'Debug Objects: " . $output . "' );</script>";
+}
+
+$response = array('valid' => false, 'message' => '');
+debug_to_console($_POST);
 if (isset($_POST) && !empty($_POST)) {
 	session_start();
 	sleep(2);

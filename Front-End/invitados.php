@@ -1,5 +1,5 @@
 <?php
-require '..\Back-End\PHP\connection_DB.php ';
+require '../Back-End/PHP/connection_DB.php ';
 
 session_start();
 
@@ -48,7 +48,7 @@ if (isset($_SESSION["user"])) {
     <meta name="description" content="Proyecto final para la materia de Tecnologías para la Web.">
 
     <!-- Font Awesome JS -->
-    <link rel="stylesheet" href="css\fontawesome-free-5.3.1-web\css\all.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.3.1-web/css/all.min.css">
 
     <!-- Materialize Icons -->
     <link href="css/icon.css" rel="stylesheet">
@@ -145,9 +145,9 @@ if (isset($_SESSION["user"])) {
                     <table id="tabla-invitados" class="responsive-table">
                         <thead>
                             <tr>
-                                <th>Invitado</th>
-                                <th>Confirmado</th>
-                                <th>Accion</th>
+                                <th style="width:50%;">Invitado</th>
+                                <th style="width:20%;">Confirmado</th>
+                                <th style="width:30%;">Accion</th>
                             </tr>
                         </thead>
                         <tbody>
