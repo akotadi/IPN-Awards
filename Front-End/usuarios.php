@@ -20,13 +20,13 @@ if (isset($_SESSION["user"])) {
 		$sqlGetInvitados = "SELECT * FROM user";
 
 		$filasUsuarios = "";
-		$resultUser     = $connection->query($query);
+		$resultUser    = $connection->query($query);
 		if ($resultUser->num_rows > 0) {
 			while ($extractUser = $resultUser->fetch_assoc()) {
 				$filasUsuarios .= "
                 <tr>
-                    <td>".$extractUser['username']."</td>
-                    <td id='".$extractUser['idUser']."'>
+                    <td>" . $extractUser['username'] . "</td>
+                    <td id='" . $extractUser['idUser'] . "'>
                         <a href='#!' class='edit waves-effect waves-light modal-trigger' data-target='asist-modal'><i
                             class='material-icons left'>add</i></a>
                         <a class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
@@ -150,8 +150,8 @@ if (isset($_SESSION["user"])) {
                         </thead>
                         <tbody>
                             <?php
-                                $filasUsuarios;
-                            ?>
+$filasUsuarios;
+			?>
                         </tbody>
                     </table>
                 </div>
