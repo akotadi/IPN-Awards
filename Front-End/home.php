@@ -77,7 +77,7 @@ if (isset($_SESSION["user"])) {
     <!-- <li><a href="asistencia.php" class="waves-effect">Asistencias</a></li> -->
     <li><a href="./asistencia.php" class="waves-effect">Asistencias</a></li>
     <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
-    <li><a href="usuarios.html" class="waves-effect">Usuarios</a></li>
+    <li><a href="usuarios.php" class="waves-effect">Usuarios</a></li>
     <li><a href="estadisticas.html" class="waves-effect">Estadisticas</a></li>
     <li>
         <div class="divider"></div>

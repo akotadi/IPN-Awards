@@ -1,25 +1,42 @@
 <?php
-    session_start();
-    include("../Back-End/PHP/connection_DB.php");
-    if(isset($_SESSION["usuario"])){
-        $sqlGetInvitados = "SELECT * FROM Awarded";
-        $resGetInvitados = mysqli_query($conexion,$sqlGetInvitados);
-        $filasInvitados = "";
-        while($filas = mysqli_fetch_array($resGetInvitados,MYSQLI_BOTH)){
-            $filasInvitados .= '
-                    <tr class="not-selected">
-                        <td>$filas[1] $filas[2] $filas[3]</td>
-                        <td>$filas[7]</td>
-                        <td id="$filas[0]">
-                            <a href="#!" class="edit waves-effect waves-light modal-trigger" data-target="asist-modal"><i
-                                class="material-icons left">add</i></a>
-                            <a class="search waves-effect waves-light"><i class="material-icons left">search</i></a>
-                            <a class="delete waves-effect waves-light"><i class="material-icons left">delete_forever</i></a>
+require '..\Back-End\PHP\connection_DB.php ';
+
+session_start();
+
+if (isset($_SESSION["user"])) {
+	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+
+		$connection = connect();
+
+		$now = time();
+		if ($now > $_SESSION['expire_time']) {
+			error_log("Expired time", 3, "C:\wamp\logs\php_error.log");
+			session_destroy();
+			header("Location: ./index.html");
+		} else {
+			$_SESSION['expire_time'] = $now + (30 * 60);
+		}
+
+		$sqlGetInvitados = "SELECT * FROM Awarded";
+
+		$filasInvitados = "";
+		$resultUser     = $connection->query($sqlGetInvitados);
+		if ($resultUser->num_rows > 0) {
+			while ($extractUser = $resultUser->fetch_assoc()) {
+                $filasInvitados .= "
+                    <tr class='not-selected'>
+                        <td>".$extractUser['name'].$extractUser['first_surname'].$extractUser['first_surname']."</td>
+                        <td>".$extractUser['confirmed']."</td>
+                        <td id='".$extractUser['rfc']."'>
+                            <a href='#!' class='edit waves-effect waves-light modal-trigger' data-target='asist-modal'><i
+                                class='material-icons left'>add</i></a>
+                            <a class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
+                            <a class='delete waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
                         </td>
                     </tr>
-                    ';
-        }
-?>
+                    ";
+			}
+			?>
 <!DOCTYPE html>
 <html>
 
@@ -88,7 +105,7 @@
         </li>
         <li><a href="asistencia.php" class="waves-effect">Asistencias</a></li>
         <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
-        <li><a href="usuarios.html" class="waves-effect">Usuarios</a></li>
+        <li><a href="usuarios.php" class="waves-effect">Usuarios</a></li>
         <li><a href="estadisticas.html" class="waves-effect">Estadisticas</a></li>
         <li>
             <div class="divider"></div>
@@ -135,7 +152,7 @@
                         </thead>
                         <tbody>
                             <?php
-                                $filasInvitados;
+                                echo $filasInvitados;
                             ?>
                         </tbody>
                     </table>
@@ -167,7 +184,15 @@
 
 </html>
 <?php
-}else{
-    header("location:../Front-End/index.html");
+}
+	} else {
+		error_log("Not loggedin", 3, "C:\wamp\logs\php_error.log");
+		session_destroy();
+		header("location:./index.html");
+	}
+} else {
+	error_log("Not session", 3, "C:\wamp\logs\php_error.log");
+	session_destroy();
+	header("Location: ./index.html");
 }
 ?>
