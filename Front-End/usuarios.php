@@ -1,24 +1,41 @@
 <?php
-    session_start();
-    include("../Back-End/PHP/connection_DB.php");
-    if(isset($_SESSION["usuario"])){
-        $sqlGetInvitados = "SELECT * FROM user";
-        $resGetInvitados = mysqli_query($conexion,$sqlGetInvitados);
-        $filasUsuarios = "";
-        while($filas = mysqli_fetch_array($resGetInvitados,MYSQLI_BOTH)){
-            $filasUsuarios .= '
-                    <tr>
-                        <td>$filas[1]</td>
-                        <td id="$filas[0]">
-                            <a href="#!" class="edit waves-effect waves-light modal-trigger" data-target="asist-modal"><i
-                                class="material-icons left">add</i></a>
-                            <a class="search waves-effect waves-light"><i class="material-icons left">search</i></a>
-                            <a class="delete waves-effect waves-light"><i class="material-icons left">delete_forever</i></a>
-                        </td>
-                    </tr>
-                    ';
-        }
-?>
+require '..\Back-End\PHP\connection_DB.php ';
+
+session_start();
+
+if (isset($_SESSION["user"])) {
+	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+
+		$connection = connect();
+
+		$now = time();
+		if ($now > $_SESSION['expire_time']) {
+			error_log("Expired time", 3, "C:\wamp\logs\php_error.log");
+			session_destroy();
+			header("Location: ./index.html");
+		} else {
+			$_SESSION['expire_time'] = $now + (30 * 60);
+		}
+
+		$sqlGetInvitados = "SELECT * FROM user";
+
+		$filasUsuarios = "";
+		$resultUser     = $connection->query($query);
+		if ($resultUser->num_rows > 0) {
+			while ($extractUser = $resultUser->fetch_assoc()) {
+				$filasUsuarios .= "
+                <tr>
+                    <td>".$extractUser['username']."</td>
+                    <td id='".$extractUser['idUser']."'>
+                        <a href='#!' class='edit waves-effect waves-light modal-trigger' data-target='asist-modal'><i
+                            class='material-icons left'>add</i></a>
+                        <a class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
+                        <a class='delete waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
+                    </td>
+                </tr>
+                ";
+			}
+			?>
 <!DOCTYPE html>
 <html>
 
@@ -156,7 +173,15 @@
 
 </html>
 <?php
-}else{
-    header("location:../Front-End/index.html");
+}
+	} else {
+		error_log("Not loggedin", 3, "C:\wamp\logs\php_error.log");
+		session_destroy();
+		header("location:./index.html");
+	}
+} else {
+	error_log("Not session", 3, "C:\wamp\logs\php_error.log");
+	session_destroy();
+	header("Location: ./index.html");
 }
 ?>
