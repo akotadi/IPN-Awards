@@ -9,20 +9,20 @@
     <meta name="description" content="Proyecto final para la materia de Tecnologías para la Web.">
 
     <!-- Font Awesome JS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    <link rel="stylesheet" href="css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
 
     <!-- Materialize Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/icon.css" rel="stylesheet">
 
     <!-- Compiled and Materialize minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
 
     <!-- Compiled and minified Materialize JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/materialize.min.js"></script>
 
     <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
 
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="styles/main.css">
@@ -46,10 +46,44 @@
         <div class="col s12">
             <h1 class="center-align white-text">¡Tu asistencia está confirmada!</h1>
         </div>
-
     </div>
-    <!-- /Main -->
+    <div class="row">
+        <div id="login-container" class="col s6 white">
+            <form id="FormCommentaries">
+                <div class="row">
+                    <div class="col s12">
+                        <h1>A&ntildeadir Comentarios</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select multiple id="asist-select" data-validetta="required,minSelected[1]">
+                            <option value="" disabled selected>Elige opcion</option>
+                            <option value="capacidad_diferente">Capacidad diferente</option>
+                            <option value="silla_de_ruedas">Silla de ruedas</option>
+                            <option value="se_retira_temprano">Se retira temprano</option>
+                            <option value="acompaniante">Acompa&ntildeante (ayudante)</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="otherInput" type="text" class="validate" name="otherInput">
+                        <label id="otherLabel" for="otherInput">Agrega comentario</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <button class="waves-effect waves-purple btn-flat modal-close" type="submit" id="btnUAssistant">Aceptar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
+
+    <!-- /Main -->
     <!-- Extras -->
     <!-- /Extras -->
 

@@ -1,0 +1,11 @@
+/* Bloque blanco */
+
+#login-container {
+    position: absolute;
+    top: 35%;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}

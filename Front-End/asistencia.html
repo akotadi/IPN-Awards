@@ -1,3 +1,23 @@
+<?php
+    session_start();
+    include("./configBD.php");
+    if(isset($_SESSION["usuario"])){
+        $sqlGetInvitados = "SELECT * FROM Awarded";
+        $resGetInvitados = mysqli_query($conexion,$sqlGetInvitados);
+        $filasInvitados = "";
+        while($filas = mysqli_fetch_array($resGetInvitados,MYSQLI_BOTH)){
+            $filasInvitados .= "
+                    <tr>
+                        <td>$filas[1] $filas[2] $filas[3]</td>
+                        <td>
+                            <a id="$filas[0]" href="#!" class="waves-effect waves-light modal-trigger" data-target="asist-modal"><i
+                                class="material-icons left">add</i></a>
+                            <a class="waves-effect waves-light"><i class="material-icons left">delete_forever</i></a>
+                        </td>
+                    </tr>
+                    ";
+        }
+?>
 <!DOCTYPE html>
 <html>
 
@@ -9,20 +29,20 @@
     <meta name="description" content="Proyecto final para la materia de Tecnologías para la Web.">
 
     <!-- Font Awesome JS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+    <link rel="stylesheet" href="css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
         crossorigin="anonymous">
 
     <!-- Materialize Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/icon.css" rel="stylesheet">
 
     <!-- Compiled and Materialize minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
 
     <!-- Compiled and minified Materialize JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/materialize.min.js"></script>
 
     <!-- JQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
 
     <!-- Validetta -->
     <link rel="stylesheet" type="text/css" href="js/validetta/validetta.min.css">
@@ -125,39 +145,17 @@
                     </div>
                     <div class="row">
                         <table id="asist-table">
-                            <tr class="header">
-                                <th style="width:70%;">Invitado</th>
-                                <th style="width:30%;">Opciones</th>
-                            </tr>
-                            <tr>
-                                <td>Alfreds Futterkiste</td>
-                                <td>
-                                    <a href="#!" class="waves-effect waves-light modal-trigger" data-target="asist-modal"><i
-                                            class="material-icons left">add</i></a>
-                                    <a class="waves-effect waves-light"><i class="material-icons left">delete_forever</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Berglunds snabbkop</td>
-                                <td>
-                                    <a class="waves-effect waves-light"><i class="material-icons left">add</i></a>
-                                    <a class="waves-effect waves-light"><i class="material-icons left">delete_forever</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Island Trading</td>
-                                <td>
-                                    <a class="waves-effect waves-light"><i class="material-icons left">add</i></a>
-                                    <a class="waves-effect waves-light"><i class="material-icons left">delete_forever</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Koniglich Essen</td>
-                                <td>
-                                    <a class="waves-effect waves-light"><i class="material-icons left">add</i></a>
-                                    <a class="waves-effect waves-light"><i class="material-icons left">delete_forever</i></a>
-                                </td>
-                            </tr>
+                            <thead>
+                                <tr class="header">
+                                    <th style="width:70%;">Invitado</th>
+                                    <th style="width:30%;">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    $filasInvitados;
+                                ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>
