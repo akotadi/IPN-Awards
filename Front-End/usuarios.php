@@ -20,7 +20,7 @@ if (isset($_SESSION["user"])) {
 		$sqlGetInvitados = "SELECT * FROM user";
 
 		$filasUsuarios = "";
-		$resultUser    = $connection->query($query);
+		$resultUser    = $connection->query($sqlGetInvitados);
 		if ($resultUser->num_rows > 0) {
 			while ($extractUser = $resultUser->fetch_assoc()) {
 				$filasUsuarios .= "
@@ -80,7 +80,7 @@ if (isset($_SESSION["user"])) {
             <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <a href="home.html" class="brand-logo">IPN</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="asistencia.html" class="waves-effect waves-light">Asistencias</a></li>
+                <li><a href="asistencia.php" class="waves-effect waves-light">Asistencias</a></li>
                 <li><a href="invitados.html" class="waves-effect waves-light">Invitados</a></li>
                 <li><a href="usuarios.html" class="waves-effect waves-light">Usuarios</a></li>
                 <li><a href="estadisticas.html" class="waves-effect waves-light">Estadisticas</a></li>
@@ -102,8 +102,8 @@ if (isset($_SESSION["user"])) {
                 <a href="#email"><span class="white-text email">user@mail.com</span></a>
             </div>
         </li>
-        <li><a href="asistencia.html" class="waves-effect">Asistencias</a></li>
-        <li><a href="invitados.html" class="waves-effect">Invitados</a></li>
+        <li><a href="asistencia.php" class="waves-effect">Asistencias</a></li>
+        <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
         <li><a href="usuarios.html" class="waves-effect">Usuarios</a></li>
         <li><a href="estadisticas.html" class="waves-effect">Estadisticas</a></li>
         <li>
@@ -135,22 +135,16 @@ if (isset($_SESSION["user"])) {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12">
-                        <a class="waves-effect waves-light btn pink darken-4" id="btnCSelect" onclick="selectAll()">Seleccionar
-                            todos</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <table id="tabla-invitados" class="responsive-table">
-                        <thead>
+                    <table id="tabla-usuarios" class="responsive-table">
+                        <thead class="header">
                             <tr>
-                                <th>Usuario</th>
-                                <th>Accion</th>
+                                <th style="width:70%;">Usuario</th>
+                                <th style="width:30%;">Accion</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-$filasUsuarios;
+echo $filasUsuarios;
 			?>
                         </tbody>
                     </table>
