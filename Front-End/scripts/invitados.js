@@ -33,7 +33,7 @@ function searchAsist() {
 }
 
 function selectAll() {
-    if ($('tbody').has('tr.not-selected')) {
+    if ($('tbody').has('tr.not-selected')[0] != undefined) {
         $('tbody').children('tr.not-selected').removeClass('not-selected');
         $('tbody').children('tr').addClass('selected');
     } else {
