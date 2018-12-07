@@ -169,9 +169,9 @@ if (isset($_SESSION["user"])) {
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php
-echo $filasInvitados;
-			?>
+                                <?php
+                                    echo $filasInvitados;
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -193,10 +193,10 @@ echo $filasInvitados;
                     </div>
                 </div>
                 <div class="row">
-                        <div class="input-field col s8">
-                            <input disabled id="actual-rfc" type="text" class="validate"></input>
-                        </div>
+                    <div class="input-field col s8">
+                        <input disabled id="actual-rfc" type="text" class="validate">
                     </div>
+                </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <select multiple id="asist-select" data-validetta="required,minSelected[1]">

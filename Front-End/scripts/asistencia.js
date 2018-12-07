@@ -35,12 +35,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var instances = M.FormSelect.init(elems, {});
 });
 
+// Agrega el rfc al modal
 $('td').on("click", "a.modal-trigger", function(){
     let rfc = $(this).attr('id');
     console.log(rfc);
     $('#actual-rfc').val(rfc);
 });
 
+// Manda peticion para eliminar al dar click en icono de eliminar
 $('td').on("click", "a.delete-rfc", function(){
     let rfc = $(this).attr('id');
     let payload = jQuery.parseJSON( '{ "rfc" : "' + rfc + '" }')
@@ -82,6 +84,7 @@ $('#asist-select').change(function () {
     }
 });
 
+// Peticiones rest con ajax
 $(document).ready(function () {
     $('#otherInput').prop("hidden", true);
     $('#otherLabel').prop("hidden", true);

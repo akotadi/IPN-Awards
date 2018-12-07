@@ -24,19 +24,19 @@ if (isset($_SESSION["user"])) {
 		if ($resultUser->num_rows > 0) {
 			while ($extractUser = $resultUser->fetch_assoc()) {
 				$filasInvitados .= "
-                    <tr class='not-selected'>
+                    <tr id='" . $extractUser['rfc'] . "' class='not-selected'>
                         <td>" . $extractUser['name'] . ' ' . $extractUser['first_surname'] . ' ' . $extractUser['first_surname'] . "</td>
                         <td>" . (($extractUser['confirmed'] == 0) ? (' ') : ('<i class="material-icons">check</i>')) . "</td>
-                        <td id='" . $extractUser['rfc'] . "'>
-                            <a href='#!' class='edit waves-effect waves-light modal-trigger' data-target='asist-modal'><i
+                        <td>
+                            <a id='" . $extractUser['rfc'] . "' class='waves-effect waves-light modal-trigger' data-target='asist-modal'><i
                                 class='material-icons left'>add</i></a>
-                            <a class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
-                            <a class='delete waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
+                            <a id='" . $extractUser['rfc'] . "' class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
+                            <a id='" . $extractUser['rfc'] . "' class='delete-rfc waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
                         </td>
                     </tr>
                     ";
 			}
-			?>
+?>
 <!DOCTYPE html>
 <html>
 
@@ -142,6 +142,15 @@ if (isset($_SESSION["user"])) {
                     </div>
                 </div>
                 <div class="row">
+                    <div class="input-field col s12 m4">
+                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnInvitacion">Enviar
+                            Invitacion</a>
+                    </div>
+                    <div class="input-field col s12 m4">
+                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnAviso">Enviar Aviso</a>
+                    </div>
+                </div>
+                <div class="row">
                     <table id="tabla-invitados" class="responsive-table">
                         <thead>
                             <tr>
@@ -152,19 +161,10 @@ if (isset($_SESSION["user"])) {
                         </thead>
                         <tbody>
                             <?php
-echo $filasInvitados;
-			?>
+                                echo $filasInvitados;
+                            ?>
                         </tbody>
                     </table>
-                </div>
-                <div class="row">
-                    <div class="input-field col s12 m4">
-                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnInvitacion">Enviar
-                            Invitacion</a>
-                    </div>
-                    <div class="input-field col s12 m4">
-                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnAviso">Enviar Aviso</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -172,9 +172,50 @@ echo $filasInvitados;
     <!-- /Main -->
 
     <!-- Extras -->
-    <!-- Modal -->
-
-    <!-- /Modal -->
+    <!-- Modal Comentarios -->
+    <div id="asist-modal" class="modal">
+        <div class="modal-content">
+            <form id="FormCommentaries">
+                <div class="row">
+                    <div class="col s12">
+                        <h1>A&ntildeadir Comentarios</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <input disabled id="actual-rfc" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select multiple id="asist-select" data-validetta="required,minSelected[1]">
+                            <option id="op1" value="Capacidad diferente">Capacidad diferente</option>
+                            <option id="op2" value="Silla ruedas">Silla ruedas</option>
+                            <option id="op3" value="Representante">Representante</option>
+                            <option id="op4" value="Se retira temprano">Se retira temprano</option>
+                            <option id="op5" value="Acompañante (ayudante)">Acompa&ntildeante (ayudante)</option>
+                            <option id="op6" value="Otro...">Otro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="otherInput" type="text" class="validate" name="otherInput">
+                        <label id="otherLabel" for="otherInput">Agrega comentario</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <button class="waves-effect waves-purple btn-flat modal-close" type="submit" id="btnUAssistant">Aceptar</button>
+                    </div>
+                    <div class="col s4">
+                        <a href="#!" class="waves-effect waves-light btn-flat modal-close">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /Modal Comentarios -->
     <!-- /Extras -->
 
 </body>
