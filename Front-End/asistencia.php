@@ -29,7 +29,7 @@ if (isset($_SESSION["user"])) {
                         <td>
                             <a id='" . $extractUser['rfc'] . "' href='' class='waves-effect waves-light modal-trigger' data-target='asist-modal'><i
                                 class='material-icons left'>add</i></a>
-                            <a class='waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
+                            <a id='" . $extractUser['rfc'] . "' class='delete-rfc waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
                         </td>
                     </tr>
                     ";
@@ -84,7 +84,7 @@ if (isset($_SESSION["user"])) {
                 <li><a href="invitados.php" class="waves-effect waves-light">Invitados</a></li>
                 <li><a href="usuarios.php" class="waves-effect waves-light">Usuarios</a></li>
                 <li><a href="#" class="waves-effect waves-light">Estadisticas</a></li>
-                <li><a href="perfil.html" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
+                <li><a href="perfil.php" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
             </ul>
         </div>
     </nav>
@@ -105,11 +105,11 @@ if (isset($_SESSION["user"])) {
         <li><a href="#" class="waves-effect">Asistencias</a></li>
         <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
         <li><a href="usuarios.php" class="waves-effect">Usuarios</a></li>
-        <li><a href="estadisticas.html" class="waves-effect">Estadisticas</a></li>
+        <li><a href="estadisticas.php" class="waves-effect">Estadisticas</a></li>
         <li>
             <div class="divider"></div>
         </li>
-        <li><a href="perfil.html" class="waves-effect">Perfil</a></li>
+        <li><a href="perfil.php" class="waves-effect">Perfil</a></li>
     </ul>
     <!-- /Sidenav -->
     <!-- /Navigation section -->
@@ -169,9 +169,9 @@ if (isset($_SESSION["user"])) {
                                 </tr>
                             </thead>
                             <tbody>
-                            <?php
-echo $filasInvitados;
-			?>
+                                <?php
+                                    echo $filasInvitados;
+                                ?>
                             </tbody>
                         </table>
                     </div>
@@ -193,14 +193,19 @@ echo $filasInvitados;
                     </div>
                 </div>
                 <div class="row">
+                    <div class="input-field col s8">
+                        <input disabled id="actual-rfc" type="text" class="validate">
+                    </div>
+                </div>
+                <div class="row">
                     <div class="input-field col s12">
                         <select multiple id="asist-select" data-validetta="required,minSelected[1]">
-                            <option value="" disabled selected>Elige opcion</option>
-                            <option value="capacidad_diferente">Capacidad diferente</option>
-                            <option value="silla_de_ruedas">Silla de ruedas</option>
-                            <option value="se_retira_temprano">Se retira temprano</option>
-                            <option value="acompaniante">Acompa&ntildeante (ayudante)</option>
-                            <option value="otro">Otro</option>
+                            <option id="op1" value="Capacidad diferente">Capacidad diferente</option>
+                            <option id="op2" value="Silla ruedas">Silla ruedas</option>
+                            <option id="op3" value="Representante">Representante</option>
+                            <option id="op4" value="Se retira temprano">Se retira temprano</option>
+                            <option id="op5" value="Acompañante (ayudante)">Acompa&ntildeante (ayudante)</option>
+                            <option id="op6" value="Otro...">Otro</option>
                         </select>
                     </div>
                 </div>
