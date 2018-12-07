@@ -1,6 +1,9 @@
 <?php
 require './connection_DB.php';
 require './RESTResponse.php';
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 
 $response = array('valid' => false, 'message' => '');
 

@@ -15,8 +15,8 @@ if (isset($_POST) && !empty($_POST)) {
 
 		$query = "SELECT * FROM awarded WHERE rfc = '$rfc'";
 
-		$resultAwarded = $connection->query($query);
-		if ($resultAwarded->num_rows > 0) {
+		$resultawarded = $connection->query($query);
+		if ($resultawarded->num_rows > 0) {
 
 			$response = array('valid' => true);
 		} else {

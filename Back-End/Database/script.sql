@@ -8,50 +8,50 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema IPN-Awards
+-- Schema IPN-awards
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `IPN-Awards` ;
+DROP SCHEMA IF EXISTS `IPN-awards` ;
 
 -- -----------------------------------------------------
--- Schema IPN-Awards
+-- Schema IPN-awards
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `IPN-Awards` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE SCHEMA IF NOT EXISTS `IPN-awards` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 SHOW WARNINGS;
-USE `IPN-Awards` ;
+USE `IPN-awards` ;
 
 -- -----------------------------------------------------
--- Table `IPN-Awards`.`Area`
+-- Table `IPN-awards`.`area`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `IPN-Awards`.`Area` ;
+DROP TABLE IF EXISTS `IPN-awards`.`area` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Area` (
-  `idArea` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `IPN-awards`.`area` (
+  `idarea` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(30) NOT NULL,
   `description` VARCHAR(255) NULL,
-  PRIMARY KEY (`idArea`),
+  PRIMARY KEY (`idarea`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC))
 ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `IPN-Awards`.`Procedency`
+-- Table `IPN-awards`.`procedency`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `IPN-Awards`.`Procedency` ;
+DROP TABLE IF EXISTS `IPN-awards`.`procedency` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Procedency` (
+CREATE TABLE IF NOT EXISTS `IPN-awards`.`procedency` (
   `idProcedency` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `description` VARCHAR(255) NULL,
-  `idArea` INT NOT NULL,
-  PRIMARY KEY (`idProcedency`, `idArea`),
+  `idarea` INT NOT NULL,
+  PRIMARY KEY (`idProcedency`, `idarea`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC),
-  INDEX `fk_Procedency_Area1_idx` (`idArea` ASC),
-  CONSTRAINT `fk_Procedency_Area1`
-    FOREIGN KEY (`idArea`)
-    REFERENCES `IPN-Awards`.`Area` (`idArea`)
+  INDEX `fk_Procedency_area1_idx` (`idarea` ASC),
+  CONSTRAINT `fk_Procedency_area1`
+    FOREIGN KEY (`idarea`)
+    REFERENCES `IPN-awards`.`area` (`idarea`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=utf8;
@@ -59,22 +59,22 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `IPN-Awards`.`Award`
+-- Table `IPN-awards`.`award`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `IPN-Awards`.`Award` ;
+DROP TABLE IF EXISTS `IPN-awards`.`award` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Award` (
-  `idAward` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `IPN-awards`.`award` (
+  `idaward` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `speech` VARCHAR(700) NOT NULL,
-  `Award_idAward` INT NULL,
-  PRIMARY KEY (`idAward`),
-  INDEX `fk_Diploma_Diploma1_idx` (`Award_idAward` ASC),
+  `award_idaward` INT NULL,
+  PRIMARY KEY (`idaward`),
+  INDEX `fk_Diploma_Diploma1_idx` (`award_idaward` ASC),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC),
   CONSTRAINT `fk_Diploma_Diploma1`
-    FOREIGN KEY (`Award_idAward`)
-    REFERENCES `IPN-Awards`.`Award` (`idAward`)
+    FOREIGN KEY (`award_idaward`)
+    REFERENCES `IPN-awards`.`award` (`idaward`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=utf8;
@@ -82,12 +82,12 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `IPN-Awards`.`Awarded`
+-- Table `IPN-awards`.`awarded`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `IPN-Awards`.`Awarded` ;
+DROP TABLE IF EXISTS `IPN-awards`.`awarded` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Awarded` (
+CREATE TABLE IF NOT EXISTS `IPN-awards`.`awarded` (
   `rfc` VARCHAR(10) NOT NULL,
   `name` VARCHAR(100) NOT NULL,
   `first_surname` VARCHAR(50) NULL,
@@ -97,20 +97,20 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Awarded` (
   `activation_code` VARCHAR(16) NULL,
   `confirmed` TINYINT ZEROFILL NOT NULL,
   `is_present` TINYINT ZEROFILL NOT NULL,
-  `idAward` INT NOT NULL,
+  `idaward` INT NOT NULL,
   `idProcedency` INT NOT NULL,
-  PRIMARY KEY (`rfc`, `idAward`, `idProcedency`),
+  PRIMARY KEY (`rfc`, `idaward`, `idProcedency`),
   UNIQUE INDEX `rfc_UNIQUE` (`rfc` ASC),
-  INDEX `fk_Awarded_Award1_idx` (`idAward` ASC),
-  INDEX `fk_Awarded_Procedency1_idx` (`idProcedency` ASC),
-  CONSTRAINT `fk_Awarded_Award1`
-    FOREIGN KEY (`idAward`)
-    REFERENCES `IPN-Awards`.`Award` (`idAward`)
+  INDEX `fk_awarded_award1_idx` (`idaward` ASC),
+  INDEX `fk_awarded_Procedency1_idx` (`idProcedency` ASC),
+  CONSTRAINT `fk_awarded_award1`
+    FOREIGN KEY (`idaward`)
+    REFERENCES `IPN-awards`.`award` (`idaward`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Awarded_Procedency1`
+  CONSTRAINT `fk_awarded_Procedency1`
     FOREIGN KEY (`idProcedency`)
-    REFERENCES `IPN-Awards`.`Procedency` (`idProcedency`)
+    REFERENCES `IPN-awards`.`procedency` (`idProcedency`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=utf8;
@@ -118,12 +118,12 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `IPN-Awards`.`Observation`
+-- Table `IPN-awards`.`observation`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `IPN-Awards`.`Observation` ;
+DROP TABLE IF EXISTS `IPN-awards`.`observation` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Observation` (
+CREATE TABLE IF NOT EXISTS `IPN-awards`.`observation` (
   `idObservation` INT NOT NULL AUTO_INCREMENT,
   `commentary` VARCHAR(200) NOT NULL,
   `description` VARCHAR(255) NULL,
@@ -133,12 +133,12 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `IPN-Awards`.`type`
+-- Table `IPN-awards`.`type`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `IPN-Awards`.`type` ;
+DROP TABLE IF EXISTS `IPN-awards`.`type` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `IPN-Awards`.`type` (
+CREATE TABLE IF NOT EXISTS `IPN-awards`.`type` (
   `idtype` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `description` VARCHAR(100) NULL,
@@ -151,12 +151,12 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `IPN-Awards`.`user`
+-- Table `IPN-awards`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `IPN-Awards`.`user` ;
+DROP TABLE IF EXISTS `IPN-awards`.`user` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `IPN-Awards`.`user` (
+CREATE TABLE IF NOT EXISTS `IPN-awards`.`user` (
   `idUser` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(20) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
@@ -171,33 +171,33 @@ CREATE TABLE IF NOT EXISTS `IPN-Awards`.`user` (
   INDEX `fk_user_type1_idx` (`idtype` ASC),
   CONSTRAINT `fk_user_type1`
     FOREIGN KEY (`idtype`)
-    REFERENCES `IPN-Awards`.`type` (`idtype`)
+    REFERENCES `IPN-awards`.`type` (`idtype`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 SHOW WARNINGS;
 
 -- -----------------------------------------------------
--- Table `IPN-Awards`.`Awarded_has_Observation`
+-- Table `IPN-awards`.`awarded_has_observation`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `IPN-Awards`.`Awarded_has_Observation` ;
+DROP TABLE IF EXISTS `IPN-awards`.`awarded_has_observation` ;
 
 SHOW WARNINGS;
-CREATE TABLE IF NOT EXISTS `IPN-Awards`.`Awarded_has_Observation` (
+CREATE TABLE IF NOT EXISTS `IPN-awards`.`awarded_has_observation` (
   `rfc` VARCHAR(10) NOT NULL,
   `Observation_idObservation` INT NOT NULL,
   `details` VARCHAR(255) NULL,
   PRIMARY KEY (`rfc`, `Observation_idObservation`),
-  INDEX `fk_Awarded_has_Observation_Observation1_idx` (`Observation_idObservation` ASC),
-  INDEX `fk_Awarded_has_Observation_Awarded1_idx` (`rfc` ASC),
-  CONSTRAINT `fk_Awarded_has_Observation_Awarded1`
+  INDEX `fk_awarded_has_Observation_Observation1_idx` (`Observation_idObservation` ASC),
+  INDEX `fk_awarded_has_Observation_awarded1_idx` (`rfc` ASC),
+  CONSTRAINT `fk_awarded_has_Observation_awarded1`
     FOREIGN KEY (`rfc`)
-    REFERENCES `IPN-Awards`.`Awarded` (`rfc`)
+    REFERENCES `IPN-awards`.`awarded` (`rfc`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Awarded_has_Observation_Observation1`
+  CONSTRAINT `fk_awarded_has_Observation_Observation1`
     FOREIGN KEY (`Observation_idObservation`)
-    REFERENCES `IPN-Awards`.`Observation` (`idObservation`)
+    REFERENCES `IPN-awards`.`observation` (`idObservation`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARSET=utf8;

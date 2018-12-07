@@ -14,29 +14,29 @@ $pdf->AddPage();
 
 $pdf->addTitle(utf8_decode('DISTINCIONES AL MÉRITO POLITÉCNICO 2019'));
 
-$sqlAward    = "SELECT name, speech FROM award";
-$resultAward = $connection->query($sqlAward);
-if ($resultAward->num_rows > 0) {
-	while ($rowAward = $resultAward->fetch_assoc()) {
-		$pdf->addAward(utf8_decode($rowAward['name']), utf8_decode($rowAward['speech']));
-		$sqlArea    = "SELECT name FROM area";
-		$resultArea = $connection->query($sqlArea);
-		if ($resultArea->num_rows > 0) {
-			while ($rowArea = $resultArea->fetch_assoc()) {
-				$arrayArea[$rowAward['name'] . $rowArea['name']] = true;
-				$sqlProcedency                                   = "SELECT p.name FROM procedency p, area ar WHERE p.idArea = ar.idArea AND ar.name = '" . $rowArea['name'] . "'";
+$sqlaward    = "SELECT name, speech FROM award";
+$resultaward = $connection->query($sqlaward);
+if ($resultaward->num_rows > 0) {
+	while ($rowaward = $resultaward->fetch_assoc()) {
+		$pdf->addaward(utf8_decode($rowaward['name']), utf8_decode($rowaward['speech']));
+		$sqlarea    = "SELECT name FROM area";
+		$resultarea = $connection->query($sqlarea);
+		if ($resultarea->num_rows > 0) {
+			while ($rowarea = $resultarea->fetch_assoc()) {
+				$arrayarea[$rowaward['name'] . $rowarea['name']] = true;
+				$sqlProcedency                                   = "SELECT p.name FROM procedency p, area ar WHERE p.idarea = ar.idarea AND ar.name = '" . $rowarea['name'] . "'";
 				$resultProcedency                                = $connection->query($sqlProcedency);
 				if ($resultProcedency->num_rows > 0) {
 					while ($rowProcedency = $resultProcedency->fetch_assoc()) {
-						$sqlAwarded    = "SELECT a.name, a.first_surname, a.second_surname FROM awarded a, procedency p, award d WHERE a.confirmed = 1 AND a.idProcedency = p.idProcedency AND a.idAward = d.idAward AND p.name = '" . $rowProcedency['name'] . "' AND d.name = '" . $rowAward['name'] . "'";
-						$resultAwarded = $connection->query($sqlAwarded);
-						if ($resultAwarded->num_rows > 0) {
-							if (($arrayArea[$rowAward['name'] . $rowArea['name']])) {
-								$pdf->addArea(utf8_decode($rowArea['name']));
+						$sqlawarded    = "SELECT a.name, a.first_surname, a.second_surname FROM awarded a, procedency p, award d WHERE a.confirmed = 1 AND a.idProcedency = p.idProcedency AND a.idaward = d.idaward AND p.name = '" . $rowProcedency['name'] . "' AND d.name = '" . $rowaward['name'] . "'";
+						$resultawarded = $connection->query($sqlawarded);
+						if ($resultawarded->num_rows > 0) {
+							if (($arrayarea[$rowaward['name'] . $rowarea['name']])) {
+								$pdf->addarea(utf8_decode($rowarea['name']));
 							}
 							$pdf->addProcedency(utf8_decode($rowProcedency['name']));
-							while ($rowAwarded = $resultAwarded->fetch_assoc()) {
-								$pdf->addName(utf8_decode($rowAwarded['name'] . ' ' . $rowAwarded['first_surname'] . ' ' . $rowAwarded['second_surname']));
+							while ($rowawarded = $resultawarded->fetch_assoc()) {
+								$pdf->addName(utf8_decode($rowawarded['name'] . ' ' . $rowawarded['first_surname'] . ' ' . $rowawarded['second_surname']));
 							}
 						}
 					}
@@ -46,10 +46,10 @@ if ($resultAward->num_rows > 0) {
 	}
 }
 
-mysqli_free_result($resultAward);
-mysqli_free_result($resultArea);
+mysqli_free_result($resultaward);
+mysqli_free_result($resultarea);
 mysqli_free_result($resultProcedency);
-mysqli_free_result($resultAwarded);
+mysqli_free_result($resultawarded);
 
 close();
 

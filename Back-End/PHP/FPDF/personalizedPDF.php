@@ -128,7 +128,7 @@ class PDF extends PDF_Diag {
 		$this->Ln(10);
 	}
 
-	function addAward($award, $speech) {
+	function addaward($award, $speech) {
 		$this->Ln(4);
 		$this->SetTextColor(0, 0, 0);
 		// Arial 12
@@ -148,7 +148,7 @@ class PDF extends PDF_Diag {
 		$this->Ln(2);
 	}
 
-	function addArea($area) {
+	function addarea($area) {
 		$this->SetTextColor(0, 0, 0);
 		// Times 12
 		$this->SetFont('Arial', '', 11);

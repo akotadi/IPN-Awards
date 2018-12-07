@@ -1,5 +1,5 @@
 <?php
-require '..\Back-End\PHP\connection_DB.php ';
+require '../Back-End/PHP/connection_DB.php';
 
 session_start();
 

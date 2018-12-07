@@ -1,5 +1,5 @@
 <?php
-require '../Back-End/PHP/connection_DB.php ';
+require '../Back-End/PHP/connection_DB.php';
 
 session_start();
 
@@ -17,8 +17,8 @@ if (isset($_SESSION["user"])) {
 			$_SESSION['expire_time'] = $now + (30 * 60);
 		}
 
-        $sqlGetPremios = "SELECT * FROM Award";
-        $sqlGetEscuelas = "SELECT * FROM Procedency";
+        $sqlGetPremios = "SELECT * FROM award";
+        $sqlGetEscuelas = "SELECT * FROM procedency";
 
         $NombresPremios = "";
         $NombresEscuelas = "";
@@ -26,7 +26,7 @@ if (isset($_SESSION["user"])) {
 		if ($resultUser1->num_rows > 0) {
 			while ($extractUser1 = $resultUser1->fetch_assoc()) {
 				$NombresPremios .= "
-                    <option value=". $extractUser1['idAward'] .">".$extractUser1['name']."</option>"; 
+                    <option value=". $extractUser1['idaward'] .">".$extractUser1['name']."</option>"; 
             }
         }
         $resultUser2     = $connection->query($sqlGetEscuelas);

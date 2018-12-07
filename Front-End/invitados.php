@@ -1,5 +1,5 @@
 <?php
-require '../Back-End/PHP/connection_DB.php ';
+require '../Back-End/PHP/connection_DB.php';
 
 session_start();
 
@@ -17,7 +17,7 @@ if (isset($_SESSION["user"])) {
 			$_SESSION['expire_time'] = $now + (30 * 60);
 		}
 
-		$sqlGetInvitados = "SELECT * FROM Awarded";
+		$sqlGetInvitados = "SELECT * FROM awarded";
 
 		$filasInvitados = "";
 		$resultUser     = $connection->query($sqlGetInvitados);
@@ -25,13 +25,13 @@ if (isset($_SESSION["user"])) {
 			while ($extractUser = $resultUser->fetch_assoc()) {
 				$filasInvitados .= "
                     <tr id='" . $extractUser['rfc'] . "' class='not-selected'>
-                        <td>" . $extractUser['name'] . ' ' . $extractUser['first_surname'] . ' ' . $extractUser['first_surname'] . "</td>
-                        <td>" . (($extractUser['confirmed'] == 0) ? (' ') : ('<i class="material-icons">check</i>')) . "</td>
+                        <td class='name'>" . $extractUser['name'] . ' ' . $extractUser['first_surname'] . ' ' . $extractUser['first_surname'] . "</td>
+                        <td class='name'>" . (($extractUser['confirmed'] == 0) ? (' ') : ('<i class="material-icons">check</i>')) . "</td>
                         <td>
                             <a id='" . $extractUser['rfc'] . "' class='waves-effect waves-light modal-trigger' data-target='asist-modal'><i
                                 class='material-icons left'>add</i></a>
-                            <a id='" . $extractUser['rfc'] . "' class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
-                            <a id='" . $extractUser['rfc'] . "' class='delete-rfc waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
+                            <a id='" . $extractUser['rfc'] . " 2' class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
+                            <a id='" . $extractUser['rfc'] . " 3' class='delete-rfc waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
                         </td>
                     </tr>
                     ";
@@ -66,6 +66,22 @@ if (isset($_SESSION["user"])) {
     <link rel="stylesheet" type="text/css" href="js/validetta/validetta.min.css">
     <script type="text/javascript" src="js/validetta/validetta.min.js"></script>
     <script type="text/javascript" src="js/validetta/localization/validettaLang-es-ES.js"></script>
+
+    <!-- Codemirror -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+    <!-- Froala Editor -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.5/js/froala_editor.pkgd.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.5/js/languages/es.js"></script>
+
+    <!-- Codemirror -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.41.0/codemirror.min.css">
+
+    <!-- Froala Editor -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.5/css/froala_style.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.5/css/froala_editor.pkgd.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.8.5/css/themes/royal.min.css">
 
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="styles/main.css">
@@ -116,17 +132,17 @@ if (isset($_SESSION["user"])) {
     <!-- /Navigation section -->
 
     <!-- Main -->
-    <form id="FormAssistance">
-        <div class="row">
-            <div class="col s12">
-                <h1 class="left-align">Invitados</h1>
-            </div>
-        </div>
+    <div class='row' style='height=25%'></div>
         <div class="row">
             <div class="col s12 m10 offset-m1 white">
                 <div class="row">
+                    <div class="col s12">
+                        <h1 class="left-align">Invitados</h1>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="input-field col s12 m4">
-                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnCAssistant">A&ntildeadir invitados</a>
+                        <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnCAssistant">A&ntildeadir invitados</button>
                     </div>
                 </div>
                 <div class="row">
@@ -143,11 +159,11 @@ if (isset($_SESSION["user"])) {
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnInvitacion">Enviar
+                        <a class="waves-effect waves-light btn pink darken-4" id="btnInvitacion">Enviar
                             Invitacion</a>
                     </div>
                     <div class="input-field col s12 m4">
-                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnAviso">Enviar Aviso</a>
+                        <a class="waves-effect waves-light btn modal-trigger pink darken-4" data-target="aviso-modal">Enviar Aviso</a>
                     </div>
                 </div>
                 <div class="row">
@@ -168,7 +184,6 @@ if (isset($_SESSION["user"])) {
                 </div>
             </div>
         </div>
-    </form>
     <!-- /Main -->
 
     <!-- Extras -->
@@ -216,6 +231,32 @@ if (isset($_SESSION["user"])) {
         </div>
     </div>
     <!-- /Modal Comentarios -->
+    <!-- Modal Enviar Aviso -->
+    <div id="aviso-modal" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col s12">
+                    <h1>Aviso</h1>
+                </div>
+            </div>
+            <form class="text-center border border-light p-5 col" id="formText">
+                <div class="row justify-content-center">
+                    <div class="col s12">
+                        <textarea id="text"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <button class="waves-effect waves-purple btn-flat modal-close" type="submit" id="btnSendEmail">Enviar</button>
+                    </div>
+                    <div class="col s4">
+                        <a href="#!" class="waves-effect waves-light btn-flat modal-close">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /Modal Enviar Aviso -->
     <!-- /Extras -->
 
 </body>

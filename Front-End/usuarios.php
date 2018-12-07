@@ -1,5 +1,5 @@
 <?php
-require '..\Back-End\PHP\connection_DB.php ';
+require '../Back-End/PHP/connection_DB.php';
 
 session_start();
 
@@ -125,7 +125,7 @@ if (isset($_SESSION["user"])) {
             <div class="col s12 m10 offset-m1 white">
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        <a class="waves-effect waves-light btn pink darken-4" type="submit" id="btnCAssistant">A&ntildeadir usuario</a>
+                        <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnCAssistant">A&ntildeadir usuario</button>
                     </div>
                 </div>
                 <div class="row">

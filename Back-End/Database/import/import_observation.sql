@@ -1,5 +1,5 @@
 /**
- * Insert # Observation #
+ * Insert # observation #
  */
 INSERT INTO observation (commentary, description) VALUES ('Capacidad diferente', 'Requiere asistencia del staff para llegar a su lugar.');
 INSERT INTO observation (commentary, description) VALUES ('Silla ruedas', 'Requiere lugar especial.');

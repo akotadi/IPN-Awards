@@ -88,7 +88,7 @@ function FancyTable($header, $data)
 
 $pdf = new PDF();
 // Column headings
-$header = array('Country', 'Capital', 'Area (sq km)', 'Pop. (thousands)');
+$header = array('Country', 'Capital', 'area (sq km)', 'Pop. (thousands)');
 // Data loading
 $data = $pdf->LoadData('countries.txt');
 $pdf->SetFont('Arial','',14);

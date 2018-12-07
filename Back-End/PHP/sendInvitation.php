@@ -30,11 +30,11 @@ if (isset($_POST) && !empty($_POST)) {
 		$rfc   = join("','", $awardeds);
 		$query = "SELECT * FROM awarded WHERE rfc IN ('$rfc')";
 
-		$resultAwarded = $connection->query($query);
-		if ($resultAwarded->num_rows > 0) {
-			while ($extractAwarded = $resultAwarded->fetch_assoc()) {
-				$pdfdoc = createInvitation($extractAwarded['rfc']);
-				if (sendEmail($awardedAwarded['rfc'], $pdfdoc)) {
+		$resultawarded = $connection->query($query);
+		if ($resultawarded->num_rows > 0) {
+			while ($extractawarded = $resultawarded->fetch_assoc()) {
+				$pdfdoc = createInvitation($extractawarded['rfc']);
+				if (sendEmail($awardedawarded['rfc'], $pdfdoc)) {
 					$response = array('valid' => true);
 				} else {
 					$response = array('valid' => false, 'message' => 'Error enviando invitación.');
@@ -43,7 +43,7 @@ if (isset($_POST) && !empty($_POST)) {
 		} else {
 			$response = array('valid' => false, 'message' => 'Correo no registrado.');
 		}
-		mysqli_free_result($resultAwarded);
+		mysqli_free_result($resultawarded);
 		close($connection);
 	} else {
 		$response = array('valid' => false, 'message' => 'Debe enviar todos los parámetros.');
@@ -58,7 +58,7 @@ function sendEmail($rfc, $pdfdoc) {
 	} else {
 		$connection = connect();
 
-		$query = "SELECT name, first_surname, second_surname, email, code FROM Awarded WHERE rfc = '" . $rfc . "'";
+		$query = "SELECT name, first_surname, second_surname, email, code FROM awarded WHERE rfc = '" . $rfc . "'";
 
 		$result        = mysqli_query($connection, $query);
 		$numberResults = mysqli_num_rows($result);
