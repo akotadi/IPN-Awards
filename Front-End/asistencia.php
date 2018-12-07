@@ -84,7 +84,7 @@ if (isset($_SESSION["user"])) {
                 <li><a href="invitados.php" class="waves-effect waves-light">Invitados</a></li>
                 <li><a href="usuarios.php" class="waves-effect waves-light">Usuarios</a></li>
                 <li><a href="#" class="waves-effect waves-light">Estadisticas</a></li>
-                <li><a href="perfil.html" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
+                <li><a href="perfil.php" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
             </ul>
         </div>
     </nav>
@@ -105,11 +105,11 @@ if (isset($_SESSION["user"])) {
         <li><a href="#" class="waves-effect">Asistencias</a></li>
         <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
         <li><a href="usuarios.php" class="waves-effect">Usuarios</a></li>
-        <li><a href="estadisticas.html" class="waves-effect">Estadisticas</a></li>
+        <li><a href="estadisticas.php" class="waves-effect">Estadisticas</a></li>
         <li>
             <div class="divider"></div>
         </li>
-        <li><a href="perfil.html" class="waves-effect">Perfil</a></li>
+        <li><a href="perfil.php" class="waves-effect">Perfil</a></li>
     </ul>
     <!-- /Sidenav -->
     <!-- /Navigation section -->
