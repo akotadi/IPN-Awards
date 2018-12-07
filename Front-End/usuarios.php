@@ -17,7 +17,16 @@ if (isset($_SESSION["user"]) && ($_SESSION["type"] == 2 || $_SESSION["type"] == 
 			$_SESSION['expire_time'] = $now + (30 * 60);
 		}
 
-		$sqlGetInvitados = "SELECT * FROM user";
+		$sqlGetInvitados = "";
+
+		if ($_SESSION["type"] == 1) {
+			$sqlGetInvitados = "SELECT * FROM user WHERE idType = 2";
+		} else if ($_SESSION["type"] == 2) {
+			$sqlGetInvitados = "SELECT * FROM user WHERE idType > 2";
+		} else {
+			session_destroy();
+			header("Location: ./index.html");
+		}
 
 		$filasUsuarios = "";
 		$resultUser    = $connection->query($sqlGetInvitados);
