@@ -2,19 +2,21 @@
 header('Content-Type: text/html; charset=utf-8');
 require 'FPDF/personalizedInvitation.php';
 
-function createInvitation($rfc) {
-	if (empty($rfc)) {
+function createInvitation($rfc, $conn) {
+	if (empty($rfc) || empty($conn)) {
 		return null;
 	} else {
 
-		$code = md5(mt_rand());
+		$connection = $conn;
 
-		$query = "UPDATE awarded SET activation_code = '" . $code . "' WHERE rfc = '" . $rfc . "'";
+		$code = substr(md5(mt_rand()), 0, 15);
 
-		if (!mysqli_query($connection, $query)) {
-			return null;
+		$uQuery = "UPDATE awarded SET activation_code = '$code' WHERE rfc = '$rfc'";
+
+		if ($connection->query($uQuery)) {
+			$confirmationLink = 'http://localhost:6789/ipn-awards/Front-End/confirmacion.php?rfc=' . $rfc . '&code=' . $code;
 		} else {
-			$confirmationLink = 'http://localhost:6789/ipn-awards/Back-End/PHP/confirmAssistance.php?rfc=' . $rfc . '&code=' . $code;
+			return null;
 		}
 	}
 

@@ -33,8 +33,8 @@ if (isset($_POST) && !empty($_POST)) {
 		$resultawarded = $connection->query($query);
 		if ($resultawarded->num_rows > 0) {
 			while ($extractawarded = $resultawarded->fetch_assoc()) {
-				$pdfdoc = createInvitation($extractawarded['rfc']);
-				if (sendEmail($awardedawarded['rfc'], $pdfdoc)) {
+				$pdfdoc = createInvitation($extractawarded['rfc'], $connection);
+				if (sendEmail($extractawarded['rfc'], $pdfdoc, $connection)) {
 					$response = array('valid' => true);
 				} else {
 					$response = array('valid' => false, 'message' => 'Error enviando invitación.');
@@ -52,10 +52,12 @@ if (isset($_POST) && !empty($_POST)) {
 	$response = array('valid' => false, 'message' => 'Hubo un problema, por favor intente de nuevo.');
 }
 
-function sendEmail($rfc, $pdfdoc) {
-	if (empty($rfc) || empty($pdfdoc)) {
+function sendEmail($rfc, $pdfdoc, $conn) {
+	if (empty($rfc) || empty($pdfdoc) || empty($conn)) {
 		return false;
 	} else {
+
+		$connection = $conn;
 
 		$query = "SELECT * FROM awarded WHERE rfc = '" . $rfc . "'";
 
@@ -63,10 +65,10 @@ function sendEmail($rfc, $pdfdoc) {
 		$numberResults = mysqli_num_rows($result);
 		if ($numberResults == 1) {
 			$extract          = $result->fetch_array();
-			$code             = $extract['code'];
+			$code             = $extract['activation_code'];
 			$email            = $extract['email'];
 			$name             = $extract['name'] . ' ' . $extract['first_surname'] . ' ' . $extract['second_surname'] . ' ';
-			$confirmationLink = 'http://localhost:6789/ipn-awards/Back-End/PHP/confirmacion.php?rfc=' . $rfc . '&code=' . $code;
+			$confirmationLink = 'http://localhost:6789/ipn-awards/Front-End/confirmacion.php?rfc=' . $rfc . '&code=' . $code;
 		} else {
 			return false;
 		}

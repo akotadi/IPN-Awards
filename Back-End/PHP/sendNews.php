@@ -16,8 +16,8 @@ $response = array('valid' => false, 'message' => '');
 if (isset($_POST) && !empty($_POST)) {
 
 	$awardeds = $_POST["rfclist"];
-	$text = $_POST["text"];
-	$subject = $_POST["subject"];
+	$text     = $_POST["text"];
+	$subject  = $_POST["subject"];
 
 	if (!empty($awardeds) && !empty($text) && !empty($subject)) {
 
@@ -26,8 +26,11 @@ if (isset($_POST) && !empty($_POST)) {
 		foreach ($awardeds as &$awarded) {
 			$awarded = mysqli_real_escape_string($connection, $awarded);
 		}
-		$text = mysqli_real_escape_string($connection, $text);
+		$text    = mysqli_real_escape_string($connection, $text);
 		$subject = mysqli_real_escape_string($connection, $subject);
+
+		error_log("\n\n" . time() . " Received..." . " " . $subject, 3, "../logs/php_error.log");
+		error_log("\n\n" . time() . " Received..." . " " . $text, 3, "../logs/php_error.log");
 
 		$rfc   = join("','", $awardeds);
 		$query = "SELECT * FROM awarded WHERE rfc IN ('$rfc')";
@@ -36,6 +39,7 @@ if (isset($_POST) && !empty($_POST)) {
 		if ($resultAwarded->num_rows > 0) {
 			$mail = new PHPMailer(true); // Passing `true` enables exceptions
 			try {
+				error_log("\n\n" . time() . " " . "Email Created", 3, "../logs/php_error.log");
 				//Server settings
 				$mail->CharSet   = 'UTF-8';
 				$mail->SMTPDebug = 0; // Enable verbose debug output
@@ -48,18 +52,21 @@ if (isset($_POST) && !empty($_POST)) {
 				$mail->Port       = 587; // TCP port to connect to
 
 				//Recipients
-				$mail->setFrom('galardones.ipn@gmail.com', 'Galardones IPN');z
+				$mail->setFrom('galardones.ipn@gmail.com', 'Galardones IPN');
 				while ($extractAwarded = $resultAwarded->fetch_assoc()) {
 					$name = $extractAwarded['name'] . ' ' . $extractAwarded['first_surname'] . ' ' . $extractAwarded['second_surname'];
 					$mail->addAddress($extractAwarded['email'], $name);
+					error_log("\n\n" . time() . " Adding..." . $name . " " . $extractAwarded['email'], 3, "../logs/php_error.log");
 				}
-				
+				error_log("\n\n" . time() . " " . "All awardeds added", 3, "../logs/php_error.log");
+
 				$mail->addAddress('manuel_7795@hotmail.com', 'BackUp'); // Add a recipient
 
 				//Content
 				$mail->isHTML(true); // Set email format to HTML
 				$mail->Subject = $subject;
 				$mail->Body    = $text;
+				error_log("\n\n" . time() . " " . "Sending...", 3, "../logs/php_error.log");
 
 				$mail->send();
 				$response = array('valid' => true);
