@@ -36,10 +36,17 @@ if (isset($_SESSION["user"])) {
                     <option value=". $extractUser2['idProcedency'] .">".$extractUser2['name']."</option>"; 
             }    
         
-        $sqlGetDiploma = "SELECT COUNT(a.is_present) FROM awarded a, procedency p, area ar, award aw WHERE ar.idArea = p.idArea
-        AND p.idProcedency = a.idProcedency AND aw.idAward = a.idAward AND a.is_present = 001";
-        $resultUser3 =intval(mysqli_query($connection, $sqlGetDiploma));
-        echo $resultUser3;
+        $sqlGetA1 = "SELECT a.* FROM awarded a, procedency p, area ar WHERE ar.idArea = p.idArea AND p.idProcedency = a.idPRocedency AND is_present = 1 && ar.idArea = 1";
+        $resultUser = $connection->query($sqlGetA1);
+        $datoa1 = mysqli_num_rows($resultUser);
+        $sqlGetA2 = "SELECT a.* FROM awarded a, procedency p, area ar WHERE ar.idArea = p.idArea AND p.idProcedency = a.idPRocedency AND is_present = 1 && ar.idArea = 2";
+        $resultUser = $connection->query($sqlGetA2);
+        $datoa2 = mysqli_num_rows($resultUser);
+        $sqlGetA3 = "SELECT a.* FROM awarded a, procedency p, area ar WHERE ar.idArea = p.idArea AND p.idProcedency = a.idPRocedency AND is_present = 1 && ar.idArea = 3";
+        $resultUser = $connection->query($sqlGetA3);
+        $datoa3 = mysqli_num_rows($resultUser);
+
+        
 ?>
 <!DOCTYPE html>
 <html>
@@ -79,6 +86,27 @@ if (isset($_SESSION["user"])) {
     <link rel="stylesheet" href="styles/invitados.css">
 
 </head>
+<script>
+ $(document).ready(function(){
+    $(".calcular").on("click",function(){
+        var chart =  new CanvasJS.Chart("chartContainer", {
+            title:{
+                text: "HOLA"
+            },
+            data:[{
+                type: "column",
+                dataPoints:[
+                    {label: "Area 1", y: <?php echo $datoa1?>},
+                    {label: "Area 2", y: <?php echo $datoa2?>},
+                    {label: "Area 3", y: <?php echo $datoa3?>}
+                ]
+            }]
+        });
+        chart.render();
+    });
+
+ });
+</script>
 
 <body class="pink darken-3">
     <!-- Navigation section -->
@@ -175,9 +203,7 @@ echo $NombresEscuelas;
                 </div>
                 <div class="row">
                     <div class="col s12">
-                    <?php
-
-                    ?>
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
                     </div>
                 </div>
                 <div class="row">
