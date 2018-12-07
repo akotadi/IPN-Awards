@@ -5,3 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function () {
     var instances = M.Modal.init(document.getElementById("stats-modal"), {});
 });
+document.addEventListener('DOMContentLoaded', function () {
+    var instances = M.Modal.init(document.getElementById("stats-modal2"), {});
+});
+document.addEventListener('DOMContentLoaded', function () {
+    var instances = M.Modal.init(document.getElementById("stats-modal3"), {});
+});
+
+
