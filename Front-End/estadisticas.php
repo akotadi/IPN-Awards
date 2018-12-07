@@ -36,6 +36,10 @@ if (isset($_SESSION["user"])) {
                     <option value=". $extractUser2['idProcedency'] .">".$extractUser2['name']."</option>"; 
             }    
         
+        $sqlGetDiploma = "SELECT COUNT(a.is_present) FROM awarded a, procedency p, area ar, award aw WHERE ar.idArea = p.idArea
+        AND p.idProcedency = a.idProcedency AND aw.idAward = a.idAward AND a.is_present = 001";
+        $resultUser3 =intval(mysqli_query($connection, $sqlGetDiploma));
+        echo $resultUser3;
 ?>
 <!DOCTYPE html>
 <html>
@@ -130,7 +134,7 @@ if (isset($_SESSION["user"])) {
             <form id="DatosEstadistica">
                 <div class="row">
                     <div class="input-field col s12">
-                        <select id="calculo">
+                        <select multiple id="calculo">
                         <option value="" disabled selected>Escoge el premio</option>
                         <?php
 echo $NombresPremios;
@@ -139,7 +143,7 @@ echo $NombresPremios;
                         <label>PREMIOS</label>
                     </div>
                     <div class="input-field col s12">
-                        <select id="calculo">
+                        <select multiple id="calculo">
                         <option value="" disabled selected>Escoge la escuela</option>
                         <?php
 echo $NombresEscuelas;
@@ -152,7 +156,7 @@ echo $NombresEscuelas;
             </form>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        <button href="" class="waves-effect waves-light btn pink darken-4 modal-trigger" type="submit" data-target="stats-modal" id="btnEstadistica">Estadisticas</button>
+                        <button href="" class="waves-effect waves-light btn pink darken-4 modal-trigger calcular" type="submit" data-target="stats-modal" id="btnEstadistica">Estadisticas</button>
                     </div>
                     <div class="input-field col s12 m4">
                         <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnReporte">Generar reporte</button>
