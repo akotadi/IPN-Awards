@@ -96,7 +96,8 @@ if (!empty($name) && !empty($procedency) && !empty($area) && !empty($award)) {
 		$pdf->Text(149 - ($pdf->GetStringWidth($award)) / 2, 155, $award);
 	}
 
-	$pdf->Output("award - " . $name . ".pdf", "D");
+	// $pdf->Output("award - " . $name . ".pdf", "D");
+	$pdf->Output();
 }
 
 // I: send the file inline to the browser. The plug-in is used if available. The name given by name is used when one selects the "Save as" option on the link generating the PDF.

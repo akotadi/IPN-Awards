@@ -28,8 +28,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
                         <td class='name'>" . $extractInvitado['name'] . ' ' . $extractInvitado['first_surname'] . ' ' . $extractInvitado['second_surname'] . "</td>
                         <td class='name'>" . (($extractInvitado['confirmed'] == 0) ? (' ') : ('<i class="material-icons">check</i>')) . "</td>
                         <td>
-                            <a id='" . $extractInvitado['rfc'] . "' class='waves-effect waves-light modal-trigger' data-target='asist-modal'><i
-                                class='material-icons left'>add</i></a>
+                            <a class='waves-effect waves-light' type='submit' method='GET' target='_blank' href='../Back-End/PHP/createAward.php?rfc=" . $extractInvitado['rfc'] . "'><i class='material-icons left'>search</i></a>
                             <a id='" . $extractInvitado['rfc'] . " 3' class='delete-rfc waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
                         </td>
                     </tr>
