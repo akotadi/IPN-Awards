@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require '..\Back-End\PHP\connection_DB.php ';
+require '../Back-End/PHP/connection_DB.php';
 
 if (isset($_GET) && !empty($_GET)) {
 
@@ -16,10 +16,10 @@ if (isset($_GET) && !empty($_GET)) {
 
 		$query = "SELECT * FROM awarded WHERE rfc = '" . $rfc . "'";
 
-		$resultAwarded = $connection->query($query);
-		if ($resultAwarded->num_rows > 0) {
-			$extractAwarded = $resultAwarded->fetch_assoc();
-			if ($code == $extractAwarded['activation_code']) {
+		$resultawarded = $connection->query($query);
+		if ($resultawarded->num_rows > 0) {
+			$extractawarded = $resultawarded->fetch_assoc();
+			if ($code == $extractawarded['activation_code']) {
 				$uQuery = "UPDATE awarded SET confirmed = 1 WHERE rfc = '$rfc'";
 				if (!($connection->query($uQuery))) {
 					error_log("Can't update", 3, "../logs/php_error.log");
@@ -36,7 +36,7 @@ if (isset($_GET) && !empty($_GET)) {
 			session_destroy();
 			header("Location: ./index.html");
 		}
-		mysqli_free_result($resultAwarded);
+		mysqli_free_result($resultawarded);
 		close($connection);
 	} else {
 		error_log("Not parameters", 3, "../logs/php_error.log");

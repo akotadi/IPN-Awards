@@ -808,7 +808,7 @@ award:
   changes:
     - 5.1.0
     - 5.2.0
-  label: Award
+  label: award
   search:
     terms:
       - honor
@@ -2172,7 +2172,7 @@ chart-area:
   changes:
     - '4.2'
     - 5.0.0
-  label: Area Chart
+  label: area Chart
   search:
     terms:
       - analytics

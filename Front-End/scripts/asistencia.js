@@ -1,7 +1,7 @@
 // Tabs
 var instance = M.Tabs.init(document.getElementById("tabs-asistencia"), {});
 
-// Listener para modal de "Eliminar cuenta"
+// Listener para modal de "Comentarios"
 document.addEventListener('DOMContentLoaded', function () {
     var instances = M.Modal.init(document.getElementById("asist-modal"), {});
 });

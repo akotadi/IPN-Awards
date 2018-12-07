@@ -1,4 +1,5 @@
 <?php
+
 function connect() {
 	$user           = "root";
 	$pass           = "root";

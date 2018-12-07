@@ -1,17 +1,17 @@
 mysql -u root -p --default-character-set=utf8
 drop database `ipn-awards`; 
-source IPN-Awards\Back-End\Database\script.sql 
-source IPN-Awards\Back-End\Database\import\import_area.sql 
-source IPN-Awards\Back-End\Database\import\import_award.sql 
-source IPN-Awards\Back-End\Database\import\import_observation.sql 
-source IPN-Awards\Back-End\Database\import\import_procedency.sql 
-source IPN-Awards\Back-End\Database\import\import_type.sql 
-source IPN-Awards\Back-End\Database\import\import_user.sql 
-source IPN-Awards\Back-End\Database\data.sql 
+source IPN-awards\Back-End\Database\script.sql 
+source IPN-awards\Back-End\Database\import\import_area.sql 
+source IPN-awards\Back-End\Database\import\import_award.sql 
+source IPN-awards\Back-End\Database\import\import_observation.sql 
+source IPN-awards\Back-End\Database\import\import_procedency.sql 
+source IPN-awards\Back-End\Database\import\import_type.sql 
+source IPN-awards\Back-End\Database\import\import_user.sql 
+source IPN-awards\Back-End\Database\data.sql 
 
 mysql -u root -p --default-character-set=utf8
 drop database `ipn-awards`; 
-source C:\wamp\www\IPN-Awards\Back-End\Database\fullScript.sql 
+source C:\wamp\www\IPN-awards\Back-End\Database\fullScript.sql 
 
 mysqldump ipn-awards > dump.sql;
 

@@ -1,7 +1,7 @@
 SET NAMES 'utf8' COLLATE 'utf8_general_ci';
 
 /**
- * Insert # Award #
+ * Insert # award #
  */
 INSERT INTO award VALUES (1, 'DIPLOMA A LA EFICIENCIA Y EFICACIA', 'PARA NUESTRA COMUNIDAD ES DE GRAN SATISFACCIÓN RECONOCER PÚBLICAMENTE LA LABOR CONSTANTE Y CONSCIENTE QUE LOS COMPAÑEROS DESEMPEÑAN EN SU VIDA LABORAL.
  
@@ -11,7 +11,7 @@ INSERT INTO award VALUES (2, 'DIPLOMAS AL MÉRITO POLITÉCNICO', 'LAS DISTINCION
 EN ESTA OCASIÓN EL CONSEJO GENERAL CONSULTIVO HA DECIDIDO OTORGAR', NULL);
 
 /**
- * Insert # Weak Award #
+ * Insert # Weak award #
  */
 INSERT INTO award VALUES (3, 'DIPLOMA DE MAESTRO EMÉRITO', 'Que se otorga a los profesores e investigadores que habiéndose retirado o jubilado, se hubieran distinguido por su relevante labor docente o de investigación en el Instituto y que hayan prestado sus servicios en éste cuando menos durante veinticinco años.
 
@@ -24,7 +24,7 @@ Reciben esta distinción:', 2);
 INSERT INTO award VALUES (7, 'DIPLOMA AL DEPORTE', 'Se otorga a aquellos integrantes de la comunidad politécnica que hayan sobresalido en eventos deportivos nacionales o internacionales auspiciados por el Instituto Politécnico Nacional, o en representación del mismo o del País, recibe este galardón:', 2);
 
 /**
- * Insert # Award #
+ * Insert # award #
  */
 INSERT INTO award VALUES (8, 'PRESEA JUAN DE DIOS BÁTIZ', 'JUAN DE DIOS BÁTIZ, DISTINGUIDO MEXICANO, NACIDO EN EL ESTADO DE SINALOA, DESARROLLÓ ACTIVIDADES DE CARÁCTER MILITAR, POLÍTICO Y EDUCATIVO, DENTRO DE LAS QUE SE DESTACA, LA DE HABER SIDO EL PRINCIPAL PROMOTOR Y UNO DE LOS FUNDADORES DEL INSTITUTO POLITÉCNICO NACIONAL.
 

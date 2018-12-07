@@ -57,18 +57,18 @@ if ($resultAssistance->num_rows > 0) {
 //Create Total Diagram
 $pdf->addDiagram('Total de Presencia', $dataAssistance);
 
-$dataAward = array();
+$dataaward = array();
 
-$sqlAward    = "SELECT name FROM award";
-$resultAward = $connection->query($sqlAward);
-if ($resultAward->num_rows > 0) {
-	while ($rowAward = $resultAward->fetch_assoc()) {
-		$sqlTotal    = "SELECT count(*) as total FROM awarded a, award d WHERE a.idAward = d.idAward AND d.name = '" . $rowAward['name'] . "'";
+$sqlaward    = "SELECT name FROM award";
+$resultaward = $connection->query($sqlaward);
+if ($resultaward->num_rows > 0) {
+	while ($rowaward = $resultaward->fetch_assoc()) {
+		$sqlTotal    = "SELECT count(*) as total FROM awarded a, award d WHERE a.idaward = d.idaward AND d.name = '" . $rowaward['name'] . "'";
 		$resultTotal = $connection->query($sqlTotal);
 		if ($resultTotal->num_rows > 0) {
 			while ($rowTotal = $resultTotal->fetch_assoc()) {
 				if ($rowTotal['total'] != 0) {
-					$dataAward[utf8_decode($rowAward['name'])] = $rowTotal['total'];
+					$dataaward[utf8_decode($rowaward['name'])] = $rowTotal['total'];
 				}
 			}
 		}
@@ -76,17 +76,17 @@ if ($resultAward->num_rows > 0) {
 }
 
 //Create Total Diagram
-$pdf->addDiagram('Total de Galardonados', $dataAward);
+$pdf->addDiagram('Total de Galardonados', $dataaward);
 
 // $specificData = array();
 
-foreach ($dataAward as $i => $value) {
+foreach ($dataaward as $i => $value) {
 	$sqlProcedency    = "SELECT name FROM procedency";
 	$resultProcedency = $connection->query($sqlProcedency);
 	if ($resultProcedency->num_rows > 0) {
 		$dataProcedency = array();
 		while ($rowProcedency = $resultProcedency->fetch_assoc()) {
-			$sqlTotal    = "SELECT count(*) as total FROM awarded a, procedency p, award d WHERE a.idProcedency = p.idProcedency AND a.idAward = d.idAward AND p.name = '" . $rowProcedency['name'] . "' AND d.name = '" . utf8_encode($i) . "'";
+			$sqlTotal    = "SELECT count(*) as total FROM awarded a, procedency p, award d WHERE a.idProcedency = p.idProcedency AND a.idaward = d.idaward AND p.name = '" . $rowProcedency['name'] . "' AND d.name = '" . utf8_encode($i) . "'";
 			$resultTotal = $connection->query($sqlTotal);
 			if ($resultTotal->num_rows > 0) {
 				while ($rowTotal = $resultTotal->fetch_assoc()) {

@@ -9,7 +9,7 @@ function createInvitation($rfc) {
 
 		$code = md5(mt_rand());
 
-		$query = "UPDATE Awarded SET activation_code = '" . $code . "' WHERE rfc = '" . $rfc . "'";
+		$query = "UPDATE awarded SET activation_code = '" . $code . "' WHERE rfc = '" . $rfc . "'";
 
 		if (!mysqli_query($connection, $query)) {
 			return null;
