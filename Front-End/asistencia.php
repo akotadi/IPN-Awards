@@ -189,7 +189,7 @@ if (isset($_SESSION["user"])) {
             <form id="FormCommentaries">
                 <div class="row">
                     <div class="col s12">
-                        <h1>A&ntildeadir Comentarios</h1>
+                        <h1>A&ntilde;adir Comentarios</h1>
                     </div>
                 </div>
                 <div class="row">

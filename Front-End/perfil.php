@@ -54,12 +54,12 @@ if (isset($_SESSION["user"])) {
     <nav class="pink darken-4">
         <div class="nav-wrapper">
             <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <a href="home.html" class="brand-logo">IPN</a>
+            <a href="home.php" class="brand-logo">IPN</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="asistencia.php" class="waves-effect waves-light">Asistencias</a></li>
-                <li><a href="invitados.html" class="waves-effect waves-light">Invitados</a></li>
-                <li><a href="usuarios.html" class="waves-effect waves-light">Usuarios</a></li>
-                <li><a href="estadisticas.html" class="waves-effect waves-light">Estadisticas</a></li>
+                <li><a href="invitados.php" class="waves-effect waves-light">Invitados</a></li>
+                <li><a href="usuarios.php" class="waves-effect waves-light">Usuarios</a></li>
+                <li><a href="estadisticas.php" class="waves-effect waves-light">Estadisticas</a></li>
                 <li><a href="#" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
             </ul>
         </div>
@@ -81,7 +81,7 @@ if (isset($_SESSION["user"])) {
         <li><a href="asistencia.php" class="waves-effect">Asistencias</a></li>
         <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
         <li><a href="usuarios.php" class="waves-effect">Usuarios</a></li>
-        <li><a href="estadisticas.html" class="waves-effect">Estadisticas</a></li>
+        <li><a href="estadisticas.php" class="waves-effect">Estadisticas</a></li>
         <li>
             <div class="divider"></div>
         </li>
@@ -129,7 +129,14 @@ if (isset($_SESSION["user"])) {
                 <li>
                     <div class="collapsible-header"><i class="fas fa-key"></i>Cambiar contrase&ntilde;a</div>
                     <div class="collapsible-body">
-                        <form id="#FormChangePassword">
+                        <form id="FormChangePassword">
+                            <div class="row">
+                                <div class="input-field col s8">
+                                    <input id="email" type="email" class="validate" name="email"
+                                        data-validetta="required,email">
+                                    <label for="email">Email actual</label>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="input-field col s8">
                                     <input id="old-password" type="password" class="validate" name="old-password"
@@ -153,7 +160,7 @@ if (isset($_SESSION["user"])) {
                             </div>
                             <div class="row">
                                 <div class="input-field col s12 m3">
-                                    <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnChangePassword">Actualizar
+                                    <button class="btn waves-effect waves-light btn pink darken-4" type="submit" id="btnChangePassword">Actualizar
                                         Contrase&ntilde;a</button>
                                 </div>
                             </div>
@@ -178,10 +185,10 @@ if (isset($_SESSION["user"])) {
                 <li>
                     <div class="collapsible-header"><i class="fas fa-sign-out-alt"></i>Desconectar</div>
                     <div class="collapsible-body">
-                        <div class="row">
-                            <a href="index.html" class="btn waves-effect waves-light pink darken-4" data-target="delete-modal">Cerrar
-                                sesión</a>
-                        </div>
+                            <div class="row">
+                                <a id="btnCloseSession" href="" class="btn waves-effect waves-light pink darken-4" data-target="delete-modal">Cerrar
+                                    sesión</a>
+                            </div>
                     </div>
                 </li>
             </ul>
@@ -192,7 +199,7 @@ if (isset($_SESSION["user"])) {
         <!-- Modal -->
         <div id="delete-modal" class="modal">
             <div class="modal-content">
-                <form>
+                <form id="FormDelete">
                     <div class="row">
                         <div class="col s12">
                             <h4>Eliminar cuenta?</h4>
@@ -208,14 +215,19 @@ if (isset($_SESSION["user"])) {
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="delete-password" type="password" class="validate" name="delete-password">
-                            <label for="delete-password">Password</label>
+                            <input id="user" type="text" class="validate" name="user" data-validetta="required">
+                            <label for="user">Usuario</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="password" type="password" class="validate" name="password" data-validetta="required,minLength[4],maxLength[16]">
+                            <label for="password">Password</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s4">
-                            <button class="waves-effect waves-purple btn-flat" type="submit" id="btnDelete">Eliminar
-                                cuenta</button>
+                            <button class="btn waves-effect waves-light btn pink darken-4" type="submit" id="btnDelete">Eliminar cuenta</button>
                         </div>
                         <div class="col s4">
                             <a href="#!" class="btn-flat modal-close waves-effect waves-light darken-4">Cancelar</a>
