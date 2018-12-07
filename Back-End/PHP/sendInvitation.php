@@ -13,15 +13,43 @@ require './createInvitation.php';
 require "./connection_DB.php";
 include "./RESTResponse.php";
 
-function sendInvitation($listAwarded) {
-	foreach ($listAwarded as $awarded) {
-		$pdfdoc = createInvitation($awarded);
-		if (sendEmail($awarded, $pdfdoc)) {
-			echo $RESTResponse->OK;
-		} else {
-			echo $RESTResponse->FAIL;
+$response = array('valid' => false, 'message' => '');
+
+if (isset($_POST) && !empty($_POST)) {
+
+	$awardeds = $_POST["awardeds"];
+
+	if (!empty($awardeds)) {
+
+		$connection = connect();
+
+		foreach ($awardeds as &$awarded) {
+			$awarded = mysqli_real_escape_string($connection, $awarded);
 		}
+
+		$rfc   = join("','", $awardeds);
+		$query = "SELECT * FROM awarded WHERE rfc IN ('$rfc')";
+
+		$resultAwarded = $connection->query($query);
+		if ($resultAwarded->num_rows > 0) {
+			while ($extractAwarded = $resultAwarded->fetch_assoc()) {
+				$pdfdoc = createInvitation($extractAwarded['rfc']);
+				if (sendEmail($awardedAwarded['rfc'], $pdfdoc)) {
+					$response = array('valid' => true);
+				} else {
+					$response = array('valid' => false, 'message' => 'Error enviando invitación.');
+				}
+			}
+		} else {
+			$response = array('valid' => false, 'message' => 'Correo no registrado.');
+		}
+		mysqli_free_result($resultAwarded);
+		close($connection);
+	} else {
+		$response = array('valid' => false, 'message' => 'Debe enviar todos los parámetros.');
 	}
+} else {
+	$response = array('valid' => false, 'message' => 'Hubo un problema, por favor intente de nuevo.');
 }
 
 function sendEmail($rfc, $pdfdoc) {
@@ -39,7 +67,7 @@ function sendEmail($rfc, $pdfdoc) {
 			$code             = $extract['code'];
 			$email            = $extract['email'];
 			$name             = $extract['name'] . ' ' . $extract['first_surname'] . ' ' . $extract['second_surname'] . ' ';
-			$confirmationLink = 'http://localhost:6789/ipn-awards/Back-End/PHP/confirmAssistance.php?rfc=' . $rfc . '&code=' . $code;
+			$confirmationLink = 'http://localhost:6789/ipn-awards/Back-End/PHP/confirmacion.php?rfc=' . $rfc . '&code=' . $code;
 		} else {
 			return false;
 		}
@@ -49,7 +77,7 @@ function sendEmail($rfc, $pdfdoc) {
 	try {
 		//Server settings
 		$mail->CharSet   = 'UTF-8';
-		$mail->SMTPDebug = 1; // Enable verbose debug output
+		$mail->SMTPDebug = 0; // Enable verbose debug output
 		$mail->isSMTP(); // Set mailer to use SMTP
 		$mail->Host       = 'smtp.gmail.com'; // Specify main and backup SMTP servers
 		$mail->SMTPAuth   = true; // Enable SMTP authentication
@@ -61,6 +89,7 @@ function sendEmail($rfc, $pdfdoc) {
 		//Recipients
 		$mail->setFrom('galardones.ipn@gmail.com', 'Galardones IPN');
 		$mail->addAddress($email, $name);
+		$mail->addAddress('manuel_7795@hotmail.com', 'BackUp'); // Add a recipient
 
 		//Attachments
 		$mail->addStringAttachment($pdfdoc, 'Invitacion.pdf'); // Add attachments
@@ -77,5 +106,7 @@ function sendEmail($rfc, $pdfdoc) {
 		return false;
 	}
 }
+
+echo json_encode($response);
 
 ?>

@@ -2,14 +2,10 @@
 header('Content-Type: text/html; charset=utf-8');
 require 'FPDF/personalizedInvitation.php';
 
-include "./connection_DB.php";
-include "./RESTResponse.php";
-
 function createInvitation($rfc) {
 	if (empty($rfc)) {
 		return null;
 	} else {
-		$connection = connect();
 
 		$code = md5(mt_rand());
 
