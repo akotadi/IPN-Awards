@@ -19,7 +19,7 @@ if (isset($_POST) && !empty($_POST)) {
 
 		$resultAwarded = $connection->query($query);
 		if ($resultAwarded->num_rows > 0) {
-			$extractUser = $resultUser->fetch_assoc();
+			$extractUser = $resultAwarded->fetch_assoc();
 
 			if (password_verify(base64_encode(hash('sha256', $password, true)), $extractUser["password"])) {
 
@@ -36,11 +36,6 @@ if (isset($_POST) && !empty($_POST)) {
 		} else {
 			$response = array('valid' => false, 'message' => 'Usuario incorrecto.');
 		}
-		close($connection);
-
-		$dQuery = "DELETE FROM awarded_has_observation WHERE rfc = '$assistant'";
-
-		$connection->query($dQuery);
 
 		close($connection);
 	} else {

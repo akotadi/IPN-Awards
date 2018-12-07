@@ -30,7 +30,6 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
                         <td>
                             <a id='" . $extractInvitado['rfc'] . "' class='waves-effect waves-light modal-trigger' data-target='asist-modal'><i
                                 class='material-icons left'>add</i></a>
-                            <a id='" . $extractInvitado['rfc'] . " 2' class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
                             <a id='" . $extractInvitado['rfc'] . " 3' class='delete-rfc waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
                         </td>
                     </tr>
@@ -129,7 +128,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
 			echo "<li><a href='./avisos.php' class='waves-effect waves-light' id='avisos'>Avisos</a></li>";
 		}
 		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
-			echo "<li><a href='' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
+			echo "<li><a href='../Back-End/PHP/createSpeech.php' target='_blank' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
 		}
 		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
 			echo "<li><a href='./asistencia.php' class='waves-effect waves-light'>Asistencias</a></li>";
@@ -170,7 +169,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
 			echo "<li><a href='./avisos.php' class='waves-effect'>Avisos</a></li>";
 		}
 		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
-			echo "<li><a href=' class='waves-effect' id='discurso'>Discurso</a></li>";
+			echo "<li><a href='../Back-End/PHP/createSpeech.php' target='_blank' class='waves-effect' id='discurso'>Discurso</a></li>";
 		}
 		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
 			echo "<li><a href='./asistencia.php' class='waves-effect'>Asistencias</a></li>";
@@ -204,7 +203,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        <a class="waves-effect waves-light modal-trigger btn pink darken-4" data-target="add-modal" href="#!" id="btnAdd">A&ntildeadir invitados</a>
+                        <a class="waves-effect waves-light modal-trigger btn pink darken-4" data-target="add-modal" href="#!" id="btnAdd">A&ntildeadir invitado</a>
                     </div>
                 </div>
                 <div class="row">

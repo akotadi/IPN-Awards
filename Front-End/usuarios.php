@@ -28,6 +28,18 @@ if (isset($_SESSION["user"]) && ($_SESSION["type"] == 2 || $_SESSION["type"] == 
 			header("Location: ./index.html");
 		}
 
+		$sqlGetProcedency = "SELECT idtype, name FROM type";
+
+		$getProcedency    = "";
+		$resultProcedency = $connection->query($sqlGetProcedency);
+		if ($resultProcedency->num_rows > 0) {
+			while ($extractProcedency = $resultProcedency->fetch_assoc()) {
+				$getProcedency .= "
+                <option value='" . $extractProcedency['idtype'] . "'>" . $extractProcedency['name'] . "</option>
+                ";
+			}
+		}
+
 		$filasUsuarios = "";
 		$resultUser    = $connection->query($sqlGetInvitados);
 		if ($resultUser->num_rows > 0) {
@@ -35,11 +47,9 @@ if (isset($_SESSION["user"]) && ($_SESSION["type"] == 2 || $_SESSION["type"] == 
 				$filasUsuarios .= "
                 <tr>
                     <td>" . $extractUser['username'] . "</td>
-                    <td id='" . $extractUser['idUser'] . "'>
-                        <a href='#!' class='edit waves-effect waves-light modal-trigger' data-target='asist-modal'><i
-                            class='material-icons left'>add</i></a>
-                        <a class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
-                        <a class='delete waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
+                    <td>
+
+                        <a id='" . $extractUser['username'] . "' class='delete waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
                     </td>
                 </tr>
                 ";
@@ -96,7 +106,7 @@ if (isset($_SESSION["user"]) && ($_SESSION["type"] == 2 || $_SESSION["type"] == 
 				echo "<li><a href='./avisos.php' class='waves-effect waves-light' id='avisos'>Avisos</a></li>";
 			}
 			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
-				echo "<li><a href='' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
+				echo "<li><a href='../Back-End/PHP/createSpeech.php' target='_blank' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
 			}
 			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
 				echo "<li><a href='./asistencia.php' class='waves-effect waves-light'>Asistencias</a></li>";
@@ -137,7 +147,7 @@ if (isset($_SESSION["user"]) && ($_SESSION["type"] == 2 || $_SESSION["type"] == 
 				echo "<li><a href='./avisos.php' class='waves-effect'>Avisos</a></li>";
 			}
 			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
-				echo "<li><a href=' class='waves-effect' id='discurso'>Discurso</a></li>";
+				echo "<li><a href='../Back-End/PHP/createSpeech.php' target='_blank' class='waves-effect' id='discurso'>Discurso</a></li>";
 			}
 			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
 				echo "<li><a href='./asistencia.php' class='waves-effect'>Asistencias</a></li>";
@@ -171,7 +181,7 @@ if (isset($_SESSION["user"]) && ($_SESSION["type"] == 2 || $_SESSION["type"] == 
             <div class="col s12 m10 offset-m1 white">
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnCAssistant">A&ntildeadir usuario</button>
+                        <a class="waves-effect waves-light modal-trigger btn pink darken-4" data-target="add-modal" href="#!" id="btnAdd">A&ntildeadir usuario</a>
                     </div>
                 </div>
                 <div class="row">
@@ -201,6 +211,59 @@ echo $filasUsuarios;
     <!-- /Main -->
 
     <!-- Extras -->
+    <!-- Modal Add Gest -->
+    <div id="add-modal" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col s12">
+                    <h1 class="black-text">Usuario</h1>
+                </div>
+            </div>
+            <form id="FormAdd">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="user" type="text" class="validate" name="user">
+                        <label for="user">Username</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate" name="email">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input id="password" type="password" class="validate" name="password">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="procedency-select" data-validetta="required">
+                            <?php
+
+			if ($resultProcedency->num_rows > 0) {
+				echo $getProcedency;
+			}
+			?>
+                        </select>
+                        <label>Tipo</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col s4">
+                        <button class="waves-effect waves-purple btn-flat modal-close" type="submit" id="btnAdd">Enviar</button>
+                    </div>
+                    <div class="col s4">
+                        <a href="#!" class="waves-effect waves-light btn-flat modal-close">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /Modal Add Gest -->
     <!-- Modal -->
 
     <!-- /Modal -->

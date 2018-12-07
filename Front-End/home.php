@@ -58,7 +58,7 @@ if (isset($_SESSION["user"])) {
 			echo "<li><a href='./avisos.php' class='waves-effect waves-light' id='avisos'>Avisos</a></li>";
 		}
 		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
-			echo "<li><a href='' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
+			echo "<li><a href='../Back-End/PHP/createSpeech.php' target='_blank' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
 		}
 		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
 			echo "<li><a href='./asistencia.php' class='waves-effect waves-light'>Asistencias</a></li>";
@@ -99,7 +99,7 @@ if (isset($_SESSION["user"])) {
 			echo "<li><a href='./avisos.php' class='waves-effect'>Avisos</a></li>";
 		}
 		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
-			echo "<li><a href=' class='waves-effect' id='discurso'>Discurso</a></li>";
+			echo "<li><a href='../Back-End/PHP/createSpeech.php' target='_blank' class='waves-effect' id='discurso'>Discurso</a></li>";
 		}
 		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
 			echo "<li><a href='./asistencia.php' class='waves-effect'>Asistencias</a></li>";

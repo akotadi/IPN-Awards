@@ -26,7 +26,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
 		if ($resultUser1->num_rows > 0) {
 			while ($extractUser1 = $resultUser1->fetch_assoc()) {
 				$NombresPremios .= "
-                    <option value=" . $extractUser1['idAward'] . ">" . $extractUser1['name'] . "</option>";
+                    <option value=" . $extractUser1['idaward'] . ">" . $extractUser1['name'] . "</option>";
 			}
 		}
 		$resultUser2 = $connection->query($sqlGetEscuelas);
@@ -51,7 +51,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
 
 			for ($j = 0; $j < 9; $j++) {
 				$suma       = $j + 1;
-				$sqlGetA3   = "SELECT a.* FROM awarded a, award aw WHERE aw.idAward = a.idAward AND  a.is_present = 1 && aw.idAward = " . $suma . "";
+				$sqlGetA3   = "SELECT a.* FROM awarded a, award aw WHERE aw.idaward = a.idaward AND  a.is_present = 1 && aw.idaward = " . $suma . "";
 				$resultUser = $connection->query($sqlGetA3);
 				$datosP[$j] = mysqli_num_rows($resultUser);
 
@@ -249,7 +249,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
 				echo "<li><a href='./avisos.php' class='waves-effect waves-light' id='avisos'>Avisos</a></li>";
 			}
 			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
-				echo "<li><a href='' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
+				echo "<li><a href='../Back-End/PHP/createSpeech.php' target='_blank' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
 			}
 			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
 				echo "<li><a href='./asistencia.php' class='waves-effect waves-light'>Asistencias</a></li>";
@@ -290,7 +290,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
 				echo "<li><a href='./avisos.php' class='waves-effect'>Avisos</a></li>";
 			}
 			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
-				echo "<li><a href=' class='waves-effect' id='discurso'>Discurso</a></li>";
+				echo "<li><a href='../Back-End/PHP/createSpeech.php' target='_blank' class='waves-effect' id='discurso'>Discurso</a></li>";
 			}
 			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
 				echo "<li><a href='./asistencia.php' class='waves-effect'>Asistencias</a></li>";
@@ -340,7 +340,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
                         <button href="" class="waves-effect waves-light btn pink darken-4 modal-trigger " type="submit" data-target="stats-modal3" id="btnEstadistica4">Estadisticas por unidad</button>
                     </div>
                     <div class="input-field col s12 m4">
-                         <a class="waves-effect waves-light btn pink darken-4" href="../Back-End/PHP/createSpeech.php" target="_blank" id="btnReporte">Generar reporte</a>
+                         <a class="waves-effect waves-light btn pink darken-4" href="../Back-End/PHP/createReport.php" target="_blank" id="btnReporte">Generar reporte</a>
                     </div>
                 </div>
             </div>
