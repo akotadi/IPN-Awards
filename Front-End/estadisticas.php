@@ -333,7 +333,7 @@ if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
                         <button href="" class="waves-effect waves-light btn pink darken-4 modal-trigger " type="submit" data-target="stats-modal3" id="btnEstadistica4">Estadisticas por unidad</button>
                     </div>
                     <div class="input-field col s12 m4">
-                        <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnReporte">Generar reporte</button>
+                         <a class="waves-effect waves-light btn pink darken-4" href="../Back-End/PHP/createSpeech.php" target="_blank" id="btnReporte">Generar reporte</a>
                     </div>
                 </div>
             </div>
