@@ -15,9 +15,9 @@ if (isset($_POST) && !empty($_POST)) {
 	$password = $_POST["old-password"];
 	$new      = $_POST["new-password"];
 	$confirm  = $_POST["new-password-confirm"];
-	$user     = $_SESSION["user"];
+	$email    = $_POST["email"];
 
-	if (!empty($password) || !empty($new) || !empty($confirm)) {
+	if (!empty($password) && !empty($new) && !empty($confirm) && !empty($email)) {
 
 		if ($new == $confirm) {
 			$connection = connect();
@@ -25,14 +25,26 @@ if (isset($_POST) && !empty($_POST)) {
 			$password = mysqli_real_escape_string($connection, $password);
 			$new      = mysqli_real_escape_string($connection, $new);
 			$confirm  = mysqli_real_escape_string($connection, $confirm);
+			$email    = mysqli_real_escape_string($connection, $email);
 
-			$query = "SELECT * FROM user WHERE usename = '$user'";
+			$query = "SELECT * FROM user WHERE email = '$email'";
 
 			$resultUser = $connection->query($query);
 			if ($resultUser->num_rows > 0) {
 				$extractUser = $resultUser->fetch_assoc();
 
-				$uQuery = "UPDATE user SET password = '$new' WHERE password = '$password'";
+				$options = [
+					'cost' => 10,
+				];
+
+				$stored = password_hash(
+					base64_encode(
+						hash('sha256', $new, true)
+					),
+					PASSWORD_BCRYPT, $options
+				);
+
+				$uQuery = "UPDATE user SET password = '$stored' WHERE email = '$email'";
 
 				if ($connection->query($uQuery)) {
 
@@ -56,9 +68,8 @@ if (isset($_POST) && !empty($_POST)) {
 
 						//Content
 						$mail->isHTML(true); // Set email format to HTML
-						$mail->Subject = 'Tu email ha sido modificado';
-						$mail->Body    = 'Hola, como lo has solicitado, tu nuevo email es ' . $new . '.';
-						$mail->AltBody = 'Hola, como lo has solicitado, tu nuevo email es ' . $new . '.';
+						$mail->Subject = 'Tu contraseña ha sido modificada';
+						$mail->Body    = 'Hola, como lo has solicitado, tu contraseña ha sido modificada.';
 
 						$mail->send();
 						$response = array('valid' => true);

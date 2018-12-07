@@ -17,7 +17,7 @@ $response = array('valid' => false, 'message' => '');
 
 if (isset($_POST) && !empty($_POST)) {
 
-	$awardeds = $_POST["awardeds"];
+	$awardeds = $_POST["rfclist"];
 
 	if (!empty($awardeds)) {
 
@@ -56,9 +56,8 @@ function sendEmail($rfc, $pdfdoc) {
 	if (empty($rfc) || empty($pdfdoc)) {
 		return false;
 	} else {
-		$connection = connect();
 
-		$query = "SELECT name, first_surname, second_surname, email, code FROM awarded WHERE rfc = '" . $rfc . "'";
+		$query = "SELECT * FROM awarded WHERE rfc = '" . $rfc . "'";
 
 		$result        = mysqli_query($connection, $query);
 		$numberResults = mysqli_num_rows($result);

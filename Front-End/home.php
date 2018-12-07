@@ -49,7 +49,7 @@ if (isset($_SESSION["user"])) {
 <nav class="pink darken-4">
     <div class="nav-wrapper">
         <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <a href="home.html" class="brand-logo">IPN</a>
+        <a href="home.php" class="brand-logo">IPN</a>
         <ul class="right hide-on-med-and-down">
             <!-- <li><a href="asistencia.php" class="waves-effect waves-light">Asistencias</a></li> -->
             <li><a href="./asistencia.php" class="waves-effect waves-light">Asistencias</a></li>
@@ -78,7 +78,7 @@ if (isset($_SESSION["user"])) {
     <li><a href="./asistencia.php" class="waves-effect">Asistencias</a></li>
     <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
     <li><a href="usuarios.php" class="waves-effect">Usuarios</a></li>
-    <li><a href="estadisticas.html" class="waves-effect">Estadisticas</a></li>
+    <li><a href="estadisticas.php" class="waves-effect">Estadisticas</a></li>
     <li>
         <div class="divider"></div>
     </li>
