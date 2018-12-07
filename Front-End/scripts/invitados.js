@@ -153,16 +153,19 @@ $(document).ready(function () {
 });
 
 // Bloque para editor de aviso
-// SendNews.php
+// sendNews.php
 $('#btnSendEmail').click(function (e) {
     e.preventDefault();
     const html = $('#text').froalaEditor('html.get');
+    const subject = $("#asunto").val();
     const rfcs = [];
     $(document).find('tr.selected').each(function () { rfcs.push(this.id); });
     const data = {
+        subject: subject,
         text: html,
         rfclist: rfcs
     };
+    console.log(subject);
     console.log(html);
     console.log(rfcs);
     console.log(data);

@@ -239,6 +239,12 @@ if (isset($_SESSION["user"])) {
                     <h1>Aviso</h1>
                 </div>
             </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="asunto" type="text" class="validate" name="asunto">
+                    <label for="asunto">Asunto</label>
+                </div>
+            </div>
             <form class="text-center border border-light p-5 col" id="formText">
                 <div class="row justify-content-center">
                     <div class="col s12">
