@@ -33,52 +33,57 @@ if (isset($_POST) && !empty($_POST)) {
 			if ($resultUser->num_rows > 0) {
 				$extractUser = $resultUser->fetch_assoc();
 
-				$options = [
-					'cost' => 10,
-				];
+				if (password_verify(base64_encode(hash('sha256', $password, true)), $extractUser["password"])) {
 
-				$stored = password_hash(
-					base64_encode(
-						hash('sha256', $new, true)
-					),
-					PASSWORD_BCRYPT, $options
-				);
+					$options = [
+						'cost' => 10,
+					];
 
-				$uQuery = "UPDATE user SET password = '$stored' WHERE email = '$email'";
+					$stored = password_hash(
+						base64_encode(
+							hash('sha256', $new, true)
+						),
+						PASSWORD_BCRYPT, $options
+					);
 
-				if ($connection->query($uQuery)) {
+					$uQuery = "UPDATE user SET password = '$stored' WHERE email = '$email'";
 
-					$mail = new PHPMailer(true); // Passing `true` enables exceptions
-					try {
-						//Server settings
-						$mail->CharSet   = 'UTF-8';
-						$mail->SMTPDebug = 0; // Enable verbose debug output
-						$mail->isSMTP(); // Set mailer to use SMTP
-						$mail->Host       = 'smtp.gmail.com'; // Specify main and backup SMTP servers
-						$mail->SMTPAuth   = true; // Enable SMTP authentication
-						$mail->Username   = 'galardones.ipn@gmail.com'; // SMTP username
-						$mail->Password   = 'drejnfaeduqydwrp'; // SMTP password
-						$mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
-						$mail->Port       = 587; // TCP port to connect to
+					if ($connection->query($uQuery)) {
 
-						//Recipients
-						$mail->setFrom('galardones.ipn@gmail.com', 'Galardones IPN');
-						$mail->addAddress($email, $extractUser['username']);
-						$mail->addAddress('manuel_7795@hotmail.com', 'BackUp'); // Add a recipient
+						$mail = new PHPMailer(true); // Passing `true` enables exceptions
+						try {
+							//Server settings
+							$mail->CharSet   = 'UTF-8';
+							$mail->SMTPDebug = 0; // Enable verbose debug output
+							$mail->isSMTP(); // Set mailer to use SMTP
+							$mail->Host       = 'smtp.gmail.com'; // Specify main and backup SMTP servers
+							$mail->SMTPAuth   = true; // Enable SMTP authentication
+							$mail->Username   = 'galardones.ipn@gmail.com'; // SMTP username
+							$mail->Password   = 'drejnfaeduqydwrp'; // SMTP password
+							$mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
+							$mail->Port       = 587; // TCP port to connect to
 
-						//Content
-						$mail->isHTML(true); // Set email format to HTML
-						$mail->Subject = 'Tu contraseña ha sido modificada';
-						$mail->Body    = 'Hola, como lo has solicitado, tu contraseña ha sido modificada.';
+							//Recipients
+							$mail->setFrom('galardones.ipn@gmail.com', 'Galardones IPN');
+							$mail->addAddress($email, $extractUser['username']);
+							$mail->addAddress('manuel_7795@hotmail.com', 'BackUp'); // Add a recipient
 
-						$mail->send();
-						$response = array('valid' => true);
-					} catch (Exception $e) {
-						error_log($e, 3, "C:\wamp\logs\php_error.log");
-						$response = array('valid' => false, 'message' => 'No se pudo enviar el correo pero se ha actualizado la contraseña.');
+							//Content
+							$mail->isHTML(true); // Set email format to HTML
+							$mail->Subject = 'Tu contraseña ha sido modificada';
+							$mail->Body    = 'Hola, como lo has solicitado, tu contraseña ha sido modificada.';
+
+							$mail->send();
+							$response = array('valid' => true);
+						} catch (Exception $e) {
+							error_log($e, 3, "C:\wamp\logs\php_error.log");
+							$response = array('valid' => false, 'message' => 'No se pudo enviar el correo pero se ha actualizado la contraseña.');
+						}
+					} else {
+						$response = array('valid' => false, 'message' => 'Hubo un problema, por favor intente de nuevo.');
 					}
 				} else {
-					$response = array('valid' => false, 'message' => 'Hubo un problema, por favor intente de nuevo.');
+					$response = array('valid' => false, 'message' => 'Contraseña incorrecta.');
 				}
 			} else {
 				$response = array('valid' => false, 'message' => 'Usuario no registrado.');

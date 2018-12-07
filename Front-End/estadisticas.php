@@ -3,7 +3,7 @@ require '../Back-End/PHP/connection_DB.php';
 
 session_start();
 
-if (isset($_SESSION["user"])) {
+if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
 		$connection = connect();
@@ -17,37 +17,36 @@ if (isset($_SESSION["user"])) {
 			$_SESSION['expire_time'] = $now + (30 * 60);
 		}
 
-        $sqlGetPremios = "SELECT * FROM award";
-        $sqlGetEscuelas = "SELECT * FROM procedency";
+		$sqlGetPremios  = "SELECT * FROM award";
+		$sqlGetEscuelas = "SELECT * FROM procedency";
 
-        $NombresPremios = "";
-        $NombresEscuelas = "";
+		$NombresPremios  = "";
+		$NombresEscuelas = "";
 		$resultUser1     = $connection->query($sqlGetPremios);
 		if ($resultUser1->num_rows > 0) {
 			while ($extractUser1 = $resultUser1->fetch_assoc()) {
 				$NombresPremios .= "
-                    <option value=". $extractUser1['idaward'] .">".$extractUser1['name']."</option>"; 
-            }
-        }
-        $resultUser2     = $connection->query($sqlGetEscuelas);
-        if ($resultUser2->num_rows > 0) {
-            while ($extractUser2 = $resultUser2->fetch_assoc()) {
-                $NombresEscuelas .= "
-                    <option value=". $extractUser2['idProcedency'] .">".$extractUser2['name']."</option>"; 
-            }    
-        
-        $sqlGetA1 = "SELECT a.* FROM awarded a, procedency p, area ar WHERE ar.idArea = p.idArea AND p.idProcedency = a.idPRocedency AND is_present = 1 && ar.idArea = 1";
-        $resultUser = $connection->query($sqlGetA1);
-        $datoa1 = mysqli_num_rows($resultUser);
-        $sqlGetA2 = "SELECT a.* FROM awarded a, procedency p, area ar WHERE ar.idArea = p.idArea AND p.idProcedency = a.idPRocedency AND is_present = 1 && ar.idArea = 2";
-        $resultUser = $connection->query($sqlGetA2);
-        $datoa2 = mysqli_num_rows($resultUser);
-        $sqlGetA3 = "SELECT a.* FROM awarded a, procedency p, area ar WHERE ar.idArea = p.idArea AND p.idProcedency = a.idPRocedency AND is_present = 1 && ar.idArea = 3";
-        $resultUser = $connection->query($sqlGetA3);
-        $datoa3 = mysqli_num_rows($resultUser);
+                    <option value=" . $extractUser1['idaward'] . ">" . $extractUser1['name'] . "</option>";
+			}
+		}
+		$resultUser2 = $connection->query($sqlGetEscuelas);
+		if ($resultUser2->num_rows > 0) {
+			while ($extractUser2 = $resultUser2->fetch_assoc()) {
+				$NombresEscuelas .= "
+                    <option value=" . $extractUser2['idProcedency'] . ">" . $extractUser2['name'] . "</option>";
+			}
 
-        
-?>
+			$sqlGetA1   = "SELECT a.* FROM awarded a, procedency p, area ar WHERE ar.idArea = p.idArea AND p.idProcedency = a.idPRocedency AND is_present = 1 && ar.idArea = 1";
+			$resultUser = $connection->query($sqlGetA1);
+			$datoa1     = mysqli_num_rows($resultUser);
+			$sqlGetA2   = "SELECT a.* FROM awarded a, procedency p, area ar WHERE ar.idArea = p.idArea AND p.idProcedency = a.idPRocedency AND is_present = 1 && ar.idArea = 2";
+			$resultUser = $connection->query($sqlGetA2);
+			$datoa2     = mysqli_num_rows($resultUser);
+			$sqlGetA3   = "SELECT a.* FROM awarded a, procedency p, area ar WHERE ar.idArea = p.idArea AND p.idProcedency = a.idPRocedency AND is_present = 1 && ar.idArea = 3";
+			$resultUser = $connection->query($sqlGetA3);
+			$datoa3     = mysqli_num_rows($resultUser);
+
+			?>
 <!DOCTYPE html>
 <html>
 
@@ -96,9 +95,9 @@ if (isset($_SESSION["user"])) {
             data:[{
                 type: "column",
                 dataPoints:[
-                    {label: "Area 1", y: <?php echo $datoa1?>},
-                    {label: "Area 2", y: <?php echo $datoa2?>},
-                    {label: "Area 3", y: <?php echo $datoa3?>}
+                    {label: "Area 1", y: <?php echo $datoa1 ?>},
+                    {label: "Area 2", y: <?php echo $datoa2 ?>},
+                    {label: "Area 3", y: <?php echo $datoa3 ?>}
                 ]
             }]
         });
@@ -116,11 +115,27 @@ if (isset($_SESSION["user"])) {
             <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <a href="home.php" class="brand-logo">IPN</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="asistencia.php" class="waves-effect waves-light">Asistencias</a></li>
-                <li><a href="invitados.php" class="waves-effect waves-light">Invitados</a></li>
-                <li><a href="usuarios.php" class="waves-effect waves-light">Usuarios</a></li>
-                <li><a href="estadisticas.php" class="waves-effect waves-light">Estadisticas</a></li>
-                <li><a href="perfil.php" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
+
+<?php
+
+			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
+				echo "<li><a href='' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
+			}
+			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
+				echo "<li><a href='./asistencia.php' class='waves-effect waves-light'>Asistencias</a></li>";
+			}
+			if ($_SESSION["type"] == 2) {
+				echo "<li><a href='./invitados.php' class='waves-effect waves-light'>Invitados</a></li>";
+			}
+			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 1) {
+				echo "<li><a href='./usuarios.php' class='waves-effect waves-light'>Usuarios</a></li>";
+			}
+			if ($_SESSION["type"] == 2) {
+				echo "<li><a href='./estadisticas.php' class='waves-effect waves-light'>Estadisticas</a></li>";
+			}
+
+			?>
+                <li><a href="./perfil.php" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
             </ul>
         </div>
     </nav>
@@ -138,14 +153,28 @@ if (isset($_SESSION["user"])) {
                 <a href="#email"><span class="white-text email">user@mail.com</span></a>
             </div>
         </li>
-        <li><a href="asistencia.php" class="waves-effect">Asistencias</a></li>
-        <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
-        <li><a href="usuarios.php" class="waves-effect">Usuarios</a></li>
-        <li><a href="estadisticas.php" class="waves-effect">Estadisticas</a></li>
+
+<?php
+if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
+				echo "<li><a href=' class='waves-effect' id='discurso'>Discurso</a></li>";
+			}
+			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
+				echo "<li><a href='./asistencia.php' class='waves-effect'>Asistencias</a></li>";
+			}
+			if ($_SESSION["type"] == 2) {
+				echo "<li><a href='./invitados.php' class='waves-effect'>Invitados</a></li>";
+			}
+			if ($_SESSION["type"] == 2 || $_SESSION["type"] == 1) {
+				echo "<li><a href='./usuarios.php' class='waves-effect'>Usuarios</a></li>";
+			}
+			if ($_SESSION["type"] == 2) {
+				echo "<li><a href='./estadisticas.php' class='waves-effect'>Estadisticas</a></li>";
+			}
+			?>
         <li>
             <div class="divider"></div>
         </li>
-        <li><a href="perfil.php" class="waves-effect">Perfil</a></li>
+        <li><a href="./perfil.php" class="waves-effect">Perfil</a></li>
     </ul>
     <!-- /Sidenav -->
     <!-- /Navigation section -->
@@ -166,7 +195,7 @@ if (isset($_SESSION["user"])) {
                         <option value="" disabled selected>Escoge el premio</option>
                         <?php
 echo $NombresPremios;
-			            ?>
+			?>
                         </select>
                         <label>PREMIOS</label>
                     </div>
@@ -175,11 +204,11 @@ echo $NombresPremios;
                         <option value="" disabled selected>Escoge la escuela</option>
                         <?php
 echo $NombresEscuelas;
-			            ?>
+			?>
                         </select>
                         <label>ESCUELAS</label>
                     </div>
-            
+
                 </div>
             </form>
                 <div class="row">

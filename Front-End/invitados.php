@@ -3,7 +3,7 @@ require '../Back-End/PHP/connection_DB.php';
 
 session_start();
 
-if (isset($_SESSION["user"])) {
+if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
 	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
 		$connection = connect();
@@ -19,8 +19,8 @@ if (isset($_SESSION["user"])) {
 
 		$sqlGetInvitados = "SELECT * FROM awarded";
 
-		$filasInvitados = "";
-		$resultInvitados     = $connection->query($sqlGetInvitados);
+		$filasInvitados  = "";
+		$resultInvitados = $connection->query($sqlGetInvitados);
 		if ($resultInvitados->num_rows > 0) {
 			while ($extractInvitado = $resultInvitados->fetch_assoc()) {
 				$filasInvitados .= "
@@ -35,33 +35,33 @@ if (isset($_SESSION["user"])) {
                         </td>
                     </tr>
                     ";
-            }
-        }
+			}
+		}
 
-        $sqlGetProcedency = "SELECT idProcedency, name FROM procedency;";
+		$sqlGetProcedency = "SELECT idProcedency, name FROM procedency;";
 
-        $getProcedency = "";
-		$resultProcedency     = $connection->query($sqlGetProcedency);
+		$getProcedency    = "";
+		$resultProcedency = $connection->query($sqlGetProcedency);
 		if ($resultProcedency->num_rows > 0) {
 			while ($extractProcedency = $resultProcedency->fetch_assoc()) {
 				$getProcedency .= "
-                    <option value='".$extractProcedency['idProcedency']."'>".$extractProcedency['name']."</option>
+                    <option value='" . $extractProcedency['idProcedency'] . "'>" . $extractProcedency['name'] . "</option>
                     ";
-            }
-        }
+			}
+		}
 
-        $sqlGetAward = "SELECT idaward, name FROM award;";
+		$sqlGetAward = "SELECT idaward, name FROM award;";
 
-        $getAward = "";
-		$resultAward     = $connection->query($sqlGetAward);
+		$getAward    = "";
+		$resultAward = $connection->query($sqlGetAward);
 		if ($resultAward->num_rows > 0) {
 			while ($extractAward = $resultAward->fetch_assoc()) {
 				$getAward .= "
-                    <option value='".$extractAward['idaward']."'>".$extractAward['name']."</option>
+                    <option value='" . $extractAward['idaward'] . "'>" . $extractAward['name'] . "</option>
                     ";
-            }
-        }
-?>
+			}
+		}
+		?>
 <!DOCTYPE html>
 <html>
 
@@ -122,11 +122,27 @@ if (isset($_SESSION["user"])) {
             <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <a href="home.php" class="brand-logo">IPN</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="asistencia.php" class="waves-effect waves-light">Asistencias</a></li>
-                <li><a href="invitados.php" class="waves-effect waves-light">Invitados</a></li>
-                <li><a href="usuarios.php" class="waves-effect waves-light">Usuarios</a></li>
-                <li><a href="estadisticas.php" class="waves-effect waves-light">Estadisticas</a></li>
-                <li><a href="perfil.php" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
+
+<?php
+
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
+			echo "<li><a href='' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
+		}
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
+			echo "<li><a href='./asistencia.php' class='waves-effect waves-light'>Asistencias</a></li>";
+		}
+		if ($_SESSION["type"] == 2) {
+			echo "<li><a href='./invitados.php' class='waves-effect waves-light'>Invitados</a></li>";
+		}
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 1) {
+			echo "<li><a href='./usuarios.php' class='waves-effect waves-light'>Usuarios</a></li>";
+		}
+		if ($_SESSION["type"] == 2) {
+			echo "<li><a href='./estadisticas.php' class='waves-effect waves-light'>Estadisticas</a></li>";
+		}
+
+		?>
+                <li><a href="./perfil.php" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
             </ul>
         </div>
     </nav>
@@ -144,14 +160,28 @@ if (isset($_SESSION["user"])) {
                 <a href="#email"><span class="white-text email">user@mail.com</span></a>
             </div>
         </li>
-        <li><a href="asistencia.php" class="waves-effect">Asistencias</a></li>
-        <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
-        <li><a href="usuarios.php" class="waves-effect">Usuarios</a></li>
-        <li><a href="estadisticas.php" class="waves-effect">Estadisticas</a></li>
+
+<?php
+if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
+			echo "<li><a href=' class='waves-effect' id='discurso'>Discurso</a></li>";
+		}
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
+			echo "<li><a href='./asistencia.php' class='waves-effect'>Asistencias</a></li>";
+		}
+		if ($_SESSION["type"] == 2) {
+			echo "<li><a href='./invitados.php' class='waves-effect'>Invitados</a></li>";
+		}
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 1) {
+			echo "<li><a href='./usuarios.php' class='waves-effect'>Usuarios</a></li>";
+		}
+		if ($_SESSION["type"] == 2) {
+			echo "<li><a href='./estadisticas.php' class='waves-effect'>Estadisticas</a></li>";
+		}
+		?>
         <li>
             <div class="divider"></div>
         </li>
-        <li><a href="perfil.php" class="waves-effect">Perfil</a></li>
+        <li><a href="./perfil.php" class="waves-effect">Perfil</a></li>
     </ul>
     <!-- /Sidenav -->
     <!-- /Navigation section -->
@@ -202,10 +232,10 @@ if (isset($_SESSION["user"])) {
                         </thead>
                         <tbody>
                             <?php
-                                if ($resultInvitados->num_rows > 0) {
-                                    echo $filasInvitados;
-                                }
-                            ?>
+if ($resultInvitados->num_rows > 0) {
+			echo $filasInvitados;
+		}
+		?>
                         </tbody>
                     </table>
                 </div>
@@ -313,12 +343,12 @@ if (isset($_SESSION["user"])) {
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m6">
-                        <input id="first_surname" type="text" class="validate" name="first_surname">
-                        <label for="first_surname">Primer apellido</label>
+                        <input id="firstSurname" type="text" class="validate" name="firstSurname">
+                        <label for="firstSurname">Primer apellido</label>
                     </div>
                     <div class="input-field col s12 m6">
-                        <input id="second_surname" type="text" class="validate" name="second_surname">
-                        <label for="second_surname">Segundo apellido</label>
+                        <input id="secondSurname" type="text" class="validate" name="secondSurname">
+                        <label for="secondSurname">Segundo apellido</label>
                     </div>
                 </div>
                 <div class="row">
@@ -331,10 +361,10 @@ if (isset($_SESSION["user"])) {
                     <div class="input-field col s12">
                         <select id="procedency-select" data-validetta="required">
                             <?php
-                            if ($resultProcedency->num_rows > 0) {
-                                echo $getProcedency;
-                            }
-                            ?>
+if ($resultProcedency->num_rows > 0) {
+			echo $getProcedency;
+		}
+		?>
                         </select>
                         <label>Procedencia</label>
                     </div>
@@ -343,10 +373,10 @@ if (isset($_SESSION["user"])) {
                     <div class="input-field col s12">
                         <select id="award-select" data-validetta="required">
                             <?php
-                            if ($resultAward->num_rows > 0) {
-                                echo $getAward;
-                            }
-                            ?>
+if ($resultAward->num_rows > 0) {
+			echo $getAward;
+		}
+		?>
                         </select>
                         <label>Procedencia</label>
                     </div>
@@ -373,10 +403,10 @@ if (isset($_SESSION["user"])) {
 </html>
 <?php
 } else {
-    error_log("Not loggedin", 3, "../logs/php_error.log");
-    session_destroy();
-    header("location:./index.html");
-}
+		error_log("Not loggedin", 3, "../logs/php_error.log");
+		session_destroy();
+		header("location:./index.html");
+	}
 } else {
 	error_log("Not session", 3, "../logs/php_error.log");
 	session_destroy();

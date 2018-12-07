@@ -87,3 +87,5 @@ Returninghttp://localhost:6789/ipn-awards/Front-End/confirmacion.php?rfc=AARE791
 1544184316 All awardeds added
 
 1544184316 Sending...
+
+ INSERT INTO awarded VALUES ('ajsgekj', 'agih','kangej', 'gehh', 'ageh@aghei.com', null, null, 0, 0, 6, 1)

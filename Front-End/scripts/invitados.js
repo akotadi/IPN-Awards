@@ -80,11 +80,12 @@ $('td').on("click", "a.modal-trigger", function () {
 // Manda peticion para eliminar al dar click en icono de eliminar
 $('td').on("click", "a.delete-rfc", function () {
     let rfc = $(this).attr('id');
-    let payload = jQuery.parseJSON('{ "rfc" : "' + rfc + '" }')
+    let payload = jQuery.parseJSON('{ "rfc" : "' + rfc.substr(0,10) + '" }')
     console.log(payload);
+    debugger;
     $.ajax({
         method: "post",
-        url: "../Back-End/PHP/dAssistant_AX.php",
+        url: "../Back-End/PHP/dAwarded_AX.php",
         data: payload,
         dataType: 'json',
         cache: false,
@@ -94,8 +95,9 @@ $('td').on("click", "a.delete-rfc", function () {
     })
         .done(function (data) {
             console.log(data);
+            debugger;
             if (data.valid) {
-                $(location).attr("href", "asistencia.php");
+                $(location).attr("href", "./invitados.php");
             } else {
                 alert(data.message);
             }
@@ -141,7 +143,7 @@ $(document).ready(function () {
                 .done(function (data) {
                     console.log(data);
                     if (data.valid) {
-                        $(location).attr("href", "asistencia.php");
+                        $(location).attr("href", "./invitados.php");
                     } else {
                         alert(data.message);
                     }
@@ -167,24 +169,24 @@ $(document).ready(function () {
             e.preventDefault(); // Deja de actuar como formulario
             const rfc = $("#rfc").val();
             const name = $("#name").val();
-            const first_surname = $("#first_surname").val();
-            const second_surname = $("#second_surname").val();
+            const firstSurname = $("#firstSurname").val();
+            const secondSurname = $("#secondSurname").val();
             const email = $("#email").val();
             const procedency = $('#procedency-select').find('option:selected').val();
             const award = $('#award-select').find('option:selected').val();
             const data = {
                 rfc: rfc,
                 name: name,
-                first_surname: first_surname,
-                second_surname: second_surname,
+                firstSurname: firstSurname,
+                secondSurname: secondSurname,
                 email: email,
                 procedency: procedency,
                 award: award
             };
             console.log(rfc);
             console.log(name);
-            console.log(first_surname);
-            console.log(second_surname);
+            console.log(firstSurname);
+            console.log(secondSurname);
             console.log(email);
             console.log(procedency);
             console.log(award);
@@ -203,7 +205,7 @@ $(document).ready(function () {
                 .done(function (data) {
                     console.log(data);
                     if (data.valid) {
-                        $(location).attr("href", "asistencia.php");
+                        $(location).attr("href", "./invitados.php");
                     } else {
                         alert(data.message);
                     }
@@ -249,7 +251,7 @@ $('#btnSendEmail').click(function (e) {
         .done(function (data) {
             console.log(data);
             if (data.valid) {
-                $(location).attr("href", "asistencia.php");
+                $(location).attr("href", "./invitados.php");
             } else {
                 alert(data.message);
             }
@@ -291,7 +293,7 @@ $('#btnInvitacion').click(function () {
         .done(function (data) {
             console.log(data);
             if (data.valid) {
-                $(location).attr("href", "asistencia.php");
+                $(location).attr("href", "./invitados.php");
             } else {
                 alert(data.message);
             }

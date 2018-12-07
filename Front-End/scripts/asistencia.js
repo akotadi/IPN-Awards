@@ -60,7 +60,7 @@ $('td').on("click", "a.delete-rfc", function(){
                 .done(function (data) {
                     console.log(data);
                     if (data.valid) {
-                        $(location).attr("href", "asistencia.php");
+                        $(location).attr("href", "./asistencia.php");
                     } else {
                         alert(data.message);
                     }
@@ -112,7 +112,7 @@ $(document).ready(function () {
                 .done(function (data) {
                     console.log(data);
                     if (data.valid) {
-                        $(location).attr("href", "asistencia.php");
+                        $(location).attr("href", "./asistencia.php");
                     } else {
                         alert(data.message);
                     }
@@ -154,7 +154,7 @@ $(document).ready(function () {
                 .done(function (data) {
                     console.log(data);
                     if (data.valid) {
-                        $(location).attr("href", "asistencia.php");
+                        $(location).attr("href", "./asistencia.php");
                     } else {
                         alert(data.message);
                     }

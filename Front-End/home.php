@@ -51,11 +51,27 @@ if (isset($_SESSION["user"])) {
         <a href="#!" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <a href="home.php" class="brand-logo">IPN</a>
         <ul class="right hide-on-med-and-down">
-            <!-- <li><a href="asistencia.php" class="waves-effect waves-light">Asistencias</a></li> -->
-            <li><a href="./asistencia.php" class="waves-effect waves-light">Asistencias</a></li>
-            <li><a href="invitados.php" class="waves-effect waves-light">Invitados</a></li>
-            <li><a href="usuarios.php" class="waves-effect waves-light">Usuarios</a></li>
-            <li><a href="#" class="waves-effect waves-light">Estadisticas</a></li>
+
+<?php
+
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
+			echo "<li><a href='' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
+		}
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
+			echo "<li><a href='./asistencia.php' class='waves-effect waves-light'>Asistencias</a></li>";
+		}
+		if ($_SESSION["type"] == 2) {
+			echo "<li><a href='./invitados.php' class='waves-effect waves-light'>Invitados</a></li>";
+		}
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 1) {
+			echo "<li><a href='./usuarios.php' class='waves-effect waves-light'>Usuarios</a></li>";
+		}
+		if ($_SESSION["type"] == 2) {
+			echo "<li><a href='./estadisticas.php' class='waves-effect waves-light'>Estadisticas</a></li>";
+		}
+
+		?>
+
             <li><a href="./perfil.php" class="waves-effect waves-light"><i class="material-icons">person</i></a></li>
         </ul>
     </div>
@@ -74,11 +90,23 @@ if (isset($_SESSION["user"])) {
             <a href="#email"><span class="white-text email">user@mail.com</span></a>
         </div>
     </li>
-    <!-- <li><a href="asistencia.php" class="waves-effect">Asistencias</a></li> -->
-    <li><a href="./asistencia.php" class="waves-effect">Asistencias</a></li>
-    <li><a href="invitados.php" class="waves-effect">Invitados</a></li>
-    <li><a href="usuarios.php" class="waves-effect">Usuarios</a></li>
-    <li><a href="estadisticas.php" class="waves-effect">Estadisticas</a></li>
+<?php
+if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
+			echo "<li><a href=' class='waves-effect' id='discurso'>Discurso</a></li>";
+		}
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
+			echo "<li><a href='./asistencia.php' class='waves-effect'>Asistencias</a></li>";
+		}
+		if ($_SESSION["type"] == 2) {
+			echo "<li><a href='./invitados.php' class='waves-effect'>Invitados</a></li>";
+		}
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 1) {
+			echo "<li><a href='./usuarios.php' class='waves-effect'>Usuarios</a></li>";
+		}
+		if ($_SESSION["type"] == 2) {
+			echo "<li><a href='./estadisticas.php' class='waves-effect'>Estadisticas</a></li>";
+		}
+		?>
     <li>
         <div class="divider"></div>
     </li>

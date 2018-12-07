@@ -15,6 +15,33 @@ document.addEventListener('DOMContentLoaded', function () {
 
 $(document).ready(function () {
 
+    $('#btnCloseSession').click(function(e){
+        e.preventDefault();
+        $.ajax({
+            method: "get",
+            url: "../Back-End/PHP/destroySession_AX.php",
+            cache: false,
+            beforeSend : function(){
+                console.log('Started request !');
+            }
+        })
+        .done( function( data ){
+            console.log(data);
+            if (data.valid) {
+                $(location).attr("href", "./#");
+            } else {
+                // alert(data.message);
+            }
+        })
+        .fail( function( jqXHR, textStatus, error ){
+            console.log(textStatus+':'+jqXHR.status+' : '+jqXHR.statusText);
+        })
+        .always( function( result ){ 
+            console.log('Request done !!');
+            $(location).attr("href", "./index.html");
+        });
+    });
+
 	$('#FormChangeEmail').validetta({
 		bubblePosition: "bottom",
 		bubbleGapTop: 10,
@@ -39,7 +66,7 @@ $(document).ready(function () {
             .done( function( data ){
                 console.log(data);
                 if (data.valid) {
-                    $(location).attr("href", "perfil.php");
+                    $(location).attr("href", "./perfil.php");
                 } else {
                     alert(data.message);
                 }
@@ -75,7 +102,7 @@ $(document).ready(function () {
             .done( function( data ){
                 console.log(data);
                 if (data.valid) {
-                    $(location).attr("href", "perfil.php");
+                    $(location).attr("href", "./perfil.php");
                 } else {
                     alert(data.message);
                 }
@@ -111,7 +138,7 @@ $(document).ready(function () {
             .done( function( data ){
                 console.log(data);
                 if (data.valid) {
-                    $(location).attr("href", "perfil.php");
+                    $(location).attr("href", "./perfil.php");
                 } else {
                     alert(data.message);
                 }

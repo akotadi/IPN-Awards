@@ -57,6 +57,29 @@ if ($resultAssistance->num_rows > 0) {
 //Create Total Diagram
 $pdf->addDiagram('Total de Presencia', $dataAssistance);
 
+$dataPresent = array();
+
+$sqlaward    = "SELECT name FROM award";
+$resultaward = $connection->query($sqlaward);
+if ($resultaward->num_rows > 0) {
+	while ($rowaward = $resultaward->fetch_assoc()) {
+		$sqlTotal    = "SELECT count(*) as total FROM awarded aw, awarded a, award d WHERE aw.is_present = 1 AND aw.idaward = a.idaward AND a.idaward = d.idaward AND d.name = '" . $rowaward['name'] . "'";
+		$resultTotal = $connection->query($sqlTotal);
+		if ($resultTotal->num_rows > 0) {
+			while ($rowTotal = $resultTotal->fetch_assoc()) {
+				if ($rowTotal['total'] != 0) {
+					$dataPresent[utf8_decode($rowaward['name'])] = $rowTotal['total'];
+				}
+			}
+		}
+	}
+}
+
+if (!empty($dataPresent)) {
+	//Create Total Diagram
+	$pdf->addDiagram('Total de Galardonados Presentes', $dataPresent);
+}
+
 $dataaward = array();
 
 $sqlaward    = "SELECT name FROM award";
@@ -81,12 +104,12 @@ $pdf->addDiagram('Total de Galardonados', $dataaward);
 // $specificData = array();
 
 foreach ($dataaward as $i => $value) {
-	$sqlProcedency    = "SELECT name FROM procedency";
+	$sqlProcedency    = "SELECT name FROM area";
 	$resultProcedency = $connection->query($sqlProcedency);
 	if ($resultProcedency->num_rows > 0) {
 		$dataProcedency = array();
 		while ($rowProcedency = $resultProcedency->fetch_assoc()) {
-			$sqlTotal    = "SELECT count(*) as total FROM awarded a, procedency p, award d WHERE a.idProcedency = p.idProcedency AND a.idaward = d.idaward AND p.name = '" . $rowProcedency['name'] . "' AND d.name = '" . utf8_encode($i) . "'";
+			$sqlTotal    = "SELECT count(*) as total FROM awarded a, procedency p, award d, area ar WHERE a.idProcedency = p.idProcedency AND p.idArea = ar.idArea AND a.idaward = d.idaward AND ar.name = '" . $rowProcedency['name'] . "' AND d.name = '" . utf8_encode($i) . "' AND a.is_present = 1";
 			$resultTotal = $connection->query($sqlTotal);
 			if ($resultTotal->num_rows > 0) {
 				while ($rowTotal = $resultTotal->fetch_assoc()) {
