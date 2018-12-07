@@ -3,7 +3,7 @@ require './connection_DB.php';
 require './RESTResponse.php';
 
 $response = array('valid' => false, 'message' => '');
-// debug_to_console($_POST);
+
 if (isset($_POST) && !empty($_POST)) {
 	session_start();
 	sleep(2);

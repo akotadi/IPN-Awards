@@ -1,17 +1,50 @@
 <?php
 session_start();
-if (isset($_SESSION["user"])) {
-	if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 
-		$now = time();
-		if ($now > $_SESSION['expire_time']) {
-			error_log("Expired time", 3, "../logs/php_error.log");
+require '..\Back-End\PHP\connection_DB.php ';
+
+if (isset($_GET) && !empty($_GET)) {
+
+	$rfc  = $_GET["rfc"];
+	$code = $_GET["code"];
+
+	if (!empty($rfc) && !empty($code)) {
+		$connection = connect();
+
+		$rfc  = mysqli_real_escape_string($connection, $rfc);
+		$code = mysqli_real_escape_string($connection, $code);
+
+		$query = "SELECT * FROM awarded WHERE rfc = '" . $rfc . "'";
+
+		$resultAwarded = $connection->query($query);
+		if ($resultAwarded->num_rows > 0) {
+			$extractAwarded = $resultAwarded->fetch_assoc();
+			if ($code == $extractAwarded['activation_code']) {
+				$uQuery = "UPDATE awarded SET confirmed = 1 WHERE rfc = '$rfc'";
+				if (!($connection->query($uQuery))) {
+					error_log("Can't update", 3, "../logs/php_error.log");
+					session_destroy();
+					header("Location: ./index.html");
+				}
+			} else {
+				error_log("Not valid activation code", 3, "../logs/php_error.log");
+				session_destroy();
+				header("Location: ./index.html");
+			}
+		} else {
+			error_log("Not exist " . $rfc, 3, "../logs/php_error.log");
 			session_destroy();
 			header("Location: ./index.html");
-		} else {
-			$_SESSION['expire_time'] = $now + (30 * 60);
 		}
-		?>
+		mysqli_free_result($resultAwarded);
+		close($connection);
+	} else {
+		error_log("Not parameters", 3, "../logs/php_error.log");
+		session_destroy();
+		header("Location: ./index.html");
+	}
+
+	?>
 <!DOCTYPE html>
 <html>
 
@@ -69,16 +102,18 @@ if (isset($_SESSION["user"])) {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12">
-                        <select multiple id="asist-select" data-validetta="required,minSelected[1]">
-                            <option value="" disabled selected>Elige opcion</option>
-                            <option value="capacidad_diferente">Capacidad diferente</option>
-                            <option value="silla_de_ruedas">Silla de ruedas</option>
-                            <option value="se_retira_temprano">Se retira temprano</option>
-                            <option value="acompaniante">Acompa&ntildeante (ayudante)</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                    </div>
+                    <form id="FormConfirmation">
+                        <div class="input-field col s12">
+                            <select multiple="multiple" name="multiple" id="asist-select" data-validetta="required,minSelected[1]">
+                                <option value="" disabled selected>Elige opcion</option>
+                                <option value="capacidad_diferente">Capacidad diferente</option>
+                                <option value="silla_de_ruedas">Silla de ruedas</option>
+                                <option value="se_retira_temprano">Se retira temprano</option>
+                                <option value="acompaniante">Acompa&ntildeante (ayudante)</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
@@ -108,12 +143,7 @@ if (isset($_SESSION["user"])) {
 </html>
 <?php
 } else {
-		error_log("Not loggedin", 3, "../logs/php_error.log");
-		session_destroy();
-		header("location:./index.html");
-	}
-} else {
-	error_log("Not session", 3, "../logs/php_error.log");
+	error_log("Not get", 3, "../logs/php_error.log");
 	session_destroy();
 	header("Location: ./index.html");
 }

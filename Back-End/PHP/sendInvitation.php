@@ -7,10 +7,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
-require 'FPDF/fpdf.php';
+
 require './createInvitation.php';
 
-include "./connection_DB.php";
+require "./connection_DB.php";
 include "./RESTResponse.php";
 
 function sendInvitation($listAwarded) {
