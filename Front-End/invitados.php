@@ -20,22 +20,47 @@ if (isset($_SESSION["user"])) {
 		$sqlGetInvitados = "SELECT * FROM awarded";
 
 		$filasInvitados = "";
-		$resultUser     = $connection->query($sqlGetInvitados);
-		if ($resultUser->num_rows > 0) {
-			while ($extractUser = $resultUser->fetch_assoc()) {
+		$resultInvitados     = $connection->query($sqlGetInvitados);
+		if ($resultInvitados->num_rows > 0) {
+			while ($extractInvitado = $resultInvitados->fetch_assoc()) {
 				$filasInvitados .= "
-                    <tr id='" . $extractUser['rfc'] . "' class='not-selected'>
-                        <td class='name'>" . $extractUser['name'] . ' ' . $extractUser['first_surname'] . ' ' . $extractUser['first_surname'] . "</td>
-                        <td class='name'>" . (($extractUser['confirmed'] == 0) ? (' ') : ('<i class="material-icons">check</i>')) . "</td>
+                    <tr id='" . $extractInvitado['rfc'] . "' class='not-selected'>
+                        <td class='name'>" . $extractInvitado['name'] . ' ' . $extractInvitado['first_surname'] . ' ' . $extractInvitado['second_surname'] . "</td>
+                        <td class='name'>" . (($extractInvitado['confirmed'] == 0) ? (' ') : ('<i class="material-icons">check</i>')) . "</td>
                         <td>
-                            <a id='" . $extractUser['rfc'] . "' class='waves-effect waves-light modal-trigger' data-target='asist-modal'><i
+                            <a id='" . $extractInvitado['rfc'] . "' class='waves-effect waves-light modal-trigger' data-target='asist-modal'><i
                                 class='material-icons left'>add</i></a>
-                            <a id='" . $extractUser['rfc'] . " 2' class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
-                            <a id='" . $extractUser['rfc'] . " 3' class='delete-rfc waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
+                            <a id='" . $extractInvitado['rfc'] . " 2' class='search waves-effect waves-light'><i class='material-icons left'>search</i></a>
+                            <a id='" . $extractInvitado['rfc'] . " 3' class='delete-rfc waves-effect waves-light'><i class='material-icons left'>delete_forever</i></a>
                         </td>
                     </tr>
                     ";
-			}
+            }
+        }
+
+        $sqlGetProcedency = "SELECT idProcedency, name FROM procedency;";
+
+        $getProcedency = "";
+		$resultProcedency     = $connection->query($sqlGetProcedency);
+		if ($resultProcedency->num_rows > 0) {
+			while ($extractProcedency = $resultProcedency->fetch_assoc()) {
+				$getProcedency .= "
+                    <option value='".$extractProcedency['idProcedency']."'>".$extractProcedency['name']."</option>
+                    ";
+            }
+        }
+
+        $sqlGetAward = "SELECT idaward, name FROM award;";
+
+        $getAward = "";
+		$resultAward     = $connection->query($sqlGetAward);
+		if ($resultAward->num_rows > 0) {
+			while ($extractAward = $resultAward->fetch_assoc()) {
+				$getAward .= "
+                    <option value='".$extractAward['idaward']."'>".$extractAward['name']."</option>
+                    ";
+            }
+        }
 ?>
 <!DOCTYPE html>
 <html>
@@ -142,7 +167,7 @@ if (isset($_SESSION["user"])) {
                 </div>
                 <div class="row">
                     <div class="input-field col s12 m4">
-                        <button class="waves-effect waves-light btn pink darken-4" type="submit" id="btnCAssistant">A&ntildeadir invitados</button>
+                        <a class="waves-effect waves-light modal-trigger btn pink darken-4" data-target="add-modal" href="#!" id="btnAdd">A&ntildeadir invitados</a>
                     </div>
                 </div>
                 <div class="row">
@@ -177,7 +202,9 @@ if (isset($_SESSION["user"])) {
                         </thead>
                         <tbody>
                             <?php
-                                echo $filasInvitados;
+                                if ($resultInvitados->num_rows > 0) {
+                                    echo $filasInvitados;
+                                }
                             ?>
                         </tbody>
                     </table>
@@ -263,6 +290,79 @@ if (isset($_SESSION["user"])) {
         </div>
     </div>
     <!-- /Modal Enviar Aviso -->
+    <!-- Modal Add Gest -->
+    <div id="add-modal" class="modal">
+        <div class="modal-content">
+            <div class="row">
+                <div class="col s12">
+                    <h1>Aviso</h1>
+                </div>
+            </div>
+            <form id="FormAdd">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="rfc" type="text" class="validate" name="rfc">
+                        <label for="rfc">RFC</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="name" type="text" class="validate" name="name">
+                        <label for="name">Nombre</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m6">
+                        <input id="first_surname" type="text" class="validate" name="first_surname">
+                        <label for="first_surname">Primer apellido</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input id="second_surname" type="text" class="validate" name="second_surname">
+                        <label for="second_surname">Segundo apellido</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate" name="email">
+                        <label for="email">Correo electrónico</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="procedency-select" data-validetta="required">
+                            <?php
+                            if ($resultProcedency->num_rows > 0) {
+                                echo $getProcedency;
+                            }
+                            ?>
+                        </select>
+                        <label>Procedencia</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select id="award-select" data-validetta="required">
+                            <?php
+                            if ($resultAward->num_rows > 0) {
+                                echo $getAward;
+                            }
+                            ?>
+                        </select>
+                        <label>Procedencia</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s4">
+                        <button class="waves-effect waves-purple btn-flat modal-close" type="submit" id="btnAdd">Enviar</button>
+                    </div>
+                    <div class="col s4">
+                        <a href="#!" class="waves-effect waves-light btn-flat modal-close">Cancelar</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /Modal Add Gest -->
     <!-- /Extras -->
 
 </body>
@@ -272,12 +372,11 @@ if (isset($_SESSION["user"])) {
 
 </html>
 <?php
+} else {
+    error_log("Not loggedin", 3, "../logs/php_error.log");
+    session_destroy();
+    header("location:./index.html");
 }
-	} else {
-		error_log("Not loggedin", 3, "../logs/php_error.log");
-		session_destroy();
-		header("location:./index.html");
-	}
 } else {
 	error_log("Not session", 3, "../logs/php_error.log");
 	session_destroy();

@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
 document.addEventListener('DOMContentLoaded', function () {
     var instances = M.Modal.init(document.getElementById("aviso-modal"), {});
 });
+// Listener para modal de "Comentarios"
+document.addEventListener('DOMContentLoaded', function () {
+    var instances = M.Modal.init(document.getElementById("add-modal"), {});
+});
 // Listener para el select del modal
 document.addEventListener('DOMContentLoaded', function () {
     var elems = document.querySelectorAll('select');
@@ -128,6 +132,68 @@ $(document).ready(function () {
                 url: "../Back-End/PHP/uAssistant_AX.php",
                 // Cambiar data para que mande el RFC
                 data: payload,
+                dataType: 'json',
+                cache: false,
+                beforeSend: function () {
+                    console.log('Started request !');
+                }
+            })
+                .done(function (data) {
+                    console.log(data);
+                    if (data.valid) {
+                        $(location).attr("href", "asistencia.php");
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .fail(function (jqXHR, textStatus, error) {
+                    console.log(textStatus + ':' + jqXHR.status + ' : ' + jqXHR.statusText);
+                })
+                .always(function (result) {
+                    console.log('Request done !!');
+                });
+        }
+    });
+
+    $('#FormAdd').validetta({
+        bubblePosition: "bottom",
+        bubbleGapTop: 10,
+        bubbleGapLeft: -5,
+        onError: function (e) {
+            e.preventDefault();
+            // alert("ERROR");
+        },
+        onValid: function (e) {
+            e.preventDefault(); // Deja de actuar como formulario
+            const rfc = $("#rfc").val();
+            const name = $("#name").val();
+            const first_surname = $("#first_surname").val();
+            const second_surname = $("#second_surname").val();
+            const email = $("#email").val();
+            const procedency = $('#procedency-select').find('option:selected').val();
+            const award = $('#award-select').find('option:selected').val();
+            const data = {
+                rfc: rfc,
+                name: name,
+                first_surname: first_surname,
+                second_surname: second_surname,
+                email: email,
+                procedency: procedency,
+                award: award
+            };
+            console.log(rfc);
+            console.log(name);
+            console.log(first_surname);
+            console.log(second_surname);
+            console.log(email);
+            console.log(procedency);
+            console.log(award);
+            console.log(data);
+            console.log(JSON.stringify(data));
+            $.ajax({
+                method: "post",
+                url: "../Back-End/PHP/cAwarded_AX.php",
+                data: data,
                 dataType: 'json',
                 cache: false,
                 beforeSend: function () {
