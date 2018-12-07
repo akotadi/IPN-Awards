@@ -58,6 +58,9 @@ if (isset($_SESSION["user"])) {
             <ul class="right hide-on-med-and-down">
 <?php
 
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 3) {
+			echo "<li><a href='./avisos.php' class='waves-effect waves-light' id='avisos'>Avisos</a></li>";
+		}
 		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
 			echo "<li><a href='' class='waves-effect waves-light' id='discurso'>Discurso</a></li>";
 		}
@@ -94,7 +97,11 @@ if (isset($_SESSION["user"])) {
             </div>
         </li>
 <?php
-if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
+
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 3) {
+			echo "<li><a href='./avisos.php' class='waves-effect'>Avisos</a></li>";
+		}
+		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 5) {
 			echo "<li><a href=' class='waves-effect' id='discurso'>Discurso</a></li>";
 		}
 		if ($_SESSION["type"] == 2 || $_SESSION["type"] == 4) {
