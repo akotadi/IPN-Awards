@@ -351,7 +351,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
             <form id="FormCommentaries">
                 <div class="row">
                     <div class="col s12">
-                        <h1>Estadisticas</h1>
+                        <h1 style = "font-size: 5vw;">Estadisticas</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -383,7 +383,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
             <form id="FormCommentaries">
                 <div class="row">
                     <div class="col s12">
-                        <h1>Estadisticas</h1>
+                        <h1 style = "font-size: 5vw;">Estadisticas</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -426,7 +426,7 @@ if (isset($_SESSION["user"]) && $_SESSION["type"] == 2) {
             <form id="FormCommentaries">
                 <div class="row">
                     <div class="col s12">
-                        <h1>Estadisticas</h1>
+                        <h1 style = "font-size: 5vw;">Estadisticas</h1>
                     </div>
                 </div>
                 <div class="row">
