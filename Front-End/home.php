@@ -72,7 +72,7 @@ if (isset($_SESSION["user"])) {
 		if ($_SESSION["type"] == 2) {
 			echo "<li><a href='./estadisticas.php' class='waves-effect waves-light'>Estadisticas</a></li>";
 		}
-		echo "<li><a href='.asientos.php' target='_blank' class='waves-effect waves-light' id='asientos'>Asientos</a></li>";
+		echo "<li><a href='./asientos.php' target='_blank' class='waves-effect waves-light' id='asientos'>Asientos</a></li>";
 
 		?>
 
